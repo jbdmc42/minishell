@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 14:34:55 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/12/15 12:01:34 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/12/15 18:16:08 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	is_valid_n_flag(char *s)
 {
 	int	i;
 
-	if (!s || s[0] == '-')					// check if the first character is a '-' and if the string is valid
+	if (!s || s[0] != '-')					// check if the first character is a '-' and if the string is valid
 		return (0);
 	i = 1;
 	if (s[i] == '\0')						// check if the token contains something more than the '-'
