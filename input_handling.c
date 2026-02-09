@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   input_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 10:44:02 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/12/15 15:26:10 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/02/09 11:48:58 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*
+**  read_input function helper: checks for an empty line and returns a boolean.
+*/
 int	ft_strisspace(char *line)
 {
 	size_t	i;
@@ -24,7 +27,10 @@ int	ft_strisspace(char *line)
 	return (line[i] == '\0');
 }
 
-// input reading function
+/*
+**  reads the line and checks for initial spaces to skip, and empty line or an EOF.
+**  In the end, returns the line from the prompt.
+*/
 char	*read_input(void)
 {
 	size_t	i;

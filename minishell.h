@@ -6,7 +6,7 @@
 /*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:34 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/02/09 09:17:39 by joaobarb         ###   ########.fr       */
+/*   Updated: 2026/02/09 11:50:14 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,6 @@ typedef struct s_token
 void	free_all(void);
 void	clean_exit(void);
 
-// commands_extra.c:
-/* void	ft_unset(t_token **tokens);
-void	ft_env(t_token **tokens); */
-int		is_valid_n_flag(char *s);
-
 // commands.c:
 void	ft_echo(t_token **tokens);
 void	ft_exit(t_token **tokens);
@@ -82,14 +77,19 @@ void	ft_pwd(t_token **tokens);
 void	ft_export(t_token **tokens); */
 void	get_commands(t_token **tokens);
 
+// echo.c:
+void	ft_echo(t_token **tokens):
+
 // exit.c:
 void	ft_exit(t_token **tokens);
-
-// echo.c:
 
 // input_handling.c:
 int		ft_strisspace(char *line);
 char	*read_input(void);
+
+// quote_handling.c:
+int		is_quotes_balanced(char *str);
+char	*read_input_with_continuation(void);
 
 // parsing_helpers.c:
 int		parse_pipe(char *line, size_t *i, t_token **tokens);

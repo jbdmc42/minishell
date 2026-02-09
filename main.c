@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:24 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/12/15 18:10:02 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/02/09 10:40:36 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ static void	main_loop(void)
 	while (1)					// main loop (heart of the shell)
 	{
 		i = 0;
-		line = read_input();									// gets the input if no Ctrl + D, EOF or exit command exists and the line is not empty or contains anything more than spaces / tabs
+		line = read_input_with_continuation();								// gets the input with quote continuation support
 		if (!line)												// if the line comes back as a Ctrl + D, EOF or exit command, we cleanly end the program
-			clean_exit();										// frees everything and sets the exit status to 1
+			clean_exit();										// frees everything and sets the exit status to 0
 		if (line[treat_empty_input(line, i)] == '\0')			// if the line is empty, we skip the loop and restart it
 		{
 			free(line);
