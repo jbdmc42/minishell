@@ -15,7 +15,6 @@ INCLUDES	= -I. -I$(LIBFT_DIR)
 
 SRCS		= main.c \
 			cleaning.c \
-			commands_extra.c \
 			commands.c \
 			echo.c \
 			exit.c \

@@ -6,7 +6,7 @@
 /*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:34 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/02/09 11:50:14 by joaobarb         ###   ########.fr       */
+/*   Updated: 2026/02/09 11:53:35 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	ft_export(t_token **tokens); */
 void	get_commands(t_token **tokens);
 
 // echo.c:
-void	ft_echo(t_token **tokens):
+void	ft_echo(t_token **tokens);
 
 // exit.c:
 void	ft_exit(t_token **tokens);
