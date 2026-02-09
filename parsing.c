@@ -21,7 +21,8 @@ int	syntaxe_error(char *line, size_t i)
 {
 	if (line[i] == '>' || line[i] == '<' || line[i] == '|')
 	{
-		printf("minishell: syntax error near unexpected token `%s'\n", &line[i]);
+		printf("minishell: syntax error near");
+		printf(" unexpected token `%s'\n", &line[i]);
 		return (0);
 	}
 	return (1);

@@ -96,6 +96,10 @@ char	*ft_strrchr(const char *s, int c);
 
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
+// ft_strcmp
+
+int		ft_strcmp(const char *s1, const char *s2);
+
 // ft_memchr
 
 void	*ft_memchr(const void *s, int c, size_t n);

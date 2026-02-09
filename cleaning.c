@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleaning.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 10:44:36 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/12/15 15:30:29 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/02/09 09:31:16 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,5 @@ void	clean_exit(void)
 {
 	free_all();
 	printf(EXIT);
-	g_global.exit_status = 2;
 	exit(g_global.exit_status);
 }

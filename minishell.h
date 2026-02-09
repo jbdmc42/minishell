@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:34 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/12/15 12:01:31 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/02/09 09:17:39 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,14 @@ int		is_valid_n_flag(char *s);
 
 // commands.c:
 void	ft_echo(t_token **tokens);
+void	ft_exit(t_token **tokens);
 /* void	ft_cd(t_token **tokens);
 void	ft_pwd(t_token **tokens);
 void	ft_export(t_token **tokens); */
 void	get_commands(t_token **tokens);
+
+// exit.c:
+void	ft_exit(t_token **tokens);
 
 // echo.c:
 

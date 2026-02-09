@@ -17,6 +17,7 @@ SRCS		= main.c \
 			cleaning.c \
 			commands_extra.c \
 			commands.c \
+			exit.c \
 			input_handling.c \
 			parsing_helpers.c \
 			parsing.c \
