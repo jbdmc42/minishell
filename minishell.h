@@ -6,7 +6,7 @@
 /*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:34 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/02/09 11:53:35 by joaobarb         ###   ########.fr       */
+/*   Updated: 2026/02/12 14:12:05 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,33 +16,9 @@
 # define _POSIX_C_SOURCE 200809L
 
 // Macros
+
 # define PROMPT "minishell$ "
 # define EXIT "exit\n"
-
-// Structs
-typedef struct s_global
-{
-	int		exit_status;
-}	t_global;
-
-extern t_global	g_global;
-
-typedef enum e_tokentype
-{
-	WORD,		// text (echo, cd, ls, hello, file.txt, ...)
-	PIPE,		// |
-	GREAT,		// >
-	DGREAT,		// >>
-	LESS,		// <
-	DLESS		// <<
-}	t_tokentype;
-
-typedef struct s_token
-{
-	char			*value;
-	t_tokentype		type;
-	struct s_token	*next;
-}	t_token;
 
 // Libraries
 
@@ -62,6 +38,49 @@ typedef struct s_token
 # include <dirent.h>
 # include <termio.h>
 # include <term.h>
+
+// Globals
+
+/* 
+** "extern" is used so that the variable is actually defined on the header file, 
+** and not only declared and redefined in each .c file with this header present 
+*/
+extern int	g_exit_status;
+
+// Structs
+
+/* 
+**  enumeration of types that a token can have/be
+** WORD  : text (echo, cd, ls, hello, file.txt, ...)
+** PIPE  : |
+** GREAT : >
+** DGREAT: >>
+** LESS  : <
+** DLESS : <<
+*/
+typedef enum e_tokentype
+{
+	WORD,
+	PIPE,
+	GREAT,
+	DGREAT,
+	LESS,
+	DLESS
+}	t_tokentype;
+
+/* 
+**  char 	      *value: actual value of the token in a string
+**  t_tokentype 	type: the type of the token based on the list of token types 
+** (and that's why we use t_tokentype)
+**  struct s_token *next: a pointer to the next node in the token struct so we 
+** can "travel" inside it
+*/
+typedef struct s_token
+{
+	char			*value;		
+	t_tokentype		type;
+	struct s_token	*next;
+}	t_token;
 
 // Function Declaration
 
@@ -89,7 +108,7 @@ char	*read_input(void);
 
 // quote_handling.c:
 int		is_quotes_balanced(char *str);
-char	*read_input_with_continuation(void);
+char	*read_input_with_continuation(char *line);
 
 // parsing_helpers.c:
 int		parse_pipe(char *line, size_t *i, t_token **tokens);

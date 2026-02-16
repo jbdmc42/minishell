@@ -19,9 +19,9 @@ SRCS		= main.c \
 			echo.c \
 			exit.c \
 			input_handling.c \
-			quote_handling.c \
 			parsing_helpers.c \
 			parsing.c \
+			quote_handling.c \
 			setup_signal_handlers.c \
 			tokenization.c
 

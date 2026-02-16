@@ -6,59 +6,66 @@
 /*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:24 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/02/09 10:40:36 by joaobarb         ###   ########.fr       */
+/*   Updated: 2026/02/12 14:37:48 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_global g_global;
+int	g_exit_status;
 
-/* static void	free_tokens(t_token *tokens)
+/*
+**  helper function that checks for an empty input line, returning the stopping 
+** point without actually moving in the line position on the main loop.
+*/
+static size_t	treat_empty_input(char *line, size_t i)
 {
-	
-} */
-
-static size_t	treat_empty_input(char *line, size_t i)		// empty line or the line only contains spaces/tabs
-{
-	while (line[i] && (line[i] == ' ' || line[i] == '\t'))
-		i++;
-	return (i);
+	while (line[i] && (line[i] == ' ' || line[i] == '\t')) // Skip spaces and tabs
+		i++; // Move to next character
+	return (i); // Return position after whitespace
 }
 
+/*
+**  main loop of the program: acts as a listener that receives each 
+** line sent by the user and then, after checking if the line is valid
+** (not empty, not only a '\0'), sends it to parser that will then divide it 
+** into separate tokens that we can interpret easier.
+*/
 static void	main_loop(void)
 {
-	char	*line;		// variable that will store the user input
-	size_t	i;			// counter
-	t_token	*tokens;
+	char	*line; // Input line from readline
+	size_t	i; // Index for parsing
+	t_token	*tokens; // Token list
 
-	while (1)					// main loop (heart of the shell)
+	while (1) // Infinite loop for shell prompt
 	{
-		i = 0;
-		line = read_input_with_continuation();								// gets the input with quote continuation support
-		if (!line)												// if the line comes back as a Ctrl + D, EOF or exit command, we cleanly end the program
-			clean_exit();										// frees everything and sets the exit status to 0
-		if (line[treat_empty_input(line, i)] == '\0')			// if the line is empty, we skip the loop and restart it
+		i = 0; // Reset index
+		line = readline(PROMPT); // Read input from user
+		if (!line) // Check for EOF (Ctrl+D)
+			clean_exit(); // Exit cleanly
+		if (line[treat_empty_input(line, i)] == '\0') // Check if line is empty or only whitespace
 		{
-			free(line);
-			continue ;
+			free(line); // Free empty line
+			continue ; // Skip to next iteration
 		}
-		tokens = NULL;
-		parse_input(line, i, &tokens);			// turn the line into tokens
-		/* print_tokens(tokens); */
-		//free_tokens(tokens);					// free the tokens
-		free(line);								// free the line for the next read
+		add_history(line); // Add line to readline history
+		line = read_input_with_continuation(line); // Handle unclosed quotes with continuation
+		if (!line) // Check if continuation was interrupted
+			continue ; // Skip to next iteration
+		tokens = NULL; // Initialize token list
+		parse_input(line, i, &tokens); // Parse line into tokens
+		free(line); // Free input line
 	}
 }
 
-int	main(int argc, char **argv, char **envp)	// argc > number of arguments (including the program itself) | argv > arguments that we will put into tokens | envp > arguments that we will put into environment variables
+/*
+**  main program function: starts the user input request loop and prepares the
+** signal handlers for CTRL-D, CTRL-C and CTRL-\.
+*/
+int	main(void)
 {
-	(void)argc;			// this is used to tell the compiler that the variable exists, but will not be used here
-	(void)argv;
-	(void)envp;
-
-	g_global.exit_status = 0;
-	setup_signal_handlers();	// prepare the signal handlers to "listen" to the user's input
-	main_loop();
-	return (g_global.exit_status);	// returns with the exit status (1)
+	g_exit_status = 0; // Initialize exit status to 0
+	setup_signal_handlers(); // Setup signal handlers for SIGINT and SIGQUIT
+	main_loop(); // Start the main shell loop
+	return (g_exit_status); // Return exit status (never reached)
 }

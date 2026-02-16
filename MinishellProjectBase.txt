@@ -12,10 +12,10 @@ Minishell
 │   └── 2.3 ctrl-\ → do nothing
 │
 ├── 3. Parsing														> CURRENTLY WORKING <
-│   ├── 3.1 Basic tokenization										-
-│   ├── 3.2 Correct handling of spaces								-
-│   ├── 3.3 Quoting													-
-│   │   ├── 3.3.1 Single quotes → no interpretation					-
+│   ├── 3.1 Basic tokenization										✓
+│   ├── 3.2 Correct handling of spaces								✓
+│   ├── 3.3 Quoting													✓
+│   │   ├── 3.3.1 Single quotes → no interpretation					✓
 │   │   └── 3.3.2 Double quotes → no interpretation except $		- (handle exception $)
 │   ├── 3.4 Variable expansion
 │   │   ├── 3.4.1 $VAR
@@ -35,13 +35,13 @@ Minishell
 │
 ├── 5. Command Execution
 │   ├── 5.1 Built-in detection
-│   │   ├── echo -n
+│   │   ├── echo -n													✓
 │   │   ├── cd
 │   │   ├── pwd
 │   │   ├── export
 │   │   ├── unset
 │   │   ├── env
-│   │   └── exit
+│   │   └── exit													✓
 │   ├── 5.2 Run built-ins without fork (when required)
 │   ├── 5.3 External command execution via PATH
 │   ├── 5.4 Resolve absolute/relative paths

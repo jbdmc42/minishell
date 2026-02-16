@@ -6,22 +6,20 @@
 /*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 10:44:36 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/02/09 11:50:19 by joaobarb         ###   ########.fr       */
+/*   Updated: 2026/02/12 14:37:49 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// use this function to free all allocations
 void	free_all(void)
 {
-	// free everything needed before closing/reseting here
+	// Placeholder for freeing all allocated resources
 }
 
-// use this function to exit minishell freeing all before closing
 void	clean_exit(void)
 {
-	free_all();
-	printf(EXIT);
-	exit(g_global.exit_status);
+	free_all(); // Free all allocated resources
+	printf(EXIT); // Print exit message
+	exit(g_exit_status); // Exit with current status
 }

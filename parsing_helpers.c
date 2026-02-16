@@ -6,7 +6,7 @@
 /*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 17:40:26 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/02/09 11:33:08 by joaobarb         ###   ########.fr       */
+/*   Updated: 2026/02/12 14:37:48 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@
 */
 int	parse_pipe(char *line, size_t *i, t_token **tokens)
 {
-	if (line[*i] == '|')
+	if (line[*i] == '|') // Check if current character is pipe
 	{
-		add_token("|", PIPE, tokens);
-		(*i)++;
-		if (syntaxe_error(line, *i))
-			g_global.exit_status = 2;
-		return (1);
+		add_token("|", PIPE, tokens); // Add pipe token
+		(*i)++; // Move to next character
+		if (syntaxe_error(line, *i)) // Check for syntax errors after pipe
+			g_exit_status = 2; // Set exit status to 2 on error
+		return (1); // Return 1 to indicate pipe was parsed
 	}
-	return (0);
+	return (0); // Return 0 if not a pipe
 }
 
 /*
@@ -37,49 +37,50 @@ int	parse_pipe(char *line, size_t *i, t_token **tokens)
 */
 int	parse_less(char *line, size_t *i, t_token **tokens)
 {
-	if (line[*i] == '<')
-    {
-        if (line[*i + 1] == '<')
-        {
-            add_token("<<", DLESS, tokens);
-            (*i) += 2;
-			if (syntaxe_error(line, *i))
-				g_global.exit_status = 2;
-            return (1);
-        }
-        add_token("<", LESS, tokens);
-        (*i)++;
-		if (syntaxe_error(line, *i))
-			g_global.exit_status = 2;
-        return (1);
-    }
-    return (0);
+	if (line[*i] == '<') // Check if current character is '<'
+	{
+		if (line[*i + 1] == '<') // Check for '<<' (heredoc)
+		{
+			add_token("<<", DLESS, tokens); // Add double less token
+			(*i) += 2; // Move past both characters
+			if (syntaxe_error(line, *i)) // Check for syntax errors
+				g_exit_status = 2; // Set exit status to 2 on error
+			return (1); // Return 1 to indicate double less was parsed
+		}
+		add_token("<", LESS, tokens); // Add single less token
+		(*i)++; // Move to next character
+		if (syntaxe_error(line, *i)) // Check for syntax errors
+			g_exit_status = 2; // Set exit status to 2 on error
+		return (1); // Return 1 to indicate less was parsed
+	}
+	return (0); // Return 0 if not a '<'
 }
 
 /*
-**  great and double great parser: checks the existence of one or two great symbols.
+**  great and double great parser: checks the existence of one or 
+** two great symbols.
 **  Checks the syntaxe to ensure the token can work properly.
 **  Also creates a token with the correct type of signal.
 */
 int	parse_great(char *line, size_t *i, t_token **tokens)
 {
-	if (line[*i] == '>')
-    {
-        if (line[*i + 1] == '>')
-        {
-            add_token(">>", DGREAT, tokens);
-            (*i) += 2;
-			if (syntaxe_error(line, *i))
-				g_global.exit_status = 2;
-            return (1);
-        }
-        add_token(">", GREAT, tokens);
-        (*i)++;
-		if (syntaxe_error(line, *i))
-			g_global.exit_status = 2;
-        return (1);
-    }
-    return (0);
+	if (line[*i] == '>') // Check if current character is '>'
+	{
+		if (line[*i + 1] == '>') // Check for '>>' (append)
+		{
+			add_token(">>", DGREAT, tokens); // Add double great token
+			(*i) += 2; // Move past both characters
+			if (syntaxe_error(line, *i)) // Check for syntax errors
+				g_exit_status = 2; // Set exit status to 2 on error
+			return (1); // Return 1 to indicate double great was parsed
+		}
+		add_token(">", GREAT, tokens); // Add single great token
+		(*i)++; // Move to next character
+		if (syntaxe_error(line, *i)) // Check for syntax errors
+			g_exit_status = 2; // Set exit status to 2 on error
+		return (1); // Return 1 to indicate great was parsed
+	}
+	return (0); // Return 0 if not a '>'
 }
 
 /*
@@ -92,23 +93,23 @@ int	parse_single_quotes(char *line, size_t *i, t_token **tokens)
 	size_t	start;
 	char	*token;
 
-	if (line[*i] != '\'')	// checks the existence of single quotes
-		return (0);
-	(*i)++;					// moving past the opening quote
-	start = *i;				// defines the beggining of the token content
-	while (line[*i] && line[*i] != '\'')		// skip the content and try to find the end of the line or the closing quote
-		(*i)++;
-	if (line[*i] == '\0')	// detected EOF without a closing quote
+	if (line[*i] != '\'') // Check if current character is single quote
+		return (0); // Return 0 if not a single quote
+	(*i)++; // Move past opening quote
+	start = *i; // Mark start of quoted content
+	while (line[*i] && line[*i] != '\'') // Find closing quote
+		(*i)++; // Move through quoted content
+	if (line[*i] == '\0') // Check if reached end without closing quote
 	{
 		printf("minishell: unexpected EOF while looking for matching `'\n");
-		return (-1);
+		return (-1); // Return -1 on unclosed quote
 	}
-	token = ft_substr(line, start, *i - start);		// token extraction 
-	add_token(token, WORD, tokens);					// defining the token value and type	
-	free(token);			// as add_token copies the token from the temporary place in char *token, we free it before ending the function
-	if (line[*i] == '\'')	// move past the closing quote
+	token = ft_substr(line, start, *i - start); // Extract content between quotes
+	add_token(token, WORD, tokens); // Add token to list
+	free(token); // Free temporary token string
+	if (line[*i] == '\'') // Move past closing quote
 		(*i)++;
-	return (1);
+	return (1); // Return 1 to indicate single quotes were parsed
 }
 
 /*
@@ -121,21 +122,21 @@ int	parse_double_quotes(char *line, size_t *i, t_token **tokens)
 	size_t	start;
 	char	*token;
 
-	if (line[*i] != '\"')	// checks the existence of double quotes
-		return (0);
-	(*i)++;					// moving past the opening quote
-	start = *i;				// defines the beggining of the token content
-	while (line[*i] && line[*i] != '"')		// skip the content and try to find the end of the line or the closing quote
-		(*i)++;
-	if (line[*i] == '\0')	// detected EOF without a closing quote
+	if (line[*i] != '"') // Check if current character is double quote
+		return (0); // Return 0 if not a double quote
+	(*i)++; // Move past opening quote
+	start = *i; // Mark start of quoted content
+	while (line[*i] && line[*i] != '"') // Find closing quote
+		(*i)++; // Move through quoted content
+	if (line[*i] == '\0') // Check if reached end without closing quote
 	{
 		printf("minishell: unexpected EOF while looking for matching `\"\n");
-		return (-1);
+		return (-1); // Return -1 on unclosed quote
 	}
-	token = ft_substr(line, start, *i - start);		// token extraction
-	add_token(token, WORD, tokens);					// defining the token value and type
-	free(token);			// as add_token copies the token from the temporary place in char *token, we free it before ending the function
-	if (line[*i] == '\"')	// move past the closing quote
+	token = ft_substr(line, start, *i - start); // Extract content between quotes
+	add_token(token, WORD, tokens); // Add token to list
+	free(token); // Free temporary token string
+	if (line[*i] == '"') // Move past closing quote
 		(*i)++;
-	return (1);
+	return (1); // Return 1 to indicate double quotes were parsed
 }
