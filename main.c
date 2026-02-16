@@ -6,55 +6,79 @@
 /*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:24 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/02/12 14:37:48 by joaobarb         ###   ########.fr       */
+/*   Updated: 2026/02/16 12:11:51 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	g_exit_status;
+volatile sig_atomic_t	g_signal_received = 0;
 
 /*
-**  helper function that checks for an empty input line, returning the stopping 
-** point without actually moving in the line position on the main loop.
+**  Helper function that checks for an empty input line.
 */
 static size_t	treat_empty_input(char *line, size_t i)
 {
-	while (line[i] && (line[i] == ' ' || line[i] == '\t')) // Skip spaces and tabs
-		i++; // Move to next character
-	return (i); // Return position after whitespace
+	while (line[i] && (line[i] == ' ' || line[i] == '\t'))
+		i++;
+	return (i);
 }
 
 /*
-**  main loop of the program: acts as a listener that receives each 
-** line sent by the user and then, after checking if the line is valid
-** (not empty, not only a '\0'), sends it to parser that will then divide it 
-** into separate tokens that we can interpret easier.
+**  Handle readline input and check for interrupts or empty lines.
+**  Returns 1 if processing should continue, 0 if should skip to next iteration.
 */
-static void	main_loop(void)
+static int	process_input_line(char **line, t_shell *shell)
 {
-	char	*line; // Input line from readline
-	size_t	i; // Index for parsing
-	t_token	*tokens; // Token list
-
-	while (1) // Infinite loop for shell prompt
+	if (!*line)
+		clean_exit(shell);
+	if (g_signal_received)
 	{
-		i = 0; // Reset index
-		line = readline(PROMPT); // Read input from user
-		if (!line) // Check for EOF (Ctrl+D)
-			clean_exit(); // Exit cleanly
-		if (line[treat_empty_input(line, i)] == '\0') // Check if line is empty or only whitespace
-		{
-			free(line); // Free empty line
-			continue ; // Skip to next iteration
-		}
-		add_history(line); // Add line to readline history
-		line = read_input_with_continuation(line); // Handle unclosed quotes with continuation
-		if (!line) // Check if continuation was interrupted
-			continue ; // Skip to next iteration
-		tokens = NULL; // Initialize token list
-		parse_input(line, i, &tokens); // Parse line into tokens
-		free(line); // Free input line
+		shell->exit_status = 130;
+		return (0);
+	}
+	if ((*line)[treat_empty_input(*line, 0)] == '\0')
+	{
+		free(*line);
+		return (0);
+	}
+	return (1);
+}
+
+/*
+**  Process and execute the validated input line.
+*/
+static void	execute_line(char *line, t_shell *shell)
+{
+	t_token	*tokens;
+	char	*validated_line;
+
+	validated_line = read_input_with_continuation(line, shell);
+	if (!validated_line)
+	{
+		free(line);
+		return ;
+	}
+	add_history(line);
+	tokens = NULL;
+	parse_input(validated_line, 0, &tokens, shell);
+	free(validated_line);
+}
+
+/*
+**  Main loop: reads and processes user input continuously.
+*/
+static void	main_loop(t_shell *shell)
+{
+	char	*line;
+
+	while (1)
+	{
+		g_signal_received = 0;
+		line = readline(PROMPT);
+		if (!process_input_line(&line, shell))
+			continue ;
+		execute_line(line, shell);
 	}
 }
 
@@ -64,8 +88,10 @@ static void	main_loop(void)
 */
 int	main(void)
 {
-	g_exit_status = 0; // Initialize exit status to 0
-	setup_signal_handlers(); // Setup signal handlers for SIGINT and SIGQUIT
-	main_loop(); // Start the main shell loop
-	return (g_exit_status); // Return exit status (never reached)
+	t_shell	shell; 												// Shell state structure
+
+	shell.exit_status = 0; 										// Initialize exit status to 0
+	setup_signal_handlers(); 									// Setup signal handlers for SIGINT and SIGQUIT
+	main_loop(&shell); 											// Start the main shell loop
+	return (shell.exit_status); 								// Return exit status (never reached)
 }

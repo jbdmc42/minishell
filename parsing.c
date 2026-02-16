@@ -6,7 +6,7 @@
 /*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 13:54:22 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/02/12 14:37:49 by joaobarb         ###   ########.fr       */
+/*   Updated: 2026/02/16 10:05:11 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	parse_word(char *line, size_t *i, t_token **tokens)
 	free(token); // Free temporary token string
 }
 
-void	parse_input(char *line, size_t i, t_token **tokens)
+void	parse_input(char *line, size_t i, t_token **tokens, t_shell *shell)
 {
 	while (line[i] != '\0') // Loop through entire input line
 	{
@@ -65,13 +65,13 @@ void	parse_input(char *line, size_t i, t_token **tokens)
 			continue ; // Continue if quotes were parsed
 		if (parse_double_quotes(line, &i, tokens)) // Try parsing double quotes
 			continue ; // Continue if quotes were parsed
-		if (parse_pipe(line, &i, tokens)) // Try parsing pipe
+		if (parse_pipe(line, &i, tokens, shell)) // Try parsing pipe
 			continue ; // Continue if pipe was parsed
-		if (parse_less(line, &i, tokens)) // Try parsing less/heredoc
+		if (parse_less(line, &i, tokens, shell)) // Try parsing less/heredoc
 			continue ; // Continue if less was parsed
-		if (parse_great(line, &i, tokens)) // Try parsing great/append
+		if (parse_great(line, &i, tokens, shell)) // Try parsing great/append
 			continue ; // Continue if great was parsed
 		parse_word(line, &i, tokens); // Parse regular word
 	}
-	get_commands(tokens); // Execute the parsed commands
+	get_commands(tokens, shell); // Execute the parsed commands
 }

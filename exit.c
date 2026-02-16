@@ -6,7 +6,7 @@
 /*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 09:15:11 by joaobarb          #+#    #+#             */
-/*   Updated: 2026/02/12 14:37:48 by joaobarb         ###   ########.fr       */
+/*   Updated: 2026/02/16 10:05:11 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	count_tokens(t_token *tokens)
 	return (count); // Return total count
 }
 
-void	ft_exit(t_token **tokens)
+void	ft_exit(t_token **tokens, t_shell *shell)
 {
 	int		token_count; // Number of tokens
 
@@ -65,7 +65,7 @@ void	ft_exit(t_token **tokens)
 	if (token_count > 2) // Check if too many arguments
 	{
 		printf("minishell: exit: too many arguments\n");
-		g_exit_status = 1; // Set exit status to 1
+		shell->exit_status = 1; // Set exit status to 1
 		return ; // Return without exiting
 	}
 	if (token_count == 2) // Check if exit code argument provided
@@ -74,12 +74,12 @@ void	ft_exit(t_token **tokens)
 		{
 			printf("minishell: exit: %s: numeric argument required\n",
 				(*tokens)->next->value);
-			g_exit_status = 2; // Set exit status to 2 for invalid argument
+			shell->exit_status = 2; // Set exit status to 2 for invalid argument
 			free_all(); // Free all resources
-			exit(g_exit_status); // Exit with error status
+			exit(shell->exit_status); // Exit with error status
 		}
-		g_exit_status = ft_atoi((*tokens)->next->value); // Convert argument to exit code
+		shell->exit_status = ft_atoi((*tokens)->next->value); // Convert argument to exit code
 	}
 	free_all(); // Free all resources
-	exit(g_exit_status); // Exit with specified or default status
+	exit(shell->exit_status); // Exit with specified or default status
 }

@@ -6,7 +6,7 @@
 /*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:34 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/02/12 14:12:05 by joaobarb         ###   ########.fr       */
+/*   Updated: 2026/02/16 11:43:01 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,23 @@
 // Globals
 
 /* 
-** "extern" is used so that the variable is actually defined on the header file, 
-** and not only declared and redefined in each .c file with this header present 
+** Global variable used ONLY for signal handling (Ctrl+C interruption)
+** 0 = normal, 1 = interrupted by signal
 */
-extern int	g_exit_status;
+extern volatile sig_atomic_t	g_signal_received;
 
 // Structs
+
+/*
+** Shell state structure that holds the shell's context
+** int exit_status: last command exit status (for $? and error codes)
+*/
+typedef struct s_shell
+{
+	int			exit_status;
+}	t_shell;
+
+// More Structs
 
 /* 
 **  enumeration of types that a token can have/be
@@ -86,21 +97,21 @@ typedef struct s_token
 
 // cleaning.c:
 void	free_all(void);
-void	clean_exit(void);
+void	clean_exit(t_shell *shell);
 
 // commands.c:
-void	ft_echo(t_token **tokens);
-void	ft_exit(t_token **tokens);
-/* void	ft_cd(t_token **tokens);
-void	ft_pwd(t_token **tokens);
-void	ft_export(t_token **tokens); */
-void	get_commands(t_token **tokens);
+void	ft_echo(t_token **tokens, t_shell *shell);
+void	ft_exit(t_token **tokens, t_shell *shell);
+/* void	ft_cd(t_token **tokens, t_shell *shell);
+void	ft_pwd(t_token **tokens, t_shell *shell);
+void	ft_export(t_token **tokens, t_shell *shell); */
+void	get_commands(t_token **tokens, t_shell *shell);
 
 // echo.c:
-void	ft_echo(t_token **tokens);
+void	ft_echo(t_token **tokens, t_shell *shell);
 
 // exit.c:
-void	ft_exit(t_token **tokens);
+void	ft_exit(t_token **tokens, t_shell *shell);
 
 // input_handling.c:
 int		ft_strisspace(char *line);
@@ -108,17 +119,17 @@ char	*read_input(void);
 
 // quote_handling.c:
 int		is_quotes_balanced(char *str);
-char	*read_input_with_continuation(char *line);
+char	*read_input_with_continuation(char *line, t_shell *shell);
 
 // parsing_helpers.c:
-int		parse_pipe(char *line, size_t *i, t_token **tokens);
-int		parse_less(char *line, size_t *i, t_token **tokens);
-int		parse_great(char *line, size_t *i, t_token **tokens);
+int		parse_pipe(char *line, size_t *i, t_token **tokens, t_shell *shell);
+int		parse_less(char *line, size_t *i, t_token **tokens, t_shell *shell);
+int		parse_great(char *line, size_t *i, t_token **tokens, t_shell *shell);
 int		parse_single_quotes(char *line, size_t *i, t_token **tokens);
 int		parse_double_quotes(char *line, size_t *i, t_token **tokens);
 
 // parsing.c:
-void	parse_input(char *line, size_t i, t_token **tokens);
+void	parse_input(char *line, size_t i, t_token **tokens, t_shell *shell);
 int		syntaxe_error(char *line, size_t i);
 int		skip_spaces(char *line, size_t *i);
 

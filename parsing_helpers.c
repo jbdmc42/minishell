@@ -6,7 +6,7 @@
 /*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 17:40:26 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/02/12 14:37:48 by joaobarb         ###   ########.fr       */
+/*   Updated: 2026/02/16 10:05:11 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 **  Checks the syntaxe to ensure the token can work properly.
 **  Also creates a token with the correct type of signal.
 */
-int	parse_pipe(char *line, size_t *i, t_token **tokens)
+int	parse_pipe(char *line, size_t *i, t_token **tokens, t_shell *shell)
 {
 	if (line[*i] == '|') // Check if current character is pipe
 	{
 		add_token("|", PIPE, tokens); // Add pipe token
 		(*i)++; // Move to next character
 		if (syntaxe_error(line, *i)) // Check for syntax errors after pipe
-			g_exit_status = 2; // Set exit status to 2 on error
+			shell->exit_status = 2; // Set exit status to 2 on error
 		return (1); // Return 1 to indicate pipe was parsed
 	}
 	return (0); // Return 0 if not a pipe
@@ -35,7 +35,7 @@ int	parse_pipe(char *line, size_t *i, t_token **tokens)
 **  Checks the syntaxe to ensure the token can work properly.
 **  Also creates a token with the correct type of signal.
 */
-int	parse_less(char *line, size_t *i, t_token **tokens)
+int	parse_less(char *line, size_t *i, t_token **tokens, t_shell *shell)
 {
 	if (line[*i] == '<') // Check if current character is '<'
 	{
@@ -44,13 +44,13 @@ int	parse_less(char *line, size_t *i, t_token **tokens)
 			add_token("<<", DLESS, tokens); // Add double less token
 			(*i) += 2; // Move past both characters
 			if (syntaxe_error(line, *i)) // Check for syntax errors
-				g_exit_status = 2; // Set exit status to 2 on error
+				shell->exit_status = 2; // Set exit status to 2 on error
 			return (1); // Return 1 to indicate double less was parsed
 		}
 		add_token("<", LESS, tokens); // Add single less token
 		(*i)++; // Move to next character
 		if (syntaxe_error(line, *i)) // Check for syntax errors
-			g_exit_status = 2; // Set exit status to 2 on error
+			shell->exit_status = 2; // Set exit status to 2 on error
 		return (1); // Return 1 to indicate less was parsed
 	}
 	return (0); // Return 0 if not a '<'
@@ -62,7 +62,7 @@ int	parse_less(char *line, size_t *i, t_token **tokens)
 **  Checks the syntaxe to ensure the token can work properly.
 **  Also creates a token with the correct type of signal.
 */
-int	parse_great(char *line, size_t *i, t_token **tokens)
+int	parse_great(char *line, size_t *i, t_token **tokens, t_shell *shell)
 {
 	if (line[*i] == '>') // Check if current character is '>'
 	{
@@ -71,13 +71,13 @@ int	parse_great(char *line, size_t *i, t_token **tokens)
 			add_token(">>", DGREAT, tokens); // Add double great token
 			(*i) += 2; // Move past both characters
 			if (syntaxe_error(line, *i)) // Check for syntax errors
-				g_exit_status = 2; // Set exit status to 2 on error
+				shell->exit_status = 2; // Set exit status to 2 on error
 			return (1); // Return 1 to indicate double great was parsed
 		}
 		add_token(">", GREAT, tokens); // Add single great token
 		(*i)++; // Move to next character
 		if (syntaxe_error(line, *i)) // Check for syntax errors
-			g_exit_status = 2; // Set exit status to 2 on error
+			shell->exit_status = 2; // Set exit status to 2 on error
 		return (1); // Return 1 to indicate great was parsed
 	}
 	return (0); // Return 0 if not a '>'

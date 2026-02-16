@@ -6,91 +6,83 @@
 /*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 11:00:00 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/02/12 14:53:52 by joaobarb         ###   ########.fr       */
+/*   Updated: 2026/02/16 12:00:10 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
-**  helper function to check if the continuation process is interrupted by 
-** a CTRL-C or CTRL-D command, properly handling both cases.
+**  Check if quotes are balanced in the input string.
+**  Returns 1 if balanced, 0 if unbalanced.
 */
-static int	handle_interruptions(char *continuation, int in_single)
-{
-	char	quote;
-
-	if (!continuation) // Check if readline returned NULL (EOF or interruption)
-	{
-		if (in_single) // Determine which quote type was unclosed
-			quote = '\'';
-		else
-			quote = '"';
-		printf("minishell: unexpected EOF while looking for matching ");
-		printf("`%c'\n", quote); // Print the unclosed quote character
-		printf("minishell: syntax error: unexpected end of file\n");
-		return (0); // Return 0 to indicate interruption
-	}
-	return (1); // Return 1 if continuation is valid
-}
-
-/*
-**  helper function to update quote states that also
-** tracks whether we're inside single or double quotes.
-*/
-static void	update_quote_state(char c, int *in_single, int *in_double)
-{
-	if (c == '\'' && !(*in_double)) // Toggle single quote state if not inside double quotes
-		*in_single = !(*in_single);
-	else if (c == '"' && !(*in_single)) // Toggle double quote state if not inside single quotes
-		*in_double = !(*in_double);
-}
-
-/*
-**  helper function to check quote state in a string,
-** updating in_single and in_double flags, and returning 1 if balanced, 0 if not.
-*/
-static int	check_quote_state(char *str, int *in_single, int *in_double)
+int	is_quotes_balanced(char *str)
 {
 	int	i;
+	int	in_single;
+	int	in_double;
 
 	i = 0;
-	*in_single = 0; // Initialize single quote flag
-	*in_double = 0; // Initialize double quote flag
-	while (str && str[i]) // Iterate through each character in the string
+	in_single = 0;
+	in_double = 0;
+	while (str && str[i])
 	{
-		update_quote_state(str[i], in_single, in_double); // Update quote states
+		if (str[i] == '\'' && !in_double)
+			in_single = !in_single;
+		else if (str[i] == '"' && !in_single)
+			in_double = !in_double;
 		i++;
 	}
-	return (!(*in_single) && !(*in_double)); // Return 1 if quotes are balanced
+	return (!in_single && !in_double);
 }
 
 /*
-**  wrapper function to check if quotes are balanced in a string,
-** returning 1 if balanced, 0 if not balanced.
+**  Helper function that checks which quote was unclosed.
+** 	Returns 0 for single and 1 for double.
 */
-char	*read_input_with_continuation(char *line)
+static int decide_unclosed_quote(int s, int d, t_shell *shell, char *u)
 {
-	int		in_single; // Flag for single quote state
-	int		in_double; // Flag for double quote state
-	char	*temp; // Temporary string for joining
-	char	*continuation; // Next line of input
-
-	if (!line) // Check if initial line is NULL
-		return (NULL);
-	while (!check_quote_state(line, &in_single, &in_double)) // Loop while quotes are unbalanced
+	if (s || d)
 	{
-		continuation = readline("> "); // Read continuation line with ">" prompt
-		if (!handle_interruptions(continuation, in_single)) // Check for EOF or interruption
-		{
-			free(line); // Free the current line
-			return (NULL); // Return NULL on interruption
-		}
-		temp = ft_strjoin(line, "\n"); // Add newline to current line
-		free(line); // Free old line
-		line = ft_strjoin(temp, continuation); // Join with continuation
-		free(temp); // Free temporary string
-		free(continuation); // Free continuation line
+		if (s)
+			*u = '\'';
+		else
+			*u = '"';
+		shell->exit_status = 2;
+		return (0);
 	}
-	return (line); // Return complete line with balanced quotes
+	return (1);
+}
+
+/*
+**  Check for unclosed quotes and report syntax error if found.
+**  Returns the original line if balanced, NULL if unbalanced.
+*/
+char	*read_input_with_continuation(char *line, t_shell *shell)
+{
+	int		i;
+	int		in_single;
+	int		in_double;
+	char	u;				// short for unclosed_quote
+
+	i = 0;
+	in_single = 0;
+	in_double = 0;
+	if (!line)
+		return (NULL);
+	while (line[i])
+	{
+		if (line[i] == '\'' && !in_double)
+			in_single = !in_single;
+		else if (line[i] == '"' && !in_single)
+			in_double = !in_double;
+		i++;
+	}
+	if (!decide_unclosed_quote(in_single, in_double, shell, &u))
+	{
+		printf("minishell: syntax error near unexpected token `%c'\n", u);
+		free(line);
+		return (NULL);
+	}
+	return (line);
 }
