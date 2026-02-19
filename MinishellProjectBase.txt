@@ -23,8 +23,8 @@ Minishell
 │   ├── 3.5 Detect pipes											- (create the pipe system)
 │   └── 3.6 Detect redirections										- (create the redirection system)
 │       ├── <
-│       ├── >
-│       ├── >>
+│       ├── >  *CHECK THE END OF THE PAGE
+│       ├── >> *CHECK THE END OF THE PAGE  
 │       └── << (heredoc, no history update)
 │
 ├── 4. Command Structure (AST or simple commands)
@@ -146,3 +146,27 @@ Termcap (optional)				| #include <term.h>						| tgetent				| Loads terminal des
 								|										| tgoto					| Computes cursor movement escape sequence.
 								|										| tputs					| Outputs a terminal capability string.		
 ______________________________________________________________________________________________________________________________________________________________________________________
+
+
+*IMPORTANT
+>  (redirects content from fd 1 [stdout] to the fd given [any file for example] by truncating [erases the existing content and writes what was on the stdout])
+>> (redirects content from fd 1 [stdout] to the fd given [any file for example] by appending [maintains the existing content and writes the content from stdout starting on the position of the EOF])
+
+REDIRECTIONS & PIPES MAP
+_____________________________________________________________________
+COMMAND   |   '>'	  |   '>>'   |   '<'   |   '<<'   |   '|'   
+----------|-----------|----------|---------|----------|------------->
+echo      |	   ✓	  |    ✓	 |    ✗	   |    ✗	  |    ✓    
+----------|-----------|----------|---------|----------|------------->
+cd        |	   ✗	  |    ✗	 |    ✗	   |    ✗	  |    ✗    
+----------|-----------|----------|---------|----------|------------->
+pwd       |	   ✓	  |    ✓	 |    ✗	   |    ✗	  |    ✓    
+----------|-----------|----------|---------|----------|------------->
+export    |	   ✗	  |    ✗	 |    ✗	   |    ✗	  |    ✗    
+----------|-----------|----------|---------|----------|------------->
+unset     |	   ✗	  |    ✗	 |    ✗	   |    ✗	  |    ✗    
+----------|-----------|----------|---------|----------|------------->
+env       |	   ✓	  |    ✓	 |    ✗	   |    ✗	  |    ✓    
+----------|-----------|----------|---------|----------|------------->
+exit      |	   ✗	  |    ✗	 |    ✗	   |    ✗	  |    ✗    
+_____________________________________________________________________
