@@ -36,10 +36,10 @@ Minishell
 ├── 5. Command Execution
 │   ├── 5.1 Built-in detection
 │   │   ├── echo -n													✓
-│   │   ├── cd
-│   │   ├── pwd
-│   │   ├── export
-│   │   ├── unset
+│   │   ├── cd														1.
+│   │   ├── pwd														1. Jorge
+│   │   ├── export													2.
+│   │   ├── unset													2. João
 │   │   ├── env
 │   │   └── exit													✓
 │   ├── 5.2 Run built-ins without fork (when required)
