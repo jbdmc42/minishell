@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:34 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/02/23 11:22:15 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/02/24 17:06:12 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,25 @@ extern volatile sig_atomic_t	g_signal_received;
 // Structs
 
 /*
+** Environment Variables Structure that holds the content of
+** all the environment variables on our program
+*/
+typedef struct s_env
+{
+	char			*name;
+	char			*val;
+	struct s_env	*prev;
+	struct s_env	*next;
+}	t_env;
+
+/*
 ** Shell state structure that holds the shell's context
 ** int exit_status: last command exit status (for $? and error codes)
 */
 typedef struct s_shell
 {
-	int			exit_status;
+	int		exit_status;
+	t_env	*env;	
 }	t_shell;
 
 // More Structs
@@ -85,7 +98,7 @@ typedef enum e_tokentype
 	GREAT,
 	DGREAT,
 	LESS,
-	DLESS
+	DLESS,
 }	t_tokentype;
 
 /* 

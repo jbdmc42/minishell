@@ -6,7 +6,7 @@
 /*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:24 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/02/16 12:11:51 by joaobarb         ###   ########.fr       */
+/*   Updated: 2026/02/24 16:43:35 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,14 @@ static void	main_loop(t_shell *shell)
 **  main program function: starts the user input request loop and prepares the
 ** signal handlers for CTRL-D, CTRL-C and CTRL-\.
 */
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
+	(void)argc;
+	(void)argv;
 	t_shell	shell; 												// Shell state structure
 
 	shell.exit_status = 0; 										// Initialize exit status to 0
+
 	setup_signal_handlers(); 									// Setup signal handlers for SIGINT and SIGQUIT
 	main_loop(&shell); 											// Start the main shell loop
 	return (shell.exit_status); 								// Return exit status (never reached)

@@ -6,7 +6,7 @@
 /*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 14:18:09 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/02/16 10:05:11 by joaobarb         ###   ########.fr       */
+/*   Updated: 2026/02/24 16:49:38 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ void	get_commands(t_token **tokens, t_shell *shell)
 		ft_echo(tokens, shell); 								// Execute echo command
 	else if (ft_strcmp((*tokens)->value, "exit") == 0) 			// Check if command is "exit"
 		ft_exit(tokens, shell); 								// Execute exit command
+	else if (ft_strcmp((*tokens)->value, "export") == 0)		// Check if command is "export"
+		ft_export(tokens, shell);								// Execute export command
+	else if (ft_strcmp((*tokens)->value, "unset") == 0)			// Check if command is "unset"
+		ft_export(tokens, shell);								// Execute unset command
 	else 														// Command not recognized
 	{
 		printf("%s: command not found\n", (*tokens)->value); 	// Print error message
