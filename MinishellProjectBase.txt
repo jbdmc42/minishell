@@ -39,8 +39,8 @@ Minishell
 │   │   ├── cd														1.
 │   │   ├── pwd														1. Jorge
 │   │   ├── export													2.
-│   │   ├── unset													2. João
-│   │   ├── env
+│   │   ├── unset													2.
+│   │   ├── env														2. João
 │   │   └── exit													✓
 │   ├── 5.2 Run built-ins without fork (when required)
 │   ├── 5.3 External command execution via PATH
@@ -170,3 +170,19 @@ env       |	   ✓	  |    ✓	 |    ✗	   |    ✗	  |    ✓
 ----------|-----------|----------|---------|----------|------------->
 exit      |	   ✗	  |    ✗	 |    ✗	   |    ✗	  |    ✗    
 _____________________________________________________________________
+
+
+
+
+
+João ------------------------------------------------------------------------------------>
+
+export with no args:
+1. Count the nodes in your env list (to know array size)
+2. ft_calloc an array of char * with size = node count + 1 (last element NULL)
+3. For each node in env list, build the string:
+4. Use ft_strjoin() operations to concatenate: name + "=" + "\"" + val + "\""
+5. Store the result string in the array at that index
+6. Sort the array using qsort() with strcmp as the comparison function
+7. Print the array line by line
+8. Free each string in the array, then free the array itself
