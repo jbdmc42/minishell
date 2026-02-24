@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:34 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/02/16 11:43:01 by joaobarb         ###   ########.fr       */
+/*   Updated: 2026/02/23 11:22:15 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,17 @@
 // Globals
 
 /* 
-** Global variable used ONLY for signal handling (Ctrl+C interruption)
-** 0 = normal, 1 = interrupted by signal
+**  Global variable used ONLY for signal handling (Ctrl + C interruption) with
+** 0 = default state, 1 = interrupted by signal.
+**  "extern" expands the variable to all files that include this header by declaring and assigning it the 
+** initial value to the global variable directly in the header file, forcing any other C file to use that
+** declaration instead of redeclaring the variable.
+**  "volatile" means that the variable value can be read or modified asynchronously by something other than the
+** current thread of execution (can capture and interpret changes on signals).
+**  "sig_atomic_t" or "signal atomic type" is an integer type that can be accessed as an atomic entity even in the
+** presence of asynchronous interrupts made by signals. This type prevents race conditions between threads and
+** data corruptions by accessing the atomic value of the variable whenever a signal changes it. It basically
+** automatically handles access to the variable by using thread locks per signal without the need of us to program it.
 */
 extern volatile sig_atomic_t	g_signal_received;
 
