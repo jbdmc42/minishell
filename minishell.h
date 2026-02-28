@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:34 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/02/24 17:06:12 by joaobarb         ###   ########.fr       */
+/*   Updated: 2026/02/28 12:41:14 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,12 @@ void	ft_echo(t_token **tokens, t_shell *shell);
 // exit.c:
 void	ft_exit(t_token **tokens, t_shell *shell);
 
+// export.c:
+void	ft_export(t_token **tokens, t_shell *shell);
+
+// ft_lsttochpp.c:
+char	**ft_lsttochpp(char **chpp, t_env *env);
+
 // input_handling.c:
 int		ft_strisspace(char *line);
 char	*read_input(void);
@@ -159,10 +165,14 @@ int		skip_spaces(char *line, size_t *i);
 void	sigint_handler(int sig);
 void	setup_signal_handlers(void);
 
+// utilities.c:
+int		env_lstsize(t_env *env);
+void	init_env(t_shell *shell, char **envp);
+
 // tokenization.c:
 void	add_token(char *value, t_tokentype type, t_token **tokens);
 
-// temp
-void	print_tokens(t_token *tokens);
+// utilities.c:
+void	init_env(t_shell *shell, char **envp);
 
 #endif

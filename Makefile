@@ -19,13 +19,15 @@ SRCS		= main.c \
 			echo.c \
 			exit.c \
 			export.c \
+			ft_lsttochpp.c \
 			input_handling.c \
 			parsing_helpers.c \
 			parsing.c \
 			quote_handling.c \
 			setup_signal_handlers.c \
 			tokenization.c \
-			unset.c
+			unset.c \
+			utilities.c
 
 OBJS		= $(SRCS:.c=.o)
 

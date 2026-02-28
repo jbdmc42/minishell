@@ -93,7 +93,7 @@ int	main(int argc, char **argv, char **envp)
 	t_shell	shell; 												// Shell state structure
 
 	shell.exit_status = 0; 										// Initialize exit status to 0
-
+	init_env(&shell, envp);										// Initialize environment variables from envp
 	setup_signal_handlers(); 									// Setup signal handlers for SIGINT and SIGQUIT
 	main_loop(&shell); 											// Start the main shell loop
 	return (shell.exit_status); 								// Return exit status (never reached)
