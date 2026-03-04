@@ -176,13 +176,27 @@ _____________________________________________________________________
 
 
 João ------------------------------------------------------------------------------------>
+Export command with arguments:
+1. Test command syntax for the command itself and each argument
+2. Execute the export for all the tokens
+3. Tokens should be like this: var_name=value
 
-export with no args:
-1. Count the nodes in your env list (to know array size)
-2. ft_calloc an array of char * with size = node count + 1 (last element NULL)
-3. For each node in env list, build the string:
-4. Use ft_strjoin() operations to concatenate: name + "=" + "\"" + val + "\""
-5. Store the result string in the array at that index
-6. Sort the array using qsort() with strcmp as the comparison function
-7. Print the array line by line
-8. Free each string in the array, then free the array itself
+We can have various types of tokens, such as:
+
+				Input				 |			Struct			 |
+var_name (no value)					-> name=var_name   value=""
+var_name=value						-> name=var_name   value="value"
+var_name= value						-> name=var_name   value=" value"
+
+var_name =value						-> syntax errors on the tokens 
+var_name = value					|  should print "minishell: export: `(all characters starting from the = including it)': not a valid identifier"
+
+4. We have to check if the variable name given in the token already exists. If it does, then we just give it the new value
+5. Difference between export (no args) and env: export (no args) prints every variable declared; env prints every variable declared with a value (no value="")
+
+joaobarb@c2r5s9:~/Documents/minishell$ export test=1 abc =abc
+bash: export: `=abc': not a valid identifier
+
+this should define the following:
+abc=""
+test="1"
