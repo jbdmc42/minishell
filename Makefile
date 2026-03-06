@@ -18,6 +18,7 @@ SRCS		= main.c \
 			commands.c \
 			echo.c \
 			exit.c \
+			export_helpers.c \
 			export.c \
 			ft_lsttochpp.c \
 			input_handling.c \

@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:34 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/02/28 12:41:14 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/03/06 10:06:00 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,9 @@ void	ft_echo(t_token **tokens, t_shell *shell);
 
 // exit.c:
 void	ft_exit(t_token **tokens, t_shell *shell);
+
+// export_helpers.c:
+
 
 // export.c:
 void	ft_export(t_token **tokens, t_shell *shell);

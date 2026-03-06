@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 16:49:55 by joaobarb          #+#    #+#             */
-/*   Updated: 2026/03/04 12:38:23 by joaobarb         ###   ########.fr       */
+/*   Updated: 2026/03/06 10:50:11 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,15 +81,17 @@ void	parse_argument(t_token **tokens, t_shell *shell)
 {
 	int		i;
 	t_env	*cur;
+	char	**nameval;
 
+	nameval = ft_split((*tokens)->value, '=');
 	i = 0;
 	cur = shell->env;
 	if ((*tokens)->value)
 	{
 		while (cur)
 		{
-			if (ft_strcmp((*tokens)->value, cur->name))
-				redefine_value(tokens, shell);
+			if (ft_strcmp(nameval[0], cur->name))
+				redefine_value(tokens, shell, nameval);
 			cur = cur->next;
 		}
 		while ((*tokens)->value[i])
@@ -111,13 +113,7 @@ void	ft_export(t_token **tokens, t_shell *shell)
 		print_env(shell);
 	while ((*tokens) != NULL)
 	{
-		if ((*tokens)->value[0] == '=')
-		{
-			printf("\nminishell: export: `%s':", (*tokens)->value);
-			printf(" not a valid identifier");
-		}
-		else
-			parse_argument(tokens, shell);
+		parse_argument(tokens, shell);
 		*tokens = (*tokens)->next;
 	}
 }
