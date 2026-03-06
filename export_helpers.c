@@ -3,70 +3,66 @@
 /*                                                        :::      ::::::::   */
 /*   export_helpers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 11:58:32 by joaobarb          #+#    #+#             */
-/*   Updated: 2026/03/06 10:51:09 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/03/06 16:16:29 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	check_for_value(t_token **tokens)
+void	fill_node(t_env *var, char *name, char *val, t_env *cur)
 {
-	int	flag;
-	int	i;
-
-	flag = 0;
-	i = 0;
-	
-	while ((*tokens)->value[i])
+	var->name = ft_strdup(name);
+	if (!var->name)
+		return ;
+	var->val = ft_strdup(val);
+	if (!var->val)
 	{
-		if ((*tokens)->value[i] == '=')
-			return (1);
-		i++;
+		free(var->name);
+		return ;
 	}
-	return (0);
+	var->next = NULL;
+	var->prev = cur;
 }
 
 void	redefine_value(t_token **tokens, t_shell *shell, char **nameval)
 {
 	t_env	*cur;
-	int		i;
 
+	(void)tokens;
 	cur = shell->env;
 	while (cur)
 	{
-		i = 0;
-		while ((*tokens)->value[i])
-			i++;
-		if ((*tokens)->value[i - 1] == '=' && ft_strcmp(cur->name, nameval[0]))					// case token terminates in '=' the value turns to empty
-			cur->val = "";
-		else if (ft_strcmp(cur->name, nameval[0]) && check_for_value(tokens))					// case we find the name in the list and theres a value, we redefine it
-			cur->val = nameval[1];
-		else if (!((*tokens)->value[i - 1] == '=') && !check_for_value(tokens)
-				&& (*tokens)->next->value[0] == '=')
+		if (ft_strcmp(cur->name, nameval[0]) == 0)
 		{
-			printf("\nminishell: export: `%s':", (*tokens)->next->value);
-			printf(" not a valid identifier");
+			free(cur->val);
+			cur->val = ft_strdup(nameval[1]);
 			return ;
 		}
 		cur = cur->next;
 	}
+	define_value(shell, nameval[0], nameval[1]);
 }
 
-void	next_token_is_value(t_token **tokens, t_shell *shell)
-{
-	
-}
-
-void	define_value(t_token **tokens, t_shell *shell)
+void	define_value(t_shell *shell, char *name, char *val)
 {
 	t_env	*cur;
+	t_env	*var;
 
 	cur = shell->env;
-	while (cur)
-	{
+	while (cur && cur->next)
 		cur = cur->next;
+	var = malloc(sizeof(t_env));
+	if (!var)
+		return ;
+	fill_node(var, name, val, cur);
+	if (shell->env == NULL)
+	{
+		shell->env = var;
+		var->prev = NULL;
 	}
+	else
+		cur->next = var;
 }

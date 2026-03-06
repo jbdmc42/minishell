@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 16:49:55 by joaobarb          #+#    #+#             */
-/*   Updated: 2026/03/06 10:50:11 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/03/06 16:15:40 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void	print_env(t_shell *shell)
 
 	i = 0;
 	var = alpha_sort(shell);
+	if (!var)
+		return ;
 	while (var[i])
 	{
 		printf("declare -x %s\n", var[i]);
@@ -79,27 +81,32 @@ void	print_env(t_shell *shell)
 */
 void	parse_argument(t_token **tokens, t_shell *shell)
 {
-	int		i;
-	t_env	*cur;
 	char	**nameval;
 
 	nameval = ft_split((*tokens)->value, '=');
-	i = 0;
-	cur = shell->env;
-	if ((*tokens)->value)
+	if (!nameval)
+		return;
+	if (!nameval[0])
 	{
-		while (cur)
-		{
-			if (ft_strcmp(nameval[0], cur->name))
-				redefine_value(tokens, shell, nameval);
-			cur = cur->next;
-		}
-		while ((*tokens)->value[i])
-			i++;
-		if ((*tokens)->value[i - 1] == '=')
-			next_token_is_value(tokens, shell);
-		define_value(tokens, shell);
+		free(nameval);
+		return;
 	}
+	if (!is_valid_var_name(nameval[0]))
+	{
+		printf("minishell: export: `%s': not a valid identifier\n", nameval[0]);
+		free(nameval[0]);
+		if (nameval[1])
+			free(nameval[1]);
+		free(nameval);
+		return;
+	}
+	if (!nameval[1])
+		nameval[1] = ft_strdup("");
+	process_nameval_quotes(nameval);
+	redefine_value(tokens, shell, nameval);
+	free(nameval[0]);
+	free(nameval[1]);
+	free(nameval);
 }
 
 /*
@@ -110,7 +117,11 @@ void	parse_argument(t_token **tokens, t_shell *shell)
 void	ft_export(t_token **tokens, t_shell *shell)
 {
 	if ((*tokens)->next == NULL)
+	{
 		print_env(shell);
+		return ;
+	}
+	*tokens = (*tokens)->next;
 	while ((*tokens) != NULL)
 	{
 		parse_argument(tokens, shell);
