@@ -38,7 +38,7 @@ Minishell
 │   │   ├── echo -n													✓
 │   │   ├── cd														1.
 │   │   ├── pwd														1. Jorge
-│   │   ├── export													2.
+│   │   ├── export													✓ (little refinement left to do on this command)
 │   │   ├── unset													2.
 │   │   ├── env														2. João
 │   │   └── exit													✓

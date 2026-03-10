@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:34 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/03/06 16:16:25 by joaobarb         ###   ########.fr       */
+/*   Updated: 2026/03/10 15:58:01 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,12 +136,14 @@ void	ft_echo(t_token **tokens, t_shell *shell);
 void	ft_exit(t_token **tokens, t_shell *shell);
 
 // export_helpers.c:
-void	fill_node(t_env *var, char *name, char *val, t_env *cur);
-void	redefine_value(t_token **tokens, t_shell *shell, char **nameval);
+int		fill_node(t_env *var, char *name, char *val, t_env *cur);
+void	redefine_value(t_shell *shell, char **nameval);
 void	define_value(t_shell *shell, char *name, char *val);
+char	**split_export_arg(char *arg);
 
 // export.c:
 void	ft_export(t_token **tokens, t_shell *shell);
+void	process_export_var(char **nameval, t_shell *shell);
 
 // ft_lsttochpp.c:
 char	**ft_lsttochpp(char **chpp, t_env *env);
@@ -170,16 +172,18 @@ int		skip_spaces(char *line, size_t *i);
 void	sigint_handler(int sig);
 void	setup_signal_handlers(void);
 
-// utilities.c:
-int		env_lstsize(t_env *env);
-void	init_env(t_shell *shell, char **envp);
+// tokenization.c:
+void	add_token(char *value, t_tokentype type, t_token **tokens);
 
 // utilities_two.c:
+void	ft_swap(char **a, char **b);
 char	*remove_quotes(char *nameval);
 void	process_nameval_quotes(char **nameval);
 int		is_valid_var_name(char *name);
+void	free_nameval(char **nameval);
 
-// tokenization.c:
-void	add_token(char *value, t_tokentype type, t_token **tokens);
+// utilities.c:
+int		env_lstsize(t_env *env);
+void	init_env(t_shell *shell, char **envp);
 
 #endif

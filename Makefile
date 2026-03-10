@@ -28,6 +28,7 @@ SRCS		= main.c \
 			setup_signal_handlers.c \
 			tokenization.c \
 			unset.c \
+			utilities_two.c \
 			utilities.c
 
 OBJS		= $(SRCS:.c=.o)

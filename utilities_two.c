@@ -3,14 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   utilities_two.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 15:58:46 by joaobarb          #+#    #+#             */
-/*   Updated: 2026/03/06 16:16:27 by joaobarb         ###   ########.fr       */
+/*   Updated: 2026/03/09 09:43:46 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+**  frees all elements in a nameval array
+*/
+void	free_nameval(char **nameval)
+{
+	int	i;
+
+	i = 0;
+	while (nameval[i])
+	{
+		free(nameval[i]);
+		i++;
+	}
+	free(nameval);
+}
+
+void	ft_swap(char **a, char **b)
+{
+	char	*tmp;
+	
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
 
 char	*remove_quotes(char	*nameval)
 {
