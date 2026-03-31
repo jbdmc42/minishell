@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:34 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/03/10 15:58:01 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/03/31 14:56:52 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,7 @@ int		parse_double_quotes(char *line, size_t *i, t_token **tokens);
 void	parse_input(char *line, size_t i, t_token **tokens, t_shell *shell);
 int		syntaxe_error(char *line, size_t i);
 int		skip_spaces(char *line, size_t *i);
+void	parse_word(char *line, size_t *i, t_token **tokens);
 
 // setup_signal_handlers.c:
 void	sigint_handler(int sig);

@@ -6,11 +6,41 @@
 /*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 11:00:00 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/02/16 12:00:10 by joaobarb         ###   ########.fr       */
+/*   Updated: 2026/03/31 14:56:52 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static char	*get_error_command(char *line)
+{
+	size_t	start;
+	size_t	end;
+
+	start = 0;
+	while (line[start] == ' ' || line[start] == '\t')
+		start++;
+	if (!line[start])
+		return (NULL);
+	end = start;
+	while (line[end] && line[end] != ' ' && line[end] != '\t'
+		&& line[end] != '|' && line[end] != '<' && line[end] != '>')
+		end++;
+	return (ft_substr(line, start, end - start));
+}
+
+static void	print_unclosed_quote_error(char *line, char quote)
+{
+	char	*command;
+
+	command = get_error_command(line);
+	if (command && command[0])
+		printf("minishell: %s: syntax error near unexpected token `%c'\n", command,
+			quote);
+	else
+		printf("minishell: syntax error near unexpected token `%c'\n", quote);
+	free(command);
+}
 
 /*
 **  Check if quotes are balanced in the input string.
@@ -80,8 +110,7 @@ char	*read_input_with_continuation(char *line, t_shell *shell)
 	}
 	if (!decide_unclosed_quote(in_single, in_double, shell, &u))
 	{
-		printf("minishell: syntax error near unexpected token `%c'\n", u);
-		free(line);
+		print_unclosed_quote_error(line, u);
 		return (NULL);
 	}
 	return (line);

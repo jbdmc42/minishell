@@ -23,6 +23,7 @@ SRCS		= main.c \
 			ft_lsttochpp.c \
 			input_handling.c \
 			parsing_helpers.c \
+			parsing_helpers_two.c \
 			parsing.c \
 			quote_handling.c \
 			setup_signal_handlers.c \

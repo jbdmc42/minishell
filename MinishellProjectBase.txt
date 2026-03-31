@@ -200,3 +200,17 @@ bash: export: `=abc': not a valid identifier
 this should define the following:
 abc=""
 test="1"
+
+Edge cases to solve:
+1.
+minishell$ export test=1 hello="2" world =abc testing="123
+minishell: syntax error near unexpected token `"'
+free(): double free detected in tcache 2
+[1]    84972 IOT instruction (core dumped)  ./minishell
+
+------------------------------------------------------------
+2.
+minishell$ export test=1 hello="2" world =abc testing="123"
+minishell: export: `2': not a valid identifier
+minishell: export: `=abc': not a valid identifier
+minishell: export: `123': not a valid identifier

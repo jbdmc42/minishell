@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 16:49:55 by joaobarb          #+#    #+#             */
-/*   Updated: 2026/03/10 15:58:08 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/03/31 14:40:33 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,9 @@ void	print_env(t_shell *shell)
 void	parse_argument(t_token **tokens, t_shell *shell)
 {
 	char	**nameval;
+	char	*arg;
 
+	arg = (*tokens)->value;
 	nameval = split_export_arg((*tokens)->value);
 	if (!nameval)
 		return;
@@ -94,7 +96,7 @@ void	parse_argument(t_token **tokens, t_shell *shell)
 	}
 	if (!is_valid_var_name(nameval[0]))
 	{
-		printf("minishell: export: `%s': ", nameval[0]);
+		printf("minishell: export: `%s': ", arg);
 		printf("not a valid identifier\n");
 		free_nameval(nameval);
 		shell->exit_status = 1;
