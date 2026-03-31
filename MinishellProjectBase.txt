@@ -38,7 +38,7 @@ Minishell
 │   │   ├── echo -n													✓
 │   │   ├── cd														1.
 │   │   ├── pwd														1. Jorge
-│   │   ├── export													✓ (little refinement left to do on this command)
+│   │   ├── export													✓
 │   │   ├── unset													2.
 │   │   ├── env														2. João
 │   │   └── exit													✓
@@ -91,7 +91,49 @@ Standard I/O					| #include <stdio.h>					| printf				| Formatted output to stdo
 --------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
 Memory Management				| #include <stdlib.h>					| malloc				| Allocates memory.
 								|										| free					| Frees memory.
---------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
+--------------------------------|----------------------
+
+
+João ------------------------------------------------------------------------------------>
+Export command with arguments:
+1. Test command syntax for the command itself and each argument
+2. Execute the export for all the tokens
+3. Tokens should be like this: var_name=value
+
+We can have various types of tokens, such as:
+
+				Input				 |			Struct			 |
+var_name (no value)					-> name=var_name   value=""
+var_name=value						-> name=var_name   value="value"
+var_name= value						-> name=var_name   value=" value"
+
+var_name =value						-> syntax errors on the tokens 
+var_name = value					|  should print "minishell: export: `(all characters starting from the = including it)': not a valid identifier"
+
+4. We have to check if the variable name given in the token already exists. If it does, then we just give it the new value
+5. Difference between export (no args) and env: export (no args) prints every variable declared; env prints every variable declared with a value (no value="")
+
+joaobarb@c2r5s9:~/Documents/minishell$ export test=1 abc =abc
+bash: export: `=abc': not a valid identifier
+
+this should define the following:
+abc=""
+test="1"
+
+Edge cases to solve:
+1.
+minishell$ export test=1 hello="2" world =abc testing="123
+minishell: syntax error near unexpected token `"'
+free(): double free detected in tcache 2
+[1]    84972 IOT instruction (core dumped)  ./minishell
+
+------------------------------------------------------------
+2.
+minishell$ export test=1 hello="2" world =abc testing="123"
+minishell: export: `2': not a valid identifier
+minishell: export: `=abc': not a valid identifier
+minishell: export: `123': not a valid identifier
+-----------------|-----------------------|------------------------------------------------------------------------------------>
 File & Directory Access			| #include <unistd.h>					| access				| Checks file existence/permissions.
 								| #include <fcntl.h>					| open					| Opens a file and returns a descriptor.
 								|										| read					| Reads bytes from a file descriptor.
@@ -170,47 +212,3 @@ env       |	   ✓	  |    ✓	 |    ✗	   |    ✗	  |    ✓
 ----------|-----------|----------|---------|----------|------------->
 exit      |	   ✗	  |    ✗	 |    ✗	   |    ✗	  |    ✗    
 _____________________________________________________________________
-
-
-
-
-
-João ------------------------------------------------------------------------------------>
-Export command with arguments:
-1. Test command syntax for the command itself and each argument
-2. Execute the export for all the tokens
-3. Tokens should be like this: var_name=value
-
-We can have various types of tokens, such as:
-
-				Input				 |			Struct			 |
-var_name (no value)					-> name=var_name   value=""
-var_name=value						-> name=var_name   value="value"
-var_name= value						-> name=var_name   value=" value"
-
-var_name =value						-> syntax errors on the tokens 
-var_name = value					|  should print "minishell: export: `(all characters starting from the = including it)': not a valid identifier"
-
-4. We have to check if the variable name given in the token already exists. If it does, then we just give it the new value
-5. Difference between export (no args) and env: export (no args) prints every variable declared; env prints every variable declared with a value (no value="")
-
-joaobarb@c2r5s9:~/Documents/minishell$ export test=1 abc =abc
-bash: export: `=abc': not a valid identifier
-
-this should define the following:
-abc=""
-test="1"
-
-Edge cases to solve:
-1.
-minishell$ export test=1 hello="2" world =abc testing="123
-minishell: syntax error near unexpected token `"'
-free(): double free detected in tcache 2
-[1]    84972 IOT instruction (core dumped)  ./minishell
-
-------------------------------------------------------------
-2.
-minishell$ export test=1 hello="2" world =abc testing="123"
-minishell: export: `2': not a valid identifier
-minishell: export: `=abc': not a valid identifier
-minishell: export: `123': not a valid identifier

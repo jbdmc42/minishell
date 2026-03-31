@@ -17,6 +17,7 @@ SRCS		= main.c \
 			cleaning.c \
 			commands.c \
 			echo.c \
+			env.c \
 			exit.c \
 			export_helpers.c \
 			export.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lsttochpp.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 11:45:58 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/02/28 12:20:57 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/03/31 17:09:12 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,28 @@ char	**ft_lsttochpp(char **chpp, t_env *env)
 			return (NULL);
 		chpp[i] = ft_strjoin(tmp_nd, "\"");
 		free(tmp_nd);
+		if (!chpp[i])
+			return (NULL);
+		i++;
+		env = env->next;
+	}
+	chpp[i] = NULL;
+	return (chpp);
+}
+
+char	**ft_lsttochpp_no_quotes(char **chpp, t_env *env)
+{
+	char	*tmp;
+	int		i;
+
+	i = 0;
+	while (env)
+	{
+		tmp = ft_strjoin(env->name, "=");
+		if (!tmp)
+			return (NULL);
+		chpp[i] = ft_strjoin(tmp, env->val);
+		free(tmp);
 		if (!chpp[i])
 			return (NULL);
 		i++;

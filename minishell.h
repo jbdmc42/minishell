@@ -6,7 +6,7 @@
 /*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:34 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/03/31 14:56:52 by joaobarb         ###   ########.fr       */
+/*   Updated: 2026/03/31 17:09:07 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,11 +142,16 @@ void	define_value(t_shell *shell, char *name, char *val);
 char	**split_export_arg(char *arg);
 
 // export.c:
+char	**alpha_sort(t_shell *shell);
 void	ft_export(t_token **tokens, t_shell *shell);
 void	process_export_var(char **nameval, t_shell *shell);
 
+// env.c:
+void	ft_env(t_token **tokens, t_shell *shell);
+
 // ft_lsttochpp.c:
 char	**ft_lsttochpp(char **chpp, t_env *env);
+char	**ft_lsttochpp_no_quotes(char **chpp, t_env *env);
 
 // input_handling.c:
 int		ft_strisspace(char *line);
