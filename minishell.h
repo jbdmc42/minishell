@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:34 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/03/31 17:09:07 by joaobarb         ###   ########.fr       */
+/*   Updated: 2026/04/30 16:59:56 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # include <dirent.h>
 # include <termio.h>
 # include <term.h>
+# include <limits.h>
 
 // Globals
 
@@ -124,8 +125,8 @@ void	clean_exit(t_shell *shell);
 // commands.c:
 void	ft_echo(t_token **tokens, t_shell *shell);
 void	ft_exit(t_token **tokens, t_shell *shell);
-/* void	ft_cd(t_token **tokens, t_shell *shell);
-void	ft_pwd(t_token **tokens, t_shell *shell); */
+/* void	ft_cd(t_token **tokens, t_shell *shell); */
+void	ft_pwd(void);
 void	ft_export(t_token **tokens, t_shell *shell);
 void	get_commands(t_token **tokens, t_shell *shell);
 

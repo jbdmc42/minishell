@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 14:18:09 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/03/31 16:59:19 by joaobarb         ###   ########.fr       */
+/*   Updated: 2026/04/30 16:59:30 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,11 @@ void	get_commands(t_token **tokens, t_shell *shell)
 	else if (ft_strcmp((*tokens)->value, "export") == 0)		// Check if command is "export"
 		ft_export(tokens, shell);								// Execute export command
 	else if (ft_strcmp((*tokens)->value, "unset") == 0)			// Check if command is "unset"
-		ft_export(tokens, shell);						// Execute unset command
+		ft_export(tokens, shell);								// Execute unset command
 	else if (ft_strcmp((*tokens)->value, "env") == 0)			// Check if command is "env"
-		ft_env(tokens, shell);							// Execute env command
+		ft_env(tokens, shell);									// Execute env command
+	else if (ft_strcmp((*tokens)->value, "pwd") == 0)
+		ft_pwd();
 	else 											// Command not recognized
 	{
 		printf("%s: command not found\n", (*tokens)->value); 	// Print error message

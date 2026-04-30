@@ -14,6 +14,7 @@ LIBFT_A		= $(LIBFT_DIR)/libft.a
 INCLUDES	= -I. -I$(LIBFT_DIR)
 
 SRCS		= main.c \
+			cd.c \
 			cleaning.c \
 			commands.c \
 			echo.c \
@@ -26,6 +27,7 @@ SRCS		= main.c \
 			parsing_helpers.c \
 			parsing_helpers_two.c \
 			parsing.c \
+			pwd.c \
 			quote_handling.c \
 			setup_signal_handlers.c \
 			tokenization.c \
