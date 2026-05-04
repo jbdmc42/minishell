@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 14:18:09 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/04/30 16:59:30 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/05/04 16:52:22 by jpaulo-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	get_commands(t_token **tokens, t_shell *shell)
 		ft_env(tokens, shell);									// Execute env command
 	else if (ft_strcmp((*tokens)->value, "pwd") == 0)
 		ft_pwd();
+	else if (ft_strcmp((*tokens)->value, "cd") == 0)
+		ft_cd(tokens, shell);
 	else 											// Command not recognized
 	{
 		printf("%s: command not found\n", (*tokens)->value); 	// Print error message

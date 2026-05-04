@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:34 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/04/30 16:59:56 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/05/04 16:52:09 by jpaulo-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ void	clean_exit(t_shell *shell);
 // commands.c:
 void	ft_echo(t_token **tokens, t_shell *shell);
 void	ft_exit(t_token **tokens, t_shell *shell);
-/* void	ft_cd(t_token **tokens, t_shell *shell); */
+int		ft_cd(t_token **tokens, t_shell *shell);
 void	ft_pwd(void);
 void	ft_export(t_token **tokens, t_shell *shell);
 void	get_commands(t_token **tokens, t_shell *shell);
