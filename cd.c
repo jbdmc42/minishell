@@ -6,7 +6,7 @@
 /*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 16:58:26 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/04 16:58:15 by jpaulo-b         ###   ########.fr       */
+/*   Updated: 2026/05/12 11:42:05 by jpaulo-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,25 +85,27 @@ static int	go_to_special_dir(t_shell *data, char *key)
 	return (0);
 }
 
-int		ft_cd(t_token **tokens, t_shell *shell)
+int		ft_cd(t_token *tokens, t_shell *shell)
 {
 	char	old_path[PATH_MAX];
 
-	if (!tokens[1] || ft_strcmp(tokens[1]->value, "~") == 0)
+	if (ft_strcmp(tokens->next->value, "~") == 0)
 		return (go_to_special_dir(shell, "HOME"));
-	if (ft_strcmp(tokens[1]->value, "-") == 0)
+	else if (ft_strcmp(tokens->next->value, "-") == 0)
 		return (go_to_special_dir(shell, "OLDPWD"));
-	if (tokens[1]->value && tokens[2])
+/* 	if (tokens->next->value)
 	{
+		if (!tokens->next->next->value)
+			return (0);
 		ft_putendl_fd("minishell: cd: too many arguments", STDERR_FILENO);
 		return (1);
-	}
+	} */
 	if (getcwd(old_path, sizeof(old_path)) == NULL)
 		old_path[0] = '\0';
-	if (chdir(tokens[1]->value) != 0)
+	if (chdir(tokens->next->value) != 0)
 	{
 		ft_putstr_fd("minishell: cd: ", STDERR_FILENO);
-		ft_putstr_fd(tokens[1]->value, STDERR_FILENO);
+		ft_putstr_fd(tokens->next->value, STDERR_FILENO);
 		ft_putendl_fd(": No such file or directory", STDERR_FILENO);
 		return (1);
 	}

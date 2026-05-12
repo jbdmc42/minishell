@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 16:40:54 by joaobarb          #+#    #+#             */
-/*   Updated: 2026/03/31 17:14:08 by joaobarb         ###   ########.fr       */
+/*   Updated: 2026/05/12 11:31:48 by jpaulo-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ static int	has_value_in_env_string(char *var_str)
 	return (var_str[i + 1] != '\0');
 }
 
-static int	env_has_arguments(t_token **tokens, t_shell *shell)
+static int	env_has_arguments(t_token *tokens, t_shell *shell)
 {
-	if ((*tokens)->next == NULL)
+	if (tokens->next == NULL)
 		return (0);
 	printf("minishell: env: syntax error near unexpected token `%s'\n",
-		(*tokens)->next->value);
+		tokens->next->value);
 	shell->exit_status = 1;
 	return (1);
 }
@@ -57,7 +57,7 @@ static void	free_env_array(char **var)
 	free(var);
 }
 
-void	ft_env(t_token **tokens, t_shell *shell)
+void	ft_env(t_token *tokens, t_shell *shell)
 {
 	char	**var;
 

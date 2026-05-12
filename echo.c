@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 10:00:45 by joaobarb          #+#    #+#             */
-/*   Updated: 2026/02/16 10:05:20 by joaobarb         ###   ########.fr       */
+/*   Updated: 2026/05/12 11:26:18 by jpaulo-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	is_valid_n_flag(char *s)
 	return (s[i] == '\0'); 	// Return 1 if string is "-n", "-nn", etc.
 }
 
-void	ft_echo(t_token **tokens, t_shell *shell)
+void	ft_echo(t_token *tokens, t_shell *shell)
 {
 	(void)shell; 			// Unused parameter for now
 	int		flag; 			// Flag for newline (1 = print newline, 0 = don't print)
@@ -42,7 +42,7 @@ void	ft_echo(t_token **tokens, t_shell *shell)
 
 	flag = 1; 				// Default: print newline at end
 	first = 1; 				// Start with first word
-	cur = (*tokens)->next; 	// Skip the "echo" command token
+	cur = tokens->next; 	// Skip the "echo" command token
 	while (cur && cur->type == WORD && is_valid_n_flag(cur->value)) 	// Process all -n flags
 	{
 		flag = 0; 			// Found -n flag, don't print newline

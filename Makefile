@@ -5,7 +5,7 @@
 NAME		= minishell
 
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -g
 LDFLAGS		= -lreadline -lncurses
 
 LIBFT_DIR	= libft

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 16:49:55 by joaobarb          #+#    #+#             */
-/*   Updated: 2026/03/31 14:40:33 by joaobarb         ###   ########.fr       */
+/*   Updated: 2026/05/12 11:47:22 by jpaulo-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,13 @@ void	print_env(t_shell *shell)
 **  parses and checks the syntax of each argument:
 ** if it is correct, defines the variable using a split on the token
 */
-void	parse_argument(t_token **tokens, t_shell *shell)
+void	parse_argument(t_token *tokens, t_shell *shell)
 {
 	char	**nameval;
 	char	*arg;
 
-	arg = (*tokens)->value;
-	nameval = split_export_arg((*tokens)->value);
+	arg = tokens->value;
+	nameval = split_export_arg(tokens->value);
 	if (!nameval)
 		return;
 	if (!nameval[0])
@@ -110,18 +110,18 @@ void	parse_argument(t_token **tokens, t_shell *shell)
 ** the export command needs at least one WORD type token after the command in
 ** order to work. 
 */
-void	ft_export(t_token **tokens, t_shell *shell)
+void	ft_export(t_token *tokens, t_shell *shell)
 {
 	shell->exit_status = 0;
-	if ((*tokens)->next == NULL)
+	if (tokens->next == NULL)
 	{
 		print_env(shell);
 		return ;
 	}
-	*tokens = (*tokens)->next;
-	while ((*tokens) != NULL)
+	tokens = tokens->next;
+	while (tokens != NULL)
 	{
 		parse_argument(tokens, shell);
-		*tokens = (*tokens)->next;
+		tokens = tokens->next;
 	}
 }

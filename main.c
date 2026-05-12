@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:24 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/02/24 16:43:35 by joaobarb         ###   ########.fr       */
+/*   Updated: 2026/05/12 10:44:52 by jpaulo-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	execute_line(char *line, t_shell *shell)
 	}
 	add_history(line);
 	tokens = NULL;
-	parse_input(validated_line, 0, &tokens, shell);
+	parse_input(validated_line, 0, tokens, shell);
 	free(validated_line);
 }
 

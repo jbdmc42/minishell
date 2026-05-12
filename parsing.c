@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 13:54:22 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/03/31 14:56:52 by joaobarb         ###   ########.fr       */
+/*   Updated: 2026/05/12 10:45:34 by jpaulo-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,19 @@ int	skip_spaces(char *line, size_t *i)
 	return (skipped); // Return 1 if spaces were skipped, 0 otherwise
 }
 
-void	parse_input(char *line, size_t i, t_token **tokens, t_shell *shell)
+void	parse_input(char *line, size_t i, t_token *tokens, t_shell *shell)
 {
 	while (line[i] != '\0') // Loop through entire input line
 	{
 		if (skip_spaces(line, &i)) // Skip whitespace
 			continue ; // Continue to next iteration
-		if (parse_pipe(line, &i, tokens, shell)) // Try parsing pipe
+		if (parse_pipe(line, &i, &tokens, shell)) // Try parsing pipe
 			continue ; // Continue if pipe was parsed
-		if (parse_less(line, &i, tokens, shell)) // Try parsing less/heredoc
+		if (parse_less(line, &i, &tokens, shell)) // Try parsing less/heredoc
 			continue ; // Continue if less was parsed
-		if (parse_great(line, &i, tokens, shell)) // Try parsing great/append
+		if (parse_great(line, &i, &tokens, shell)) // Try parsing great/append
 			continue ; // Continue if great was parsed
-		parse_word(line, &i, tokens); // Parse regular word
+		parse_word(line, &i, &tokens); // Parse regular word
 	}
 	get_commands(tokens, shell); // Execute the parsed commands
 }

@@ -6,7 +6,7 @@
 /*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:34 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/04 16:52:09 by jpaulo-b         ###   ########.fr       */
+/*   Updated: 2026/05/12 11:47:41 by jpaulo-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,18 +123,18 @@ void	free_all(void);
 void	clean_exit(t_shell *shell);
 
 // commands.c:
-void	ft_echo(t_token **tokens, t_shell *shell);
-void	ft_exit(t_token **tokens, t_shell *shell);
-int		ft_cd(t_token **tokens, t_shell *shell);
+void	ft_echo(t_token *tokens, t_shell *shell);
+void	ft_exit(t_token *tokens, t_shell *shell);
+int		ft_cd(t_token *tokens, t_shell *shell);
 void	ft_pwd(void);
-void	ft_export(t_token **tokens, t_shell *shell);
-void	get_commands(t_token **tokens, t_shell *shell);
+void	ft_export(t_token *tokens, t_shell *shell);
+void	get_commands(t_token *tokens, t_shell *shell);
 
 // echo.c:
-void	ft_echo(t_token **tokens, t_shell *shell);
+void	ft_echo(t_token *tokens, t_shell *shell);
 
 // exit.c:
-void	ft_exit(t_token **tokens, t_shell *shell);
+void	ft_exit(t_token *tokens, t_shell *shell);
 
 // export_helpers.c:
 int		fill_node(t_env *var, char *name, char *val, t_env *cur);
@@ -144,11 +144,11 @@ char	**split_export_arg(char *arg);
 
 // export.c:
 char	**alpha_sort(t_shell *shell);
-void	ft_export(t_token **tokens, t_shell *shell);
+void	ft_export(t_token *tokens, t_shell *shell);
 void	process_export_var(char **nameval, t_shell *shell);
 
 // env.c:
-void	ft_env(t_token **tokens, t_shell *shell);
+void	ft_env(t_token *tokens, t_shell *shell);
 
 // ft_lsttochpp.c:
 char	**ft_lsttochpp(char **chpp, t_env *env);
@@ -170,7 +170,7 @@ int		parse_single_quotes(char *line, size_t *i, t_token **tokens);
 int		parse_double_quotes(char *line, size_t *i, t_token **tokens);
 
 // parsing.c:
-void	parse_input(char *line, size_t i, t_token **tokens, t_shell *shell);
+void	parse_input(char *line, size_t i, t_token *tokens, t_shell *shell);
 int		syntaxe_error(char *line, size_t i);
 int		skip_spaces(char *line, size_t *i);
 void	parse_word(char *line, size_t *i, t_token **tokens);

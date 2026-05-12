@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 09:15:11 by joaobarb          #+#    #+#             */
-/*   Updated: 2026/02/16 10:05:11 by joaobarb         ###   ########.fr       */
+/*   Updated: 2026/05/12 11:43:23 by jpaulo-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ static int	count_tokens(t_token *tokens)
 	return (count); // Return total count
 }
 
-void	ft_exit(t_token **tokens, t_shell *shell)
+void	ft_exit(t_token *tokens, t_shell *shell)
 {
 	int		token_count; // Number of tokens
 
 	printf("exit\n"); // Print "exit" message
-	token_count = count_tokens(*tokens); // Count tokens (command + arguments)
+	token_count = count_tokens(tokens); // Count tokens (command + arguments)
 	if (token_count > 2) // Check if too many arguments
 	{
 		printf("minishell: exit: too many arguments\n");
@@ -70,15 +70,15 @@ void	ft_exit(t_token **tokens, t_shell *shell)
 	}
 	if (token_count == 2) // Check if exit code argument provided
 	{
-		if (!is_numeric((*tokens)->next->value)) // Check if argument is numeric
+		if (!is_numeric(tokens->next->value)) // Check if argument is numeric
 		{
 			printf("minishell: exit: %s: numeric argument required\n",
-				(*tokens)->next->value);
+				tokens->next->value);
 			shell->exit_status = 2; // Set exit status to 2 for invalid argument
 			free_all(); // Free all resources
 			exit(shell->exit_status); // Exit with error status
 		}
-		shell->exit_status = ft_atoi((*tokens)->next->value); // Convert argument to exit code
+		shell->exit_status = ft_atoi(tokens->next->value); // Convert argument to exit code
 	}
 	free_all(); // Free all resources
 	exit(shell->exit_status); // Exit with specified or default status
