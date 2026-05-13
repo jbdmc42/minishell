@@ -6,7 +6,7 @@
 /*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 16:58:26 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/12 11:42:05 by jpaulo-b         ###   ########.fr       */
+/*   Updated: 2026/05/12 15:46:22 by jpaulo-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,17 +89,17 @@ int		ft_cd(t_token *tokens, t_shell *shell)
 {
 	char	old_path[PATH_MAX];
 
+	if (!tokens->next)		//  Se existe o nodo do sinal e mais nenhum argumento (cd ), faz o mesmo que ~ (HOME)
+		return (go_to_special_dir(shell, "HOME"));
+	if (tokens->next->next)		//  Se existe o nodo do sinal e mais argumentos
+	{
+		ft_putendl_fd("minishell: cd: too many arguments", STDERR_FILENO);  //  msg erro e retorna 1
+		return (1);
+	}
 	if (ft_strcmp(tokens->next->value, "~") == 0)
 		return (go_to_special_dir(shell, "HOME"));
 	else if (ft_strcmp(tokens->next->value, "-") == 0)
 		return (go_to_special_dir(shell, "OLDPWD"));
-/* 	if (tokens->next->value)
-	{
-		if (!tokens->next->next->value)
-			return (0);
-		ft_putendl_fd("minishell: cd: too many arguments", STDERR_FILENO);
-		return (1);
-	} */
 	if (getcwd(old_path, sizeof(old_path)) == NULL)
 		old_path[0] = '\0';
 	if (chdir(tokens->next->value) != 0)

@@ -36,7 +36,7 @@ Minishell
 ├── 5. Command Execution
 │   ├── 5.1 Built-in detection
 │   │   ├── echo -n													✓
-│   │   ├── cd														1.
+│   │   ├── cd														✓
 │   │   ├── pwd														✓
 │   │   ├── export													✓
 │   │   ├── unset													2.

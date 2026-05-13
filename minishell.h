@@ -6,7 +6,7 @@
 /*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:34 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/12 11:47:41 by jpaulo-b         ###   ########.fr       */
+/*   Updated: 2026/05/12 16:25:24 by jpaulo-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ void	ft_exit(t_token *tokens, t_shell *shell);
 int		ft_cd(t_token *tokens, t_shell *shell);
 void	ft_pwd(void);
 void	ft_export(t_token *tokens, t_shell *shell);
+int		ft_unset(t_token *tokens, t_shell *shell);
 void	get_commands(t_token *tokens, t_shell *shell);
 
 // echo.c:
