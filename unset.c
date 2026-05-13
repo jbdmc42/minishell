@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 16:50:42 by joaobarb          #+#    #+#             */
-/*   Updated: 2026/05/12 17:54:58 by jpaulo-b         ###   ########.fr       */
+/*   Updated: 2026/05/13 14:35:57 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_unset(t_token *tokens, t_shell *shell)
+/* int	ft_unset(t_token *tokens, t_shell *shell)
 {
 	t_env	*env;
 
 	
-}
+} */

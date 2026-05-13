@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 14:18:09 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/12 18:10:55 by jpaulo-b         ###   ########.fr       */
+/*   Updated: 2026/05/13 14:35:32 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	get_commands(t_token *tokens, t_shell *shell)
 		ft_exit(tokens, shell); 								// Execute exit command
 	else if (ft_strcmp(tokens->value, "export") == 0)		// Check if command is "export"
 		ft_export(tokens, shell);								// Execute export command
-	else if (ft_strcmp(tokens->value, "unset") == 0)		// Check if command is "unset"
-		ft_unset(tokens, shell);								// Execute unset command
+	/* else if (ft_strcmp(tokens->value, "unset") == 0)		// Check if command is "unset"
+		ft_unset(tokens, shell); */								// Execute unset command
 	else if (ft_strcmp(tokens->value, "env") == 0)			// Check if command is "env"
 		ft_env(tokens, shell);									// Execute env command
 	else if (ft_strcmp(tokens->value, "pwd") == 0)			// Check if command is "pwd"
