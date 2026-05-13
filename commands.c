@@ -3,36 +3,69 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 14:18:09 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/13 14:35:32 by joaobarb         ###   ########.fr       */
+/*   Updated: 2026/05/13 17:44:08 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static int	is_builtin_command(char *cmd)
+{
+    if (!cmd)
+        return (0);
+    return (!ft_strcmp(cmd, "echo") || !ft_strcmp(cmd, "exit")
+        || !ft_strcmp(cmd, "export") || !ft_strcmp(cmd, "env")
+        || !ft_strcmp(cmd, "pwd") || !ft_strcmp(cmd, "cd"));
+}
+
+static void	execute_builtin(t_token *tokens, t_shell *shell)
+{
+    if (!ft_strcmp(tokens->value, "echo"))
+        ft_echo(tokens, shell);
+    else if (!ft_strcmp(tokens->value, "exit"))
+        ft_exit(tokens, shell);
+    else if (!ft_strcmp(tokens->value, "export"))
+        ft_export(tokens, shell);
+    else if (!ft_strcmp(tokens->value, "env"))
+        ft_env(tokens, shell);
+    else if (!ft_strcmp(tokens->value, "pwd"))
+        ft_pwd();
+    else if (!ft_strcmp(tokens->value, "cd"))
+        ft_cd(tokens, shell);
+}
+
+static void	handle_external_command(t_token *tokens, t_shell *shell)
+{
+    char	**argv;
+    char	**envp;
+
+    argv = build_argv(tokens);
+    if (!argv)
+        return ;
+    envp = build_envp(shell);
+    if (!envp)
+    {
+        free(argv);
+        return ;
+    }
+    if (search_and_execute(tokens->value, argv, envp) == -1)
+    {
+        printf("%s: command not found\n", tokens->value);
+        shell->exit_status = 127;
+    }
+    free(argv);
+    free_envp_array(envp);
+}
+
 void	get_commands(t_token *tokens, t_shell *shell)
 {
-	if (!tokens || !tokens || !tokens->value) 				// Check if tokens are NULL or empty
-		return ; 												// Return if no tokens to process
-	else if (ft_strcmp(tokens->value, "echo") == 0) 		// Check if command is "echo"
-		ft_echo(tokens, shell); 								// Execute echo command
-	else if (ft_strcmp(tokens->value, "exit") == 0) 		// Check if command is "exit"
-		ft_exit(tokens, shell); 								// Execute exit command
-	else if (ft_strcmp(tokens->value, "export") == 0)		// Check if command is "export"
-		ft_export(tokens, shell);								// Execute export command
-	/* else if (ft_strcmp(tokens->value, "unset") == 0)		// Check if command is "unset"
-		ft_unset(tokens, shell); */								// Execute unset command
-	else if (ft_strcmp(tokens->value, "env") == 0)			// Check if command is "env"
-		ft_env(tokens, shell);									// Execute env command
-	else if (ft_strcmp(tokens->value, "pwd") == 0)			// Check if command is "pwd"
-		ft_pwd();												// Execute pwd command
-	else if (ft_strcmp(tokens->value, "cd") == 0)			// Chek if command is "cd"
-		ft_cd(tokens, shell);									// Execute cd command
-	else 											// Command not recognized
-	{
-		printf("%s: command not found\n", tokens->value); 	// Print error message
-		shell->exit_status = 127; 						// Set exit status to 127 (command not found)
-	}
+    if (!tokens || !tokens->value)
+        return ;
+    if (is_builtin_command(tokens->value))
+        execute_builtin(tokens, shell);
+    else
+        handle_external_command(tokens, shell);
 }
