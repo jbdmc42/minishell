@@ -1,27 +1,27 @@
 Minishell
-├── 1. Project Base													> DONE <
+├── 1. Project Base											> DONE <
 │   ├── 1.1 Main loop
 │   ├── 1.2 Display prompt
-│   ├── 1.3 Read input (readline)
-│   ├── 1.4 Add input to history
-│   └── 1.5 Single global variable (signal number only)
+│   ├── 1.3 Read input (readline)							✓
+│   ├── 1.4 Add input to history							✓
+│   └── 1.5 Single global variable (signal number only)		✓
 │
-├── 2. Signal Handling (interactive)								> DONE <
+├── 2. Signal Handling (interactive)						> DONE <
 │   ├── 2.1 ctrl-C → new line + new prompt
 │   ├── 2.2 ctrl-D → exit shell
 │   └── 2.3 ctrl-\ → do nothing
 │
-├── 3. Parsing														> CURRENTLY WORKING <
-│   ├── 3.1 Basic tokenization										✓
-│   ├── 3.2 Correct handling of spaces								✓
-│   ├── 3.3 Quoting													✓
-│   │   ├── 3.3.1 Single quotes → no interpretation					✓
-│   │   └── 3.3.2 Double quotes → no interpretation except $		- (handle exception $)
+├── 3. Parsing												> CURRENTLY WORKING <
+│   ├── 3.1 Basic tokenization								✓
+│   ├── 3.2 Correct handling of spaces						✓
+│   ├── 3.3 Quoting											✓
+│   │   ├── 3.3.1 Single quotes → no interpretation			✓
+│   │   └── 3.3.2 Double quotes → no interpretation except $	- (handle exception $)
 │   ├── 3.4 Variable expansion
 │   │   ├── 3.4.1 $VAR
 │   │   └── 3.4.2 $?
-│   ├── 3.5 Detect pipes											- (create the pipe system)
-│   └── 3.6 Detect redirections										- (create the redirection system)
+│   ├── 3.5 Detect pipes									✓ (tokenization only; execution/piping not yet implemented)
+│   └── 3.6 Detect redirections								✓ (tokenization only; redirection handling pending)
 │       ├── <
 │       ├── >  *CHECK THE END OF THE PAGE
 │       ├── >> *CHECK THE END OF THE PAGE  
@@ -34,14 +34,14 @@ Minishell
 │   └── 4.4 Attach pipeline chain
 │
 ├── 5. Command Execution
-│   ├── 5.1 Built-in detection
-│   │   ├── echo -n													✓
-│   │   ├── cd														✓
-│   │   ├── pwd														✓
-│   │   ├── export													✓
-│   │   ├── unset													2.
-│   │   ├── env														✓
-│   │   └── exit													✓
+│   ├── 5.1 Built-in detection								✓
+│   │   ├── echo -n											✓
+│   │   ├── cd												✓
+│   │   ├── pwd												✓
+│   │   ├── export											✓
+│   │   ├── unset												- (not implemented)
+│   │   ├── env												✓
+│   │   └── exit											✓
 │   ├── 5.2 Run built-ins without fork (when required)
 │   ├── 5.3 External command execution via PATH
 │   ├── 5.4 Resolve absolute/relative paths
@@ -78,74 +78,74 @@ Minishell
 External functions we can use and what each of them do:
 ______________________________________________________________________________________________________________________________________________________________________________________
 ______________________________________________________________________________________________________________________________________________________________________________________
-Library							| Implementation						| Functions				| Description
+Library							| Implementation				| Functions			| Description
 --------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
-Readline						| #include <readline/readline.h>		| readline				| Shows a prompt and reads user input.
-								| #include <readline/history.h>			| rl_clear_history		| Clears the history list.
-								|										| rl_on_new_line		| Notifies readline that a new line has started.
-								|										| rl_replace_line		| Replaces the buffer of the current line.
-								|										| rl_redisplay			| Redraws the current line.
-								|										| add_history			| Adds a line to history.
+Readline					| #include <readline/readline.h>		| readline			| Shows a prompt and reads user input.
+						| #include <readline/history.h>		| rl_clear_history		| Clears the history list.
+						| 					| rl_on_new_line		| Notifies readline that a new line has started.
+						| 					| rl_replace_line		| Replaces the buffer of the current line.
+						| 					| rl_redisplay		| Redraws the current line.
+						| 					| add_history		| Adds a line to history.
 --------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
-Standard I/O					| #include <stdio.h>					| printf				| Formatted output to stdout.		
-								| #include <unistd.h>					| write					| Writes raw bytes to a file descriptor.
+Standard I/O				| #include <stdio.h>				| printf			| Formatted output to stdout.		
+						| #include <unistd.h>				| write			| Writes raw bytes to a file descriptor.
 --------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
 Memory Management				| #include <stdlib.h>					| malloc				| Allocates memory.
-								|										| free					| Frees memory.
+						| 					| free					| Frees memory.
 --------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
-File & Directory Access			| #include <unistd.h>					| access				| Checks file existence/permissions.
-								| #include <fcntl.h>					| open					| Opens a file and returns a descriptor.
-								|										| read					| Reads bytes from a file descriptor.
-								|										| close					| Closes a file descriptor.
-								|										| unlink				| Removes a file.
+File & Directory Access			| #include <unistd.h>				| access				| Checks file existence/permissions.
+						| #include <fcntl.h>				| open					| Opens a file and returns a descriptor.
+						| 					| read					| Reads bytes from a file descriptor.
+						| 					| close					| Closes a file descriptor.
+						| 					| unlink				| Removes a file.
 --------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
-Process Control					| #include <unistd.h>					| fork					| Creates a child process.
-								| #include <sys/wait.h>					| wait					| Waits for any child to exit.
-								| #include <stdlib.h>					| waitpid				| Waits for a specific child.
-								|										| wait3					| Waits + resource usage info.
-								|										| wait4					| Waits + resource usage info (targeted).
-								|										| exit					| Ends the current process.
-								|										| execve				| Replaces current process with new program.
+Process Control					| #include <unistd.h>				| fork					| Creates a child process.
+						| #include <sys/wait.h>				| wait					| Waits for any child to exit.
+						| #include <stdlib.h>					| waitpid				| Waits for a specific child.
+						| 					| wait3					| Waits + resource usage info.
+						| 					| wait4					| Waits + resource usage info (targeted).
+						| 					| exit					| Ends the current process.
+						| 					| execve				| Replaces current process with new program.
 --------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
-Signals							| #include <signal.h>					| signal				| Simple (old) signal handling.
-								|										| sigaction				| Modern signal handler configuration.
-								|										| sigemptyset			| Clears a signal set.
-								|										| sigaddset				| Adds a signal to a set.
-								|										| kill					| Sends a signal to a process.
+Signals							| #include <signal.h>				| signal				| Simple (old) signal handling.
+						| 					| sigaction				| Modern signal handler configuration.
+						| 					| sigemptyset			| Clears a signal set.
+						| 					| sigaddset				| Adds a signal to a set.
+						| 					| kill					| Sends a signal to a process.
 --------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
-Current Directory & Path		| #include <unistd.h>					| getcwd 				| Gets current working directory path.
-								|										| chdir					| Changes current working directory.
+Current Directory & Path		| #include <unistd.h>				| getcwd 				| Gets current working directory path.
+						| 					| chdir					| Changes current working directory.
 --------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
-File Information				| #include <sys/stat.h>					| stat					| File info (follows symlinks).
-								| #include <unistd.h>					| lstat					| File info (doesn’t follow symlinks).
-								|										| fstat					| File info using file descriptor.
+File Information				| #include <sys/stat.h>				| stat					| File info (follows symlinks).
+						| #include <unistd.h>				| lstat					| File info (doesn’t follow symlinks).
+						| 					| fstat					| File info using file descriptor.
 --------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
-Pipes & File Descriptors		| #include <unistd.h>					| pipe					| Creates a pipe (two connected fds).
-								|										| dup					| Duplicates a file descriptor.
-								|										| dup2					| Duplicates fd into a specific number (useful for redirections).
+Pipes & File Descriptors		| #include <unistd.h>				| pipe					| Creates a pipe (two connected fds).
+						| 					| dup					| Duplicates a file descriptor.
+						| 					| dup2					| Duplicates fd into a specific number (useful for redirections).
 --------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
-Directory Handling				| #include <dirent.h>					| opendir				| Opens a directory stream.
-								|										| readdir				| Reads entries inside a directory.
-								|										| closedir				| Closes a directory stream.
+Directory Handling				| #include <dirent.h>				| opendir				| Opens a directory stream.
+						| 					| readdir				| Reads entries inside a directory.
+						| 					| closedir				| Closes a directory stream.
 --------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
-Error Handling					| #include <string.h>					| strerror				| Returns a string for an error code.
-								| #include <stdio.h>					| perror				| Prints a formatted error based on errno.
+Error Handling					| #include <string.h>				| strerror				| Returns a string for an error code.
+						| #include <stdio.h>				| perror				| Prints a formatted error based on errno.
 --------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
-Terminal/TTY Control			| #include <unistd.h>					| isatty				| Checks if a fd is a terminal.
-								| #include <termios.h>					| ttyname				| Gets terminal name of a fd.
-								| #include <sys/ioctl.h>				| ttyslot				| Returns terminal slot index.
-								|										| ioctl					| Low-level terminal or device control.
-								|										| tcsetattr				| Sets terminal attributes.
-								|										| tcgetattr				| Gets terminal attributes.
+Terminal/TTY Control			| #include <unistd.h>				| isatty				| Checks if a fd is a terminal.
+						| #include <termios.h>				| ttyname				| Gets terminal name of a fd.
+						| #include <sys/ioctl.h>				| ttyslot				| Returns terminal slot index.
+						| 					| ioctl					| Low-level terminal or device control.
+						| 					| tcsetattr				| Sets terminal attributes.
+						| 					| tcgetattr				| Gets terminal attributes.
 --------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
-Environment Variables			| #include <stdlib.h>					| getenv				| Gets an environment variable value.
+Environment Variables			| #include <stdlib.h>				| getenv				| Gets an environment variable value.
 --------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
-Termcap (optional)				| #include <term.h>						| tgetent				| Loads terminal description.
-*usually linked with -ltermcap	|										| tgetflag				| Gets boolean terminal capability.
-								|										| tgetnum				| Gets numeric terminal capability.
-								|										| tgetstr				| Gets string terminal capability.
-								|										| tgoto					| Computes cursor movement escape sequence.
-								|										| tputs					| Outputs a terminal capability string.		
+Termcap (optional)				| #include <term.h>					| tgetent				| Loads terminal description.
+*usually linked with -ltermcap	| 					| tgetflag				| Gets boolean terminal capability.
+						| 					| tgetnum				| Gets numeric terminal capability.
+						| 					| tgetstr				| Gets string terminal capability.
+						| 					| tgoto					| Computes cursor movement escape sequence.
+						| 					| tputs					| Outputs a terminal capability string.		
 ______________________________________________________________________________________________________________________________________________________________________________________
 
 
@@ -211,3 +211,84 @@ env       |	   ✓	  |    ✓	 |    ✗	   |    ✗	  |    ✓
 ----------|-----------|----------|---------|----------|------------->
 exit      |	   ✗	  |    ✗	 |    ✗	   |    ✗	  |    ✗    
 _____________________________________________________________________
+
+
+
+-------------------------
+Suggested implementation order (easy → hard)
+-------------------------
+1) Exit status propagation & support for commands with '/'
+   - What: Make parent set shell->exit_status from child waitpid status and allow executing absolute/relative paths (strings containing '/').
+   - Why: Small correctness fixes that make external execution behave like a normal shell and provide correct $? for scripts/tests.
+   - Effort: Very small (minutes → 1 hour).
+   - Files: `commands_extra.c`, `commands.c`, `main.c` (where shell->exit_status is used).
+
+2) Implement `unset` builtin
+   - What: Remove environment variable node from linked list and free memory; handle invalid identifiers like export/unset rules.
+   - Why: Completes builtin set and allows tests that rely on unset.
+   - Effort: Small (1–2 hours).
+   - Files: `unset.c`, `export_helpers.c`, `minishell.h` (if helpers needed).
+
+3) Variable expansion core: $VAR and $?
+   - What: Implement replacement of $VAR by its value from env list and $? by shell->exit_status. Do this during token processing (before building argv for execution). Handle missing variables as empty string.
+   - Why: Required for correct command arguments and many scripts.
+   - Effort: Medium (2–4 hours).
+   - Files: `parsing.c` / `tokenization.c` / `utilities_two.c` (helpers), `commands.c` (ensure builtins get expanded args).
+
+4) Double-quote handling for $ (expand in double quotes, not in single)
+   - What: Ensure tokens parsed from double quotes still undergo variable expansion, while single-quoted tokens do not.
+   - Why: Shell standard behavior, ties into variable expansion implementation.
+   - Effort: Small → Medium (1–3 hours) depending on token pipeline.
+   - Files: `parsing_helpers.c`, `quote_handling.c`, expansion helpers.
+
+5) Build command structures (attach args + redirections)
+   - What: Convert token list into a simple command list/struct: command name, argv array, list of redirections, and pipeline linkage.
+   - Why: Needed to implement redirections and pipes cleanly.
+   - Effort: Medium (3–6 hours).
+   - Files: new command struct file or modify `parsing.c`, `tokenization.c`, `commands.c`.
+
+6) Basic redirections: >, >>, < (single-command)
+   - What: For each command struct, handle output truncation (>) and append (>>) and input redirection (<) by opening files and dup2 in child before execve. Handle error messages like bash.
+   - Why: Common feature; relatively self-contained once command structs exist.
+   - Effort: Medium (3–6 hours).
+   - Files: execution path in `commands.c`, helper fds management file.
+
+7) Heredoc (<<)
+   - What: Implement heredoc reading to a pipe (or temp file), respect quoted/unquoted expansion rules, do not add heredoc lines to history, and connect pipe to child's stdin.
+   - Why: More complex due to interactive read and expansion rules.
+   - Effort: Medium→High (4–10 hours).
+   - Files: new heredoc helpers, `parsing_helpers.c`, `commands.c` execution.
+
+8) Pipes (single and multiple)
+   - What: Create pipes between commands, fork children for each command, dup2 appropriate fds, close unused fds, and wait for all children while collecting exit statuses.
+   - Why: High-priority feature; coordination-heavy and bug-prone.
+   - Effort: High (6–20 hours depending on polishing, signals, edge-cases).
+   - Files: execution core in `commands.c` / new `executor.c`.
+
+9) Complete redirection + pipe integration
+   - What: Ensure combination cases (pipes + redirects + heredoc) behave correctly, correctly preserve/restore fds for builtins executed in parent when needed.
+   - Why: Required for real-world correctness.
+   - Effort: High (several days of careful testing).
+   - Files: `commands.c`, `executor.c`, redirection helpers.
+
+10) Memory management & leak fixes, tests
+   - What: Free tokens, command structs, temporary buffers, and validate with valgrind or similar. Add regression tests to compare with bash for typical cases.
+   - Why: Stability and final polish.
+   - Effort: Medium (several hours to days depending on leaks found).
+   - Files: `cleaning.c`, all modules.
+
+General notes and ordering rationale:
+- Implement items that change small, localized code first (exit code propagation, support for '/'), so you get immediate visible improvement and smaller review surface.
+- Then finish single-command builtins/features (unset, expansion) — these unblock tests and reduce complexity when later wiring multiple components together.
+- Next create a clear command representation (step 5). Having a command struct drastically simplifies redirections and pipes implementation.
+- Do redirections before pipes if you prefer smaller incremental steps; pipes require command structs anyway but redirections are easier to test on single commands.
+- Heredoc is trickier because of interaction with readline and expansion rules — treat it after simple redirections.
+- Pipes and multi-process coordination are the heaviest—do them last and test each stage thoroughly.
+
+Testing strategy (short):
+- After each completed task, write 5–10 basic cases comparing output and exit codes with bash for that feature.
+- Use small helper scripts and run them repeatedly while developing (capture stdout/stderr and exit codes).
+
+If you want I can now:
+- Append this workflow to the file (done).
+- Or implement the first small change (exit status propagation + support for '/').
