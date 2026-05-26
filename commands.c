@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 14:18:09 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/13 17:44:08 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/05/26 10:47:58 by jpaulo-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ static void	execute_builtin(t_token *tokens, t_shell *shell)
         ft_pwd();
     else if (!ft_strcmp(tokens->value, "cd"))
         ft_cd(tokens, shell);
-	else if (!ft_strcmp(tokens->value, "unset"))
-		ft_unset(tokens, shell);
+    else if (!ft_strcmp(tokens->value, "unset"))
+        ft_unset(tokens, shell);
 }
 
 static void	handle_external_command(t_token *tokens, t_shell *shell)
@@ -65,10 +65,19 @@ static void	handle_external_command(t_token *tokens, t_shell *shell)
 
 void	get_commands(t_token *tokens, t_shell *shell)
 {
-    if (!tokens || !tokens->value)
+    int saved_stdin;
+    int saved_stdout;
+
+    if (setup_redirections(&tokens, &saved_stdin, &saved_stdout, shell) == -1)
         return ;
+    if (!tokens || !tokens->value)
+    {
+        restore_redirections(saved_stdin, saved_stdout);
+        return ;
+    }
     if (is_builtin_command(tokens->value))
         execute_builtin(tokens, shell);
     else
         handle_external_command(tokens, shell);
+    restore_redirections(saved_stdin, saved_stdout);
 }
