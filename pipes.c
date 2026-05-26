@@ -6,7 +6,7 @@
 /*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 12:00:00 by copilot           #+#    #+#             */
-/*   Updated: 2026/05/26 11:31:16 by jpaulo-b         ###   ########.fr       */
+/*   Updated: 2026/05/26 15:34:42 by jpaulo-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,30 @@ int	count_commands(t_token *tokens)
 }
 
 /*
-** Extracts a single command from the token list starting at *tokens.
-** Returns a pointer to the first token of the next command (after PIPE),
-** or NULL if this is the last command. Updates *tokens to point to the
-** first token of the extracted command.
+** Extracts a single command from the token list.
+** Returns a command token list ending before the next PIPE.
+** Does NOT modify the original token list.
+** Sets *next_token to point to the next command after the PIPE.
 */
-t_token	*extract_command(t_token **tokens, t_token **next_cmd)
+t_token	*extract_command(t_token *tokens, t_token **next_token)
 {
 	t_token	*cmd_start;
+	t_token	*current;
+	t_token	*prev;
 
-	cmd_start = *tokens;
-	*next_cmd = NULL;
-	while (*tokens && (*tokens)->type != PIPE)
-		*tokens = (*tokens)->next;
-	if (*tokens && (*tokens)->type == PIPE)
+	cmd_start = tokens;
+	*next_token = NULL;
+	prev = NULL;
+	current = tokens;
+	while (current && current->type != PIPE)
 	{
-		(*tokens)->type = WORD;
-		*tokens = (*tokens)->next;
-		*next_cmd = *tokens;
+		prev = current;
+		current = current->next;
 	}
+	if (current && current->type == PIPE)
+		*next_token = current->next;
+	if (prev)
+		prev->next = NULL;
 	return (cmd_start);
 }
 
@@ -109,7 +114,7 @@ int	execute_pipe_chain(t_token *tokens, t_shell *shell)
 	int		pipe_fd[2];
 	int		prev_read_fd;
 	t_token	*cmd;
-	t_token	*next_cmd;
+	t_token	*next_token;
 	pid_t	pid;
 	int		status;
 
@@ -118,7 +123,7 @@ int	execute_pipe_chain(t_token *tokens, t_shell *shell)
 	i = 0;
 	while (i < num_cmds)
 	{
-		cmd = extract_command(&tokens, &next_cmd);
+		cmd = extract_command(tokens, &next_token);
 		if (i < num_cmds - 1)
 		{
 			if (create_pipe(pipe_fd) == -1)
@@ -141,21 +146,22 @@ int	execute_pipe_chain(t_token *tokens, t_shell *shell)
 		}
 		if (pid == 0)
 		{
-			close_fd(&prev_read_fd);
 			if (i < num_cmds - 1)
 				close_fd(&pipe_fd[0]);
-			exec_cmd_child(cmd, prev_read_fd, 
+			exec_cmd_child(cmd, (i > 0) ? prev_read_fd : -1, 
 				(i < num_cmds - 1) ? pipe_fd[1] : -1, shell);
 		}
-		close_fd(&prev_read_fd);
+		if (prev_read_fd >= 0)
+			close_fd(&prev_read_fd);
 		if (i < num_cmds - 1)
 		{
 			close_fd(&pipe_fd[1]);
 			prev_read_fd = pipe_fd[0];
 		}
-		tokens = next_cmd;
+		tokens = next_token;
 		i++;
 	}
+	i = num_cmds;
 	while (i > 0)
 	{
 		if (waitpid(-1, &status, 0) > 0)

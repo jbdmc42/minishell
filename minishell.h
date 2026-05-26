@@ -6,7 +6,7 @@
 /*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:34 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/26 11:29:00 by jpaulo-b         ###   ########.fr       */
+/*   Updated: 2026/05/26 15:35:19 by jpaulo-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,14 +133,14 @@ void	get_commands(t_token *tokens, t_shell *shell);
 char	**build_argv(t_token *tokens);
 char	**build_envp(t_shell *shell);
 void	free_envp_array(char **envp);
-int		setup_redirections(t_token **tokens, int *saved_stdin,
-int 	*saved_stdout, t_shell *shell);
+int		setup_redirections(t_token **tokens, int *saved_stdin, \
+ 				int *saved_stdout, t_shell *shell);
 void	restore_redirections(int saved_stdin, int saved_stdout);
 int		search_and_execute(char *command, char **argv, char **envp);
 
 // pipes.c:
 int		count_commands(t_token *tokens);
-t_token	*extract_command(t_token **tokens, t_token **next_cmd);
+ t_token	*extract_command(t_token *tokens, t_token **next_token);
 int		create_pipe(int *pipe_fd);
 void	close_fd(int *fd);
 int		execute_pipe_chain(t_token *tokens, t_shell *shell);

@@ -6,7 +6,7 @@
 /*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 14:18:09 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/26 10:47:58 by jpaulo-b         ###   ########.fr       */
+/*   Updated: 2026/05/26 15:27:31 by jpaulo-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	get_commands(t_token *tokens, t_shell *shell)
 {
     int saved_stdin;
     int saved_stdout;
+    t_token	*current;
 
     if (setup_redirections(&tokens, &saved_stdin, &saved_stdout, shell) == -1)
         return ;
@@ -74,6 +75,17 @@ void	get_commands(t_token *tokens, t_shell *shell)
     {
         restore_redirections(saved_stdin, saved_stdout);
         return ;
+    }
+    current = tokens;
+    while (current)
+    {
+        if (current->type == PIPE)
+        {
+            execute_pipe_chain(tokens, shell);
+            restore_redirections(saved_stdin, saved_stdout);
+            return ;
+        }
+        current = current->next;
     }
     if (is_builtin_command(tokens->value))
         execute_builtin(tokens, shell);
