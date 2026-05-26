@@ -6,7 +6,7 @@
 /*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:24 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/12 10:44:52 by jpaulo-b         ###   ########.fr       */
+/*   Updated: 2026/05/26 18:29:21 by jpaulo-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	process_input_line(char **line, t_shell *shell)
 /*
 **  Process and execute the validated input line.
 */
-static void	execute_line(char *line, t_shell *shell)
+static void	execute_line(char *line, t_shell *shell, int interactive)
 {
 	t_token	*tokens;
 	char	*validated_line;
@@ -59,7 +59,8 @@ static void	execute_line(char *line, t_shell *shell)
 		free(line);
 		return ;
 	}
-	add_history(line);
+	if (interactive)
+		add_history(line);
 	tokens = NULL;
 	parse_input(validated_line, 0, tokens, shell);
 	free(validated_line);
@@ -68,17 +69,42 @@ static void	execute_line(char *line, t_shell *shell)
 /*
 **  Main loop: reads and processes user input continuously.
 */
-static void	main_loop(t_shell *shell)
+static void	main_loop(t_shell *shell, int interactive)
 {
 	char	*line;
 
 	while (1)
 	{
 		g_signal_received = 0;
-		line = readline(PROMPT);
-		if (!process_input_line(&line, shell))
-			continue ;
-		execute_line(line, shell);
+		if (interactive)
+		{
+			line = readline(PROMPT);
+			if (!process_input_line(&line, shell))
+				continue ;
+			execute_line(line, shell, 1);
+		}
+		else
+		{
+			ssize_t nread;
+			size_t len = 0;
+			char *buf = NULL;
+
+			nread = getline(&buf, &len, stdin);
+			if (nread == -1)
+			{
+				free(buf);
+				clean_exit(shell);
+			}
+			if (nread > 0 && buf[nread - 1] == '\n')
+				buf[nread - 1] = '\0';
+			line = buf;
+			if (!process_input_line(&line, shell))
+			{
+				free(line);
+				continue ;
+			}
+			execute_line(line, shell, 0);
+		}
 	}
 }
 
@@ -90,11 +116,13 @@ int	main(int argc, char **argv, char **envp)
 {
 	(void)argc;
 	(void)argv;
-	t_shell	shell; 												// Shell state structure
+	t_shell	shell; 													// Shell state structure
+	int		interactive;	// Flag indicating if the shell is running in interactive mode
 
-	shell.exit_status = 0; 										// Initialize exit status to 0
-	init_env(&shell, envp);										// Initialize environment variables from envp
-	setup_signal_handlers(); 									// Setup signal handlers for SIGINT and SIGQUIT
-	main_loop(&shell); 											// Start the main shell loop
-	return (shell.exit_status); 								// Return exit status (never reached)
+	shell.exit_status = 0; 									// Initialize exit status to 0
+	init_env(&shell, envp); 								// Initialize environment variables from envp
+	setup_signal_handlers(); 							// Setup signal handlers for SIGINT and SIGQUIT
+	interactive = isatty(STDIN_FILENO);				// Check if input is from a terminal
+	main_loop(&shell, interactive); 						// Start the main shell loop
+	return (shell.exit_status); 						// Return exit status (never reached)
 }

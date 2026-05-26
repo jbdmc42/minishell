@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleaning.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 10:44:36 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/02/16 10:05:11 by joaobarb         ###   ########.fr       */
+/*   Updated: 2026/05/26 17:19:55 by jpaulo-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	free_all(void)
 void	clean_exit(t_shell *shell)
 {
 	free_all(); // Free all allocated resources
-	printf(EXIT); // Print exit message
+	if (isatty(STDIN_FILENO))
+		printf(EXIT); // Print exit message only in interactive mode
 	exit(shell->exit_status); // Exit with current status
 }
