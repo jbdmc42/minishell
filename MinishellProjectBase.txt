@@ -34,14 +34,14 @@ Minishell
 │   └── 4.4 Attach pipeline chain
 │
 ├── 5. Command Execution
-│   ├── 5.1 Built-in detection								✓
-│   │   ├── echo -n											✓
-│   │   ├── cd												✓
-│   │   ├── pwd												✓
-│   │   ├── export											✓
-│   │   ├── unset												- (not implemented)
-│   │   ├── env												✓
-│   │   └── exit											✓
+│   ├── 5.1 Built-in detection
+│   │   ├── echo -n													✓
+│   │   ├── cd														✓
+│   │   ├── pwd														✓
+│   │   ├── export													✓
+│   │   ├── unset													✓
+│   │   ├── env														✓
+│   │   └── exit													✓
 │   ├── 5.2 Run built-ins without fork (when required)
 │   ├── 5.3 External command execution via PATH
 │   ├── 5.4 Resolve absolute/relative paths
@@ -49,19 +49,19 @@ Minishell
 │   └── 5.6 Update $? (exit status)
 │
 ├── 6. Pipes
-│   ├── 6.1 Create pipes (pipe())
-│   ├── 6.2 Support multiple pipes
-│   ├── 6.3 Close correct file descriptors
-│   └── 6.4 Synchronize multiple child processes
+│   ├── 6.1 Create pipes (pipe())									✓
+│   ├── 6.2 Support multiple pipes									✓
+│   ├── 6.3 Close correct file descriptors							✓
+│   └── 6.4 Synchronize multiple child processes					✓
 │
-├── 7. Redirections
-│   ├── 7.1 <  input redirect
-│   ├── 7.2 >  output truncate
-│   ├── 7.3 >> output append
-│   └── 7.4 << heredoc
-│       ├── 7.4.1 Read until delimiter
-│       ├── 7.4.2 Expansion rules (quoted/unquoted)
-│       └── 7.4.3 Use temporary pipe for heredoc
+├── 7. Redirections													✓
+│   ├── 7.1 <  input redirect										✓
+│   ├── 7.2 >  output truncate										✓
+│   ├── 7.3 >> output append										✓
+│   └── 7.4 << heredoc												✓
+│       ├── 7.4.1 Read until delimiter								✓
+│       ├── 7.4.2 Expansion rules (quoted/unquoted)					✓
+│       └── 7.4.3 Use temporary pipe for heredoc					✓
 │
 ├── 8. Memory Management
 │   ├── 8.1 Free tokens

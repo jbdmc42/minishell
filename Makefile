@@ -28,8 +28,10 @@ SRCS		= main.c \
 			parsing_helpers.c \
 			parsing_helpers_two.c \
 			parsing.c \
+			pipes.c \
 			pwd.c \
 			quote_handling.c \
+			redir.c \
 			setup_signal_handlers.c \
 			tokenization.c \
 			unset.c \
