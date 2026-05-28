@@ -289,6 +289,3 @@ Testing strategy (short):
 - After each completed task, write 5–10 basic cases comparing output and exit codes with bash for that feature.
 - Use small helper scripts and run them repeatedly while developing (capture stdout/stderr and exit codes).
 
-If you want I can now:
-- Append this workflow to the file (done).
-- Or implement the first small change (exit status propagation + support for '/').

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_helpers.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 17:40:26 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/02/16 10:05:11 by joaobarb         ###   ########.fr       */
+/*   Updated: 2026/05/28 09:33:44 by jpaulo-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	parse_pipe(char *line, size_t *i, t_token **tokens, t_shell *shell)
 	{
 		add_token("|", PIPE, tokens); // Add pipe token
 		(*i)++; // Move to next character
-		if (syntaxe_error(line, *i)) // Check for syntax errors after pipe
+		if (!syntaxe_error(line, *i)) // Check for syntax errors after pipe
 			shell->exit_status = 2; // Set exit status to 2 on error
 		return (1); // Return 1 to indicate pipe was parsed
 	}
@@ -43,13 +43,13 @@ int	parse_less(char *line, size_t *i, t_token **tokens, t_shell *shell)
 		{
 			add_token("<<", DLESS, tokens); // Add double less token
 			(*i) += 2; // Move past both characters
-			if (syntaxe_error(line, *i)) // Check for syntax errors
+			if (!syntaxe_error(line, *i)) // Check for syntax errors
 				shell->exit_status = 2; // Set exit status to 2 on error
 			return (1); // Return 1 to indicate double less was parsed
 		}
 		add_token("<", LESS, tokens); // Add single less token
 		(*i)++; // Move to next character
-		if (syntaxe_error(line, *i)) // Check for syntax errors
+		if (!syntaxe_error(line, *i)) // Check for syntax errors
 			shell->exit_status = 2; // Set exit status to 2 on error
 		return (1); // Return 1 to indicate less was parsed
 	}
@@ -70,13 +70,13 @@ int	parse_great(char *line, size_t *i, t_token **tokens, t_shell *shell)
 		{
 			add_token(">>", DGREAT, tokens); // Add double great token
 			(*i) += 2; // Move past both characters
-			if (syntaxe_error(line, *i)) // Check for syntax errors
+			if (!syntaxe_error(line, *i)) // Check for syntax errors
 				shell->exit_status = 2; // Set exit status to 2 on error
 			return (1); // Return 1 to indicate double great was parsed
 		}
 		add_token(">", GREAT, tokens); // Add single great token
 		(*i)++; // Move to next character
-		if (syntaxe_error(line, *i)) // Check for syntax errors
+		if (!syntaxe_error(line, *i)) // Check for syntax errors
 			shell->exit_status = 2; // Set exit status to 2 on error
 		return (1); // Return 1 to indicate great was parsed
 	}

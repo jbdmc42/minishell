@@ -6,7 +6,7 @@
 /*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 16:49:55 by joaobarb          #+#    #+#             */
-/*   Updated: 2026/05/12 11:47:22 by jpaulo-b         ###   ########.fr       */
+/*   Updated: 2026/05/28 09:28:58 by jpaulo-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	parse_argument(t_token *tokens, t_shell *shell)
 	}
 	if (!is_valid_var_name(nameval[0]))
 	{
-		printf("minishell: export: `%s': ", arg);
+		printf("bash: line 1: export: `%s': ", arg);
 		printf("not a valid identifier\n");
 		free_nameval(nameval);
 		shell->exit_status = 1;

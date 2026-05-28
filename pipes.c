@@ -6,7 +6,7 @@
 /*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 12:00:00 by copilot           #+#    #+#             */
-/*   Updated: 2026/05/26 15:34:42 by jpaulo-b         ###   ########.fr       */
+/*   Updated: 2026/05/28 09:33:53 by jpaulo-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,10 +116,13 @@ int	execute_pipe_chain(t_token *tokens, t_shell *shell)
 	t_token	*cmd;
 	t_token	*next_token;
 	pid_t	pid;
+	pid_t	last_pid;
 	int		status;
+	int		child_count;
 
 	num_cmds = count_commands(tokens);
 	prev_read_fd = -1;
+	last_pid = -1;
 	i = 0;
 	while (i < num_cmds)
 	{
@@ -151,6 +154,8 @@ int	execute_pipe_chain(t_token *tokens, t_shell *shell)
 			exec_cmd_child(cmd, (i > 0) ? prev_read_fd : -1, 
 				(i < num_cmds - 1) ? pipe_fd[1] : -1, shell);
 		}
+		if (i == num_cmds - 1)
+			last_pid = pid;
 		if (prev_read_fd >= 0)
 			close_fd(&prev_read_fd);
 		if (i < num_cmds - 1)
@@ -161,17 +166,19 @@ int	execute_pipe_chain(t_token *tokens, t_shell *shell)
 		tokens = next_token;
 		i++;
 	}
-	i = num_cmds;
-	while (i > 0)
+	child_count = num_cmds;
+	shell->exit_status = 0;
+	while (child_count > 0)
 	{
-		if (waitpid(-1, &status, 0) > 0)
+		pid = waitpid(-1, &status, 0);
+		if (pid == last_pid)
 		{
 			if (WIFEXITED(status))
 				shell->exit_status = WEXITSTATUS(status);
 			else
 				shell->exit_status = 1;
 		}
-		i--;
+		child_count--;
 	}
 	return (shell->exit_status);
 }

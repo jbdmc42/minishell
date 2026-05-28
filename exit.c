@@ -6,7 +6,7 @@
 /*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 09:15:11 by joaobarb          #+#    #+#             */
-/*   Updated: 2026/05/12 11:43:23 by jpaulo-b         ###   ########.fr       */
+/*   Updated: 2026/05/28 09:22:27 by jpaulo-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,10 @@ void	ft_exit(t_token *tokens, t_shell *shell)
 {
 	int		token_count; // Number of tokens
 
-	printf("exit\n"); // Print "exit" message
 	token_count = count_tokens(tokens); // Count tokens (command + arguments)
 	if (token_count > 2) // Check if too many arguments
 	{
-		printf("minishell: exit: too many arguments\n");
+		printf("bash: line 1: exit: too many arguments\n");
 		shell->exit_status = 1; // Set exit status to 1
 		return ; // Return without exiting
 	}
@@ -72,7 +71,7 @@ void	ft_exit(t_token *tokens, t_shell *shell)
 	{
 		if (!is_numeric(tokens->next->value)) // Check if argument is numeric
 		{
-			printf("minishell: exit: %s: numeric argument required\n",
+			printf("bash: line 1: exit: %s: numeric argument required\n",
 				tokens->next->value);
 			shell->exit_status = 2; // Set exit status to 2 for invalid argument
 			free_all(); // Free all resources
