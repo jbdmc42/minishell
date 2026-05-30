@@ -29,11 +29,11 @@ void	sigint_handler(int sig)
 
 void	setup_signal_handlers(void)
 {
-	struct sigaction	sa; 									// Signal action structure
+	struct sigaction	sa;
 
-	sigemptyset(&sa.sa_mask); 									// Initialize signal mask to empty
-	sa.sa_flags = 0; 											// No special flags
-	sa.sa_handler = sigint_handler; 							// Set handler function for SIGINT
-	sigaction(SIGINT, &sa, NULL); 								// Register SIGINT handler
-	signal(SIGQUIT, SIG_IGN); 									// Ignore SIGQUIT (Ctrl+\)
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = 0;
+	sa.sa_handler = sigint_handler;
+	sigaction(SIGINT, &sa, NULL);
+	signal(SIGQUIT, SIG_IGN);
 }

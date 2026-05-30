@@ -6,11 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 09:15:11 by joaobarb          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2026/05/28 09:22:27 by jpaulo-b         ###   ########.fr       */
-=======
-/*   Updated: 2026/05/27 13:28:05 by jbdmc            ###   ########.fr       */
->>>>>>> d0c3708 (Fixed double free on prompt line.)
+/*   Updated: 2026/05/30 17:38:25 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +21,20 @@ static int	is_numeric(char *str)
 {
 	int	i;
 
-	if (!str || !*str) // Check if string is NULL or empty
+	if (!str || !*str)
 		return (0);
 	i = 0;
-	if (str[i] == '+' || str[i] == '-') // Skip optional sign
+	if (str[i] == '+' || str[i] == '-')
 		i++;
-	if (!str[i]) // Return 0 if string is only a sign
+	if (!str[i])
 		return (0);
-	while (str[i]) // Check if all remaining characters are digits
+	while (str[i])
 	{
-		if (!ft_isdigit(str[i])) // Return 0 if non-digit found
+		if (!ft_isdigit(str[i]))
 			return (0);
 		i++;
 	}
-	return (1); // Return 1 if string is numeric
+	return (1);
 }
 
 /*
@@ -47,42 +43,42 @@ static int	is_numeric(char *str)
 */
 static int	count_tokens(t_token *tokens)
 {
-	int		count; // Token counter
-	t_token	*cur; // Current token pointer
+	int		count;
+	t_token	*cur;
 
-	count = 0; // Initialize counter
-	cur = tokens; // Start at first token
-	while (cur) // Iterate through all tokens
+	count = 0;
+	cur = tokens;
+	while (cur)
 	{
-		count++; // Increment counter
-		cur = cur->next; // Move to next token
+		count++;
+		cur = cur->next;
 	}
-	return (count); // Return total count
+	return (count);
 }
 
 void	ft_exit(t_token *tokens, t_shell *shell)
 {
-	int		token_count; // Number of tokens
+	int		token_count;
 
-	token_count = count_tokens(tokens); // Count tokens (command + arguments)
-	if (token_count > 2) // Check if too many arguments
+	token_count = count_tokens(tokens);
+	if (token_count > 2)
 	{
 		printf("bash: line 1: exit: too many arguments\n");
-		shell->exit_status = 1; // Set exit status to 1
-		return ; // Return without exiting
+		shell->exit_status = 1;
+		return ;
 	}
-	if (token_count == 2) // Check if exit code argument provided
+	if (token_count == 2)
 	{
-		if (!is_numeric(tokens->next->value)) // Check if argument is numeric
+		if (!is_numeric(tokens->next->value))
 		{
 			printf("bash: line 1: exit: %s: numeric argument required\n",
 				tokens->next->value);
-			shell->exit_status = 2; // Set exit status to 2 for invalid argument
-			free_all(); // Free all resources
-			exit(shell->exit_status); // Exit with error status
+			shell->exit_status = 2;
+			free_all();
+			exit(shell->exit_status);
 		}
-		shell->exit_status = ft_atoi(tokens->next->value); // Convert argument to exit code
+		shell->exit_status = ft_atoi(tokens->next->value);
 	}
-	free_all(); // Free all resources
-	exit(shell->exit_status); // Exit with specified or default status
+	free_all();
+	exit(shell->exit_status);
 }

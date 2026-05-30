@@ -93,7 +93,7 @@ char	*read_input_with_continuation(char *line, t_shell *shell)
 	int		i;
 	int		in_single;
 	int		in_double;
-	char	u;				// short for unclosed_quote
+	char	u;
 
 	i = 0;
 	in_single = 0;

@@ -19,8 +19,8 @@ void	free_all(void)
 
 void	clean_exit(t_shell *shell)
 {
-	free_all(); // Free all allocated resources
+	free_all();
 	if (isatty(STDIN_FILENO))
-		printf(EXIT); // Print exit message only in interactive mode
-	exit(shell->exit_status); // Exit with current status
+		printf(EXIT);
+	exit(shell->exit_status);
 }

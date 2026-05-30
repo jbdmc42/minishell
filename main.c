@@ -120,13 +120,13 @@ int	main(int argc, char **argv, char **envp)
 {
 	(void)argc;
 	(void)argv;
-	t_shell	shell; 													// Shell state structure
-	int		interactive;	// Flag indicating if the shell is running in interactive mode
+	t_shell	shell;
+	int		interactive;
 
-	shell.exit_status = 0; 									// Initialize exit status to 0
-	init_env(&shell, envp); 								// Initialize environment variables from envp
-	setup_signal_handlers(); 							// Setup signal handlers for SIGINT and SIGQUIT
-	interactive = isatty(STDIN_FILENO);				// Check if input is from a terminal
-	main_loop(&shell, interactive); 						// Start the main shell loop
-	return (shell.exit_status); 						// Return exit status (never reached)
+	shell.exit_status = 0;
+	init_env(&shell, envp);
+	setup_signal_handlers();
+	interactive = isatty(STDIN_FILENO);
+	main_loop(&shell, interactive);
+	return (shell.exit_status);
 }

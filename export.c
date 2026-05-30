@@ -31,7 +31,7 @@ char	**alpha_sort(t_shell *shell)
 	char	**var;
 	int		i;
 	int		j;
-	
+
 	i = 0;
 	cur = shell->env;
 	var = malloc(sizeof(char *) * ((env_lstsize(shell->env)) + 1));

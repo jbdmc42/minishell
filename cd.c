@@ -91,11 +91,11 @@ int		ft_cd(t_token *tokens, t_shell *shell)
 {
 	char	old_path[PATH_MAX];
 
-	if (!tokens->next)		//  Se existe o nodo do sinal e mais nenhum argumento (cd ), faz o mesmo que ~ (HOME)
+	if (!tokens->next)
 		return (go_to_special_dir(shell, "HOME"));
-	if (tokens->next->next)		//  Se existe o nodo do sinal e mais argumentos
+	if (tokens->next->next)
 	{
-		ft_putendl_fd("minishell: cd: too many arguments", STDERR_FILENO);  //  msg erro e retorna 1
+		ft_putendl_fd("minishell: cd: too many arguments", STDERR_FILENO);
 		return (1);
 	}
 	if (ft_strcmp(tokens->next->value, "~") == 0)
