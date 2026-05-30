@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 14:34:55 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/27 13:57:49 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/05/30 18:56:15 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ char	**build_envp(t_shell *shell)
 	return (tmp);
 }
 
-static int	exec_found_command(char *full_path, char **argv, char **envp,
-				char *path_copy, char *command, t_shell *shell)
+int	exec_found_command(char *full_path, char **argv, char **envp,
+				t_shell *shell)
 {
 	pid_t	pid;
 	int		status;
@@ -81,13 +81,11 @@ static int	exec_found_command(char *full_path, char **argv, char **envp,
 	if (pid == 0)
 	{
 		execve(full_path, argv, envp);
-		fprintf(stderr, "%s: %s\n", command, strerror(errno));
-		free(path_copy);
+		fprintf(stderr, "%s: %s\n", argv[0], strerror(errno));
 		exit(126);
 	}
 	if (pid < 0)
 	{
-		free(path_copy);
 		return (-1);
 	}
 	waitpid(pid, &status, 0);
@@ -95,7 +93,6 @@ static int	exec_found_command(char *full_path, char **argv, char **envp,
 		shell->exit_status = WEXITSTATUS(status);
 	else
 		shell->exit_status = 1;
-	free(path_copy);
 	return (0);
 }
 
@@ -103,43 +100,21 @@ int	search_and_execute(char *command, char **argv, char **envp, t_shell *shell)
 {
 	char	*path;
 	char	*path_copy;
-	char	*dir;
-	char	full_path[PATH_MAX];
 
 	if (!command || !argv || !envp)
 		return (-1);
 	if (ft_strchr(command, '/'))
-	{
-		pid_t pid = fork();
-		int status;
-		if (pid == 0)
-		{
-			execve(command, argv, envp);
-			fprintf(stderr, "%s: %s\n", command, strerror(errno));
-			exit(126);
-		}
-		if (pid < 0)
-			return (-1);
-		waitpid(pid, &status, 0);
-		if (WIFEXITED(status))
-			shell->exit_status = WEXITSTATUS(status);
-		else
-			shell->exit_status = 1;
-		return (0);
-	}
+		return (exec_direct_path(command, argv, envp, shell));
 	path = getenv("PATH");
 	if (!path)
 		return (-1);
 	path_copy = ft_strdup(path);
 	if (!path_copy)
 		return (-1);
-	dir = strtok(path_copy, ":");
-	while (dir)
+	if (try_exec_in_path(path_copy, command, argv, envp) == 0)
 	{
-		snprintf(full_path, sizeof(full_path), "%s/%s", dir, command);
-		if (access(full_path, X_OK) == 0)
-			return (exec_found_command(full_path, argv, envp, path_copy, command, shell));
-		dir = strtok(NULL, ":");
+		free(path_copy);
+		return (0);
 	}
 	free(path_copy);
 	return (-1);

@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:34 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/30 17:41:24 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/05/30 19:00:56 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,6 @@
 # include <limits.h>
 
 // Globals
-
-/* 
-**  Global variable used ONLY for signal handling (Ctrl + C interruption) with
-** 0 = default state, 1 = interrupted by signal.
-**  "extern" expands the variable to all files that include this header by declaring and assigning it the 
-** initial value to the global variable directly in the header file, forcing any other C file to use that
-** declaration instead of redeclaring the variable.
-**  "volatile" means that the variable value can be read or modified asynchronously by something other than the
-** current thread of execution (can capture and interpret changes on signals).
-**  "sig_atomic_t" or "signal atomic type" is an integer type that can be accessed as an atomic entity even in the
-** presence of asynchronous interrupts made by signals. This type prevents race conditions between threads and
-** data corruptions by accessing the atomic value of the variable whenever a signal changes it. It basically
-** automatically handles access to the variable by using thread locks per signal without the need of us to program it.
-*/
 extern volatile sig_atomic_t	g_signal_received;
 
 // Structs
@@ -116,7 +102,34 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
+typedef struct s_pipe_ctx
+{
+	t_token	*tokens;
+	t_token	*cmd;
+	t_token	*next_token;
+	t_shell	*shell;
+	int		num_cmds;
+	int		i;
+	int		pipe_fd[2];
+	int		prev_read_fd;
+	int		status;
+	int		child_count;
+	pid_t	pid;
+	pid_t	last_pid;
+}	t_pipe_ctx;
+
 // Function Declaration
+
+// main_helpers.c:
+int		process_input_line(char **line, t_shell *shell);
+void	execute_line(char *line, t_shell *shell, int interactive);
+int		run_interactive_cycle(t_shell *shell);
+int		run_noninteractive_cycle(t_shell *shell);
+void	main_loop(t_shell *shell, int interactive);
+
+// main.c:
+size_t	skip_blank_prefix(char *line);
+void	execute_line(char *line, t_shell *shell, int interactive);
 
 // cleaning.c:
 void	clean_exit(t_shell *shell);
@@ -132,17 +145,27 @@ void	get_commands(t_token *tokens, t_shell *shell);
 char	**build_argv(t_token *tokens);
 char	**build_envp(t_shell *shell);
 void	free_envp_array(char **envp);
-int		setup_redirections(t_token **tokens, int *saved_stdin, \
- 				int *saved_stdout, t_shell *shell);
+int		setup_redirections(t_token **tokens, int *saved_stdin,\
+				int *saved_stdout, t_shell *shell);
 void	restore_redirections(int saved_stdin, int saved_stdout);
-int		search_and_execute(char *command, char **argv, char **envp, t_shell *shell);
+int		search_and_execute(char *command, char **argv,\
+				char **envp, t_shell *shell);
+
+// pipes_helpers.c:
+int		execute_pipe_chain(t_token *tokens, t_shell *shell);
+
+// pipes_helpers_two.c:
+void	init_pipe_ctx(t_pipe_ctx *ctx, t_token *tokens, t_shell *shell);
+void	setup_pipe_child(t_pipe_ctx *ctx);
+int		run_pipe_stage(t_pipe_ctx *ctx);
+int		handle_pipe_fork_error(t_pipe_ctx *ctx);
+int		wait_pipe_children(t_pipe_ctx *ctx);
 
 // pipes.c:
 int		count_commands(t_token *tokens);
 t_token	*extract_command(t_token *tokens, t_token **next_token);
 int		create_pipe(int *pipe_fd);
 void	close_fd(int *fd);
-int		execute_pipe_chain(t_token *tokens, t_shell *shell);
 
 // echo.c:
 void	ft_echo(t_token *tokens, t_shell *shell);
@@ -182,6 +205,35 @@ int		parse_less(char *line, size_t *i, t_token **tokens, t_shell *shell);
 int		parse_great(char *line, size_t *i, t_token **tokens, t_shell *shell);
 int		parse_single_quotes(char *line, size_t *i, t_token **tokens);
 int		parse_double_quotes(char *line, size_t *i, t_token **tokens);
+// parsing_helpers_two/three.c:
+char	*ft_strjoin_free(char *a, char *b);
+int		is_operator_char(char c);
+char	*expand_variable_in_part(char *part, t_shell *shell);
+char	*extract_word_part(char *line, size_t *i, t_shell *shell);
+int		append_word_part(char **token, char *part);
+
+// redir helpers
+int		create_heredoc_fd(char *delimiter);
+int		perform_dup2_and_close(int fd, int target_fd, t_shell *shell);
+void	unlink_token_node(t_token **tokens, t_token *node, t_token *next);
+
+// redir_helpers_two.c:
+int		heredoc_loop(int write_fd, char *delimiter);
+
+// redir_helpers_three.c:
+int		check_target_valid(t_token *target, t_shell *shell);
+int		apply_redirection_stdin(t_token **tokens, t_token *redir,\
+				t_token *target, t_shell *shell);
+int		apply_redirection_stdout(t_token **tokens, t_token *redir,\
+				t_token *target, t_shell *shell);
+
+// commands_extra helpers
+int		exec_found_command(char *full_path, char **argv, char **envp,
+			t_shell *shell);
+int		exec_direct_path(char *command, char **argv, char **envp,
+			t_shell *shell);
+int		try_exec_in_path(char *path_copy, char *command, char **argv,
+			char **envp);
 
 // parsing.c:
 void	parse_input(char *line, size_t i, t_token **tokens, t_shell *shell);
@@ -199,6 +251,10 @@ void	add_token(char *value, t_tokentype type, t_token **tokens);
 void	print_tokens(t_token *tokens);
 void	free_tokens(t_token *tokens);
 
+// utilities_three.c:
+int		env_lstsize(t_env *env);
+t_env	*get_env_node(t_env *env_list, char *key);
+
 // utilities_two.c:
 void	ft_swap(char **a, char **b);
 char	*remove_quotes(char *nameval);
@@ -207,7 +263,6 @@ int		is_valid_var_name(char *name);
 void	free_nameval(char **nameval);
 
 // utilities.c:
-int		env_lstsize(t_env *env);
 void	init_env(t_shell *shell, char **envp);
 
 #endif

@@ -6,24 +6,11 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 18:55:46 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/27 11:44:11 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/05/30 18:07:51 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	env_lstsize(t_env *env)
-{
-	int	i;
-
-	i = 0;
-	while (env)
-	{
-		i++;
-		env = env->next;
-	}
-	return (i);
-}
 
 static int	fill_env_node(t_env *node, char *envp_entry, char *equals)
 {

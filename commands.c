@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 14:18:09 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/30 16:42:42 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/05/30 18:13:35 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,14 @@ static void	handle_external_command(t_token *tokens, t_shell *shell)
 
 void	get_commands(t_token *tokens, t_shell *shell)
 {
-	int saved_stdin;
-	int saved_stdout;
+	int		saved_stdin;
+	int		saved_stdout;
 	t_token	*current;
 
 	if (setup_redirections(&tokens, &saved_stdin, &saved_stdout, shell) == -1)
 		return ;
 	if (!tokens || !tokens->value)
-	{
-		restore_redirections(saved_stdin, saved_stdout);
-		return ;
-	}
+		return (restore_redirections(saved_stdin, saved_stdout));
 	current = tokens;
 	while (current)
 	{

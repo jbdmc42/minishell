@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 16:49:55 by joaobarb          #+#    #+#             */
-/*   Updated: 2026/05/30 17:31:53 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/05/30 17:48:51 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	parse_argument(t_token *tokens, t_shell *shell)
 	if (!nameval[0])
 	{
 		free(nameval);
-		return;
+		return ;
 	}
 	if (!is_valid_var_name(nameval[0]))
 	{

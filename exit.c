@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 09:15:11 by joaobarb          #+#    #+#             */
-/*   Updated: 2026/05/30 17:38:25 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/05/30 18:54:48 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,9 @@ void	ft_exit(t_token *tokens, t_shell *shell)
 			printf("bash: line 1: exit: %s: numeric argument required\n",
 				tokens->next->value);
 			shell->exit_status = 2;
-			free_all();
 			exit(shell->exit_status);
 		}
 		shell->exit_status = ft_atoi(tokens->next->value);
 	}
-	free_all();
 	exit(shell->exit_status);
 }

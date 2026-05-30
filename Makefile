@@ -17,8 +17,9 @@ INCLUDES	= -I. -I$(LIBFT_DIR)
 SRCS		= main.c \
 			cd.c \
 			cleaning.c \
-			commands.c \
+			commands_extra_two.c \
 			commands_extra.c \
+			commands.c \
 			echo.c \
 			env.c \
 			exit.c \
@@ -26,16 +27,25 @@ SRCS		= main.c \
 			export.c \
 			ft_lsttochpp.c \
 			input_handling.c \
-			parsing_helpers.c \
+			main_helpers.c \
+			parsing_helpers_four.c \
+			parsing_helpers_three.c \
 			parsing_helpers_two.c \
+			parsing_helpers.c \
 			parsing.c \
+			pipes_helpers_two.c \
+			pipes_helpers.c \
 			pipes.c \
 			pwd.c \
 			quote_handling.c \
+			redir_helpers_three.c \
+			redir_helpers_two.c \
+			redir_helpers.c \
 			redir.c \
 			setup_signal_handlers.c \
 			tokenization.c \
 			unset.c \
+			utilities_three.c \
 			utilities_two.c \
 			utilities.c
 
