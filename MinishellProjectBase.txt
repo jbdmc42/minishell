@@ -1,31 +1,31 @@
 Minishell
 ├── 1. Project Base											> DONE <
-│   ├── 1.1 Main loop
-│   ├── 1.2 Display prompt
+│   ├── 1.1 Main loop											✓
+│   ├── 1.2 Display prompt									✓
 │   ├── 1.3 Read input (readline)							✓
 │   ├── 1.4 Add input to history							✓
 │   └── 1.5 Single global variable (signal number only)		✓
 │
 ├── 2. Signal Handling (interactive)						> DONE <
-│   ├── 2.1 ctrl-C → new line + new prompt
-│   ├── 2.2 ctrl-D → exit shell
-│   └── 2.3 ctrl-\ → do nothing
+│   ├── 2.1 ctrl-C → new line + new prompt						✓
+│   ├── 2.2 ctrl-D → exit shell							✓
+│   └── 2.3 ctrl-\ → do nothing							✓
 │
 ├── 3. Parsing												> CURRENTLY WORKING <
 │   ├── 3.1 Basic tokenization								✓
 │   ├── 3.2 Correct handling of spaces						✓
 │   ├── 3.3 Quoting											✓
 │   │   ├── 3.3.1 Single quotes → no interpretation			✓
-│   │   └── 3.3.2 Double quotes → no interpretation except $	- (handle exception $)
+│   │   └── 3.3.2 Double quotes → no interpretation except $	✓
 │   ├── 3.4 Variable expansion
-│   │   ├── 3.4.1 $VAR
-│   │   └── 3.4.2 $?
-│   ├── 3.5 Detect pipes									✓ (tokenization only; execution/piping not yet implemented)
-│   └── 3.6 Detect redirections								✓ (tokenization only; redirection handling pending)
-│       ├── <
-│       ├── >  *CHECK THE END OF THE PAGE
-│       ├── >> *CHECK THE END OF THE PAGE  
-│       └── << (heredoc, no history update)
+│   │   ├── 3.4.1 $VAR                                            ✓
+│   │   └── 3.4.2 $?                                              ✓
+│   ├── 3.5 Detect pipes                                         ✓
+│   └── 3.6 Detect redirections                                  ✓
+│       ├── <                                                     ✓
+│       ├── >  *CHECK THE END OF THE PAGE                         ✓
+│       ├── >> *CHECK THE END OF THE PAGE                         ✓
+│       └── << (heredoc, no history update)                       ✓
 │
 ├── 4. Command Structure (AST or simple commands)
 │   ├── 4.1 Command struct creation
@@ -42,11 +42,11 @@ Minishell
 │   │   ├── unset													✓
 │   │   ├── env														✓
 │   │   └── exit													✓
-│   ├── 5.2 Run built-ins without fork (when required)
-│   ├── 5.3 External command execution via PATH
-│   ├── 5.4 Resolve absolute/relative paths
-│   ├── 5.5 Child processes (fork / execve)
-│   └── 5.6 Update $? (exit status)
+│   ├── 5.2 Run built-ins without fork (when required)           ✓
+│   ├── 5.3 External command execution via PATH                  ✓
+│   ├── 5.4 Resolve absolute/relative paths                      ✓
+│   ├── 5.5 Child processes (fork / execve)                      ✓
+│   └── 5.6 Update $? (exit status)                              ✓
 │
 ├── 6. Pipes
 │   ├── 6.1 Create pipes (pipe())									✓
@@ -70,8 +70,8 @@ Minishell
 │
 └── 9. Final Polish & Testing
     ├── 9.1 Compare behavior with bash
-    ├── 9.2 Test signals
-    ├── 9.3 Test invalid/malformed inputs
+   ├── 9.2 Test signals                                         ✓
+   ├── 9.3 Test invalid/malformed inputs                        ✓
     └── 9.4 Ensure no memory leaks (except readline)
 
 

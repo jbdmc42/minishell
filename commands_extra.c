@@ -6,11 +6,12 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 14:34:55 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/13 17:42:56 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/05/27 13:57:49 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <errno.h>
 
 void	free_envp_array(char **envp)
 {
@@ -71,7 +72,7 @@ char	**build_envp(t_shell *shell)
 }
 
 static int	exec_found_command(char *full_path, char **argv, char **envp,
-				char *path_copy, char *command)
+				char *path_copy, char *command, t_shell *shell)
 {
 	pid_t	pid;
 	int		status;
@@ -80,7 +81,7 @@ static int	exec_found_command(char *full_path, char **argv, char **envp,
 	if (pid == 0)
 	{
 		execve(full_path, argv, envp);
-		perror(command);
+		fprintf(stderr, "%s: %s\n", command, strerror(errno));
 		free(path_copy);
 		exit(126);
 	}
@@ -90,11 +91,15 @@ static int	exec_found_command(char *full_path, char **argv, char **envp,
 		return (-1);
 	}
 	waitpid(pid, &status, 0);
+	if (WIFEXITED(status))
+		shell->exit_status = WEXITSTATUS(status);
+	else
+		shell->exit_status = 1;
 	free(path_copy);
 	return (0);
 }
 
-int	search_and_execute(char *command, char **argv, char **envp)
+int	search_and_execute(char *command, char **argv, char **envp, t_shell *shell)
 {
 	char	*path;
 	char	*path_copy;
@@ -103,6 +108,25 @@ int	search_and_execute(char *command, char **argv, char **envp)
 
 	if (!command || !argv || !envp)
 		return (-1);
+	if (ft_strchr(command, '/'))
+	{
+		pid_t pid = fork();
+		int status;
+		if (pid == 0)
+		{
+			execve(command, argv, envp);
+			fprintf(stderr, "%s: %s\n", command, strerror(errno));
+			exit(126);
+		}
+		if (pid < 0)
+			return (-1);
+		waitpid(pid, &status, 0);
+		if (WIFEXITED(status))
+			shell->exit_status = WEXITSTATUS(status);
+		else
+			shell->exit_status = 1;
+		return (0);
+	}
 	path = getenv("PATH");
 	if (!path)
 		return (-1);
@@ -114,7 +138,7 @@ int	search_and_execute(char *command, char **argv, char **envp)
 	{
 		snprintf(full_path, sizeof(full_path), "%s/%s", dir, command);
 		if (access(full_path, X_OK) == 0)
-			return (exec_found_command(full_path, argv, envp, path_copy, command));
+			return (exec_found_command(full_path, argv, envp, path_copy, command, shell));
 		dir = strtok(NULL, ":");
 	}
 	free(path_copy);

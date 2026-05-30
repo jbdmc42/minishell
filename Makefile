@@ -4,8 +4,9 @@
 
 NAME		= minishell
 
-CC			= cc
+CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror -g
+#CFLAGS		+= -g3 -fsanitize=address -fno-omit-frame-pointer
 LDFLAGS		= -lreadline -lncurses
 
 LIBFT_DIR	= libft

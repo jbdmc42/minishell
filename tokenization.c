@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 18:55:49 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/02/12 14:37:48 by joaobarb         ###   ########.fr       */
+/*   Updated: 2026/05/30 16:06:17 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,18 @@ void	print_tokens(t_token *tokens)
 	{
 		printf("TOKEN: %-12s | TYPE: %d\n", tokens->value, tokens->type); // Print token and type
 		tokens = tokens->next; // Move to next token
+	}
+}
+
+void	free_tokens(t_token *tokens)
+{
+	t_token	*tmp;
+
+	while (tokens)
+	{
+		tmp = tokens->next;
+		free(tokens->value);
+		free(tokens);
+		tokens = tmp;
 	}
 }

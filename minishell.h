@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:34 by jbdmc             #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2026/05/28 09:38:12 by jpaulo-b         ###   ########.fr       */
+=======
+/*   Updated: 2026/05/30 16:06:17 by jbdmc            ###   ########.fr       */
+>>>>>>> d0c3708 (Fixed double free on prompt line.)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +140,7 @@ void	free_envp_array(char **envp);
 int		setup_redirections(t_token **tokens, int *saved_stdin, \
  				int *saved_stdout, t_shell *shell);
 void	restore_redirections(int saved_stdin, int saved_stdout);
-int		search_and_execute(char *command, char **argv, char **envp);
+int		search_and_execute(char *command, char **argv, char **envp, t_shell *shell);
 
 // pipes.c:
 int		count_commands(t_token *tokens);
@@ -185,10 +189,15 @@ int		parse_single_quotes(char *line, size_t *i, t_token **tokens);
 int		parse_double_quotes(char *line, size_t *i, t_token **tokens);
 
 // parsing.c:
-void	parse_input(char *line, size_t i, t_token *tokens, t_shell *shell);
+void	parse_input(char *line, size_t i, t_token **tokens, t_shell *shell);
 int		syntaxe_error(char *line, size_t i);
 int		skip_spaces(char *line, size_t *i);
+<<<<<<< HEAD
 void	parse_word(char *line, size_t *i, t_token **tokens, t_shell *shell);
+=======
+void	parse_word(char *line, size_t *i, t_token **tokens, struct s_shell *shell);
+char	*env_get_value(t_env *env, const char *name);
+>>>>>>> d0c3708 (Fixed double free on prompt line.)
 
 // setup_signal_handlers.c:
 void	sigint_handler(int sig);
@@ -196,6 +205,8 @@ void	setup_signal_handlers(void);
 
 // tokenization.c:
 void	add_token(char *value, t_tokentype type, t_token **tokens);
+void	print_tokens(t_token *tokens);
+void	free_tokens(t_token *tokens);
 
 // utilities_two.c:
 void	ft_swap(char **a, char **b);

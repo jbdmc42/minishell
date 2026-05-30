@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:24 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/26 18:29:21 by jpaulo-b         ###   ########.fr       */
+/*   Updated: 2026/05/30 16:52:04 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static int	process_input_line(char **line, t_shell *shell)
 	if ((*line)[treat_empty_input(*line, 0)] == '\0')
 	{
 		free(*line);
+		*line = NULL;  /* Mark as freed */
 		return (0);
 	}
 	return (1);
@@ -56,14 +57,14 @@ static void	execute_line(char *line, t_shell *shell, int interactive)
 	validated_line = read_input_with_continuation(line, shell);
 	if (!validated_line)
 	{
-		free(line);
 		return ;
 	}
 	if (interactive)
 		add_history(line);
 	tokens = NULL;
-	parse_input(validated_line, 0, tokens, shell);
+	parse_input(validated_line, 0, &tokens, shell);
 	free(validated_line);
+	free_tokens(tokens);
 }
 
 /*
@@ -82,6 +83,7 @@ static void	main_loop(t_shell *shell, int interactive)
 			if (!process_input_line(&line, shell))
 				continue ;
 			execute_line(line, shell, 1);
+			//free(line);
 		}
 		else
 		{
@@ -100,10 +102,11 @@ static void	main_loop(t_shell *shell, int interactive)
 			line = buf;
 			if (!process_input_line(&line, shell))
 			{
-				free(line);
 				continue ;
 			}
 			execute_line(line, shell, 0);
+			buf = NULL;
+			len = 0;
 		}
 	}
 }

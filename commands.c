@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 14:18:09 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/28 09:34:23 by jpaulo-b         ###   ########.fr       */
+/*   Updated: 2026/05/30 16:42:42 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	handle_external_command(t_token *tokens, t_shell *shell)
         free(argv);
         return ;
     }
-    if (search_and_execute(tokens->value, argv, envp) == -1)
+    if (search_and_execute(tokens->value, argv, envp, shell) == -1)
     {
         printf("%s: command not found\n", tokens->value);
         shell->exit_status = 127;

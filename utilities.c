@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilities.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 18:55:46 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/03/06 16:01:37 by joaobarb         ###   ########.fr       */
+/*   Updated: 2026/05/27 11:44:11 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,4 +103,15 @@ void	init_env(t_shell *shell, char **envp)
             add_env_node(&shell->env, new_node);
         i++;
     }
+}
+
+char	*env_get_value(t_env *env, const char *name)
+{
+    while (env)
+    {
+        if (!ft_strcmp(env->name, name))
+            return (ft_strdup(env->val));
+        env = env->next;
+    }
+    return (NULL);
 }

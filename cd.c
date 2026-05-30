@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 16:58:26 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/12 15:46:22 by jpaulo-b         ###   ########.fr       */
+/*   Updated: 2026/05/27 14:08:51 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ static int	go_to_special_dir(t_shell *data, char *key)
 		ft_putendl_fd(" not set", STDERR_FILENO);
 		return (1);
 	}
+	if (ft_strcmp(key, "OLDPWD") == 0)
+		printf("%s\n", path);
 	if (getcwd(old_path, sizeof(old_path)) == NULL)
 		old_path[0] = '\0';
 	if (chdir(path) != 0)

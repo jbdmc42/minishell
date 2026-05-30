@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 12:00:00 by copilot           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2026/05/28 09:34:11 by jpaulo-b         ###   ########.fr       */
+=======
+/*   Updated: 2026/05/27 14:08:51 by jbdmc            ###   ########.fr       */
+>>>>>>> d0c3708 (Fixed double free on prompt line.)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +31,25 @@ static int	create_heredoc_fd(char *delimiter)
 {
 	int	fd[2];
 	char	*line;
+	ssize_t	nread;
+	size_t	len;
 
 	if (pipe(fd) == -1)
 		return (-1);
 	while (1)
 	{
-		line = readline("> ");
+		line = NULL;
+		len = 0;
+		if (isatty(STDIN_FILENO))
+			line = readline("> ");
+		else
+		{
+			nread = getline(&line, &len, stdin);
+			if (nread == -1)
+				break ;
+			if (nread > 0 && line[nread - 1] == '\n')
+				line[nread - 1] = '\0';
+		}
 		if (!line)
 			break ;
 		if (ft_strcmp(line, delimiter) == 0)
@@ -125,6 +142,8 @@ int	setup_redirections(t_token **tokens, int *saved_stdin,
 	t_token	*prev;
 	t_token	*next;
 
+	if (!tokens || !*tokens)
+		return (0);
 	*saved_stdin = dup(STDIN_FILENO);
 	*saved_stdout = dup(STDOUT_FILENO);
 	if (*saved_stdin < 0 || *saved_stdout < 0)

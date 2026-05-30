@@ -3,114 +3,96 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_helpers_two.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 15:10:00 by joaobarb          #+#    #+#             */
-/*   Updated: 2026/05/28 09:38:24 by jpaulo-b         ###   ########.fr       */
+/*   Updated: 2026/05/30 16:45:32 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static char *ft_strjoin_free(char *a, char *b)
+{
+	char *joined;
+
+	if (!a && !b)
+		return (NULL);
+	if (!a)
+	{
+		joined = ft_strdup(b);
+		free(b);
+		return (joined);
+	}
+	if (!b)
+		return (a);
+	joined = ft_strjoin(a, b);
+	free(a);
+	free(b);
+	return (joined);
+}
 
 static int	is_operator_char(char c)
 {
 	return (c == '|' || c == '<' || c == '>');
 }
 
-static int	is_var_char(char c)
+static char	*expand_variable_in_part(char *part, struct s_shell *shell)
 {
-	return (ft_isalnum(c) || c == '_');
-}
+	size_t  i;
+	char    *res;
+	char    *name;
+	char    *val;
+	char    buf[32];
 
-static char	*get_env_value_from_shell(t_shell *shell, char *name)
-{
-	t_env	*current;
-
-	if (!shell || !name)
+	if (!part)
 		return (NULL);
-	current = shell->env;
-	while (current)
-	{
-		if (!ft_strcmp(current->name, name))
-			return (current->val);
-		current = current->next;
-	}
-	return (NULL);
-}
-
-static char	*append_char(char *str, char c)
-{
-	char	*tmp;
-	char	buf[2];
-
-	buf[0] = c;
-	buf[1] = '\0';
-	tmp = ft_strjoin(str, buf);
-	free(str);
-	return (tmp);
-}
-
-static char	*append_string(char *str, char *add)
-{
-	char	*tmp;
-
-	tmp = ft_strjoin(str, add);
-	free(str);
-	return (tmp);
-}
-
-static char	*expand_variables(char *segment, t_shell *shell)
-{
-	size_t	i;
-	char	*result;
-	char	*name;
-	char	*value;
-	size_t	start;
-
-	result = ft_strdup("");
-	if (!result)
+	if (!*part)
+		return (ft_strdup(""));
+	res = ft_strdup("");
+	if (!res)
 		return (NULL);
 	i = 0;
-	while (segment[i])
+	while (part[i])
 	{
-		if (segment[i] == '$')
+		if (part[i] == '$')
 		{
-			start = i + 1;
-			if (segment[start] == '\0')
+			i++;
+			if (part[i] == '?')
 			{
-				result = append_char(result, '$');
-				break ;
-			}
-			if (!is_var_char(segment[start]))
-			{
-				result = append_char(result, '$');
+				snprintf(buf, sizeof(buf), "%d", shell->exit_status);
+				val = ft_strdup(buf);
+				res = ft_strjoin_free(res, val);
 				i++;
 				continue ;
 			}
-			while (segment[start] && is_var_char(segment[start]))
-				start++;
-			name = ft_substr(segment, i + 1, start - (i + 1));
-			if (!name)
+			if (part[i] == '_' || ft_isalpha(part[i]))
 			{
-				free(result);
-				return (NULL);
+				size_t start = i;
+				while (part[i] && (part[i] == '_' || ft_isalnum(part[i])))
+					i++;
+				name = ft_substr(part, start, i - start);
+				val = env_get_value(shell->env, name);
+				free(name);
+				if (!val)
+					val = ft_strdup("");
+				res = ft_strjoin_free(res, val);
+				continue ;
 			}
-			value = get_env_value_from_shell(shell, name);
-			free(name);
-			result = append_string(result, value ? value : "");
-			i = start;
+			/* If not valid var char, treat as literal '$' */
+			res = ft_strjoin_free(res, ft_substr(part, i - 1, 1));
 		}
 		else
 		{
-			result = append_char(result, segment[i]);
+			char *tmp = ft_substr(part, i, 1);
+			res = ft_strjoin_free(res, tmp);
 			i++;
 		}
 	}
-	free(segment);
-	return (result);
+	return (res);
 }
 
-static char	*extract_word_part(char *line, size_t *i, t_shell *shell)
+static char	*extract_word_part(char *line, size_t *i, struct s_shell *shell)
 {
 	size_t	start;
 	char	quote;
@@ -124,16 +106,30 @@ static char	*extract_word_part(char *line, size_t *i, t_shell *shell)
 			(*i)++;
 		if (line[*i] == quote)
 			(*i)++;
-		if (quote == '\'')
-			return (ft_substr(line, start, *i - start - 1));
-		return (expand_variables(ft_substr(line, start, *i - start - 1), shell));
+		{
+			char *raw = ft_substr(line, start, *i - start - (line[*i - 1] == quote));
+			char *out;
+			if (quote == '\'')
+				out = raw; /* single quotes: no expansion */
+			else
+			{
+				out = expand_variable_in_part(raw, shell);
+				free(raw);
+			}
+			return (out);
+		}
 	}
 	start = *i;
 	while (line[*i] && line[*i] != ' ' && line[*i] != '\t'
 		&& !is_operator_char(line[*i])
 		&& line[*i] != '\'' && line[*i] != '"')
 		(*i)++;
-	return (expand_variables(ft_substr(line, start, *i - start), shell));
+	{
+		char *raw = ft_substr(line, start, *i - start);
+		char *out = expand_variable_in_part(raw, shell);
+		free(raw);
+		return (out);
+	}
 }
 
 static int	append_word_part(char **token, char *part)
@@ -151,7 +147,7 @@ static int	append_word_part(char **token, char *part)
 	return (1);
 }
 
-void	parse_word(char *line, size_t *i, t_token **tokens, t_shell *shell)
+void	parse_word(char *line, size_t *i, t_token **tokens, struct s_shell *shell)
 {
 	char	*token;
 	char	*part;
@@ -163,10 +159,9 @@ void	parse_word(char *line, size_t *i, t_token **tokens, t_shell *shell)
 		&& !is_operator_char(line[*i]))
 	{
 		part = extract_word_part(line, i, shell);
-		if (!part || !append_word_part(&token, part))
+		if (!append_word_part(&token, part))
 		{
 			free(part);
-			free(token);
 			return ;
 		}
 		free(part);
