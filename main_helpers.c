@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_helpers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 18:10:00 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/30 18:12:45 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/05/30 19:26:08 by jpaulo-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,13 @@ void	execute_line(char *line, t_shell *shell, int interactive)
 	char	*validated_line;
 
 	validated_line = read_input_with_continuation(line, shell);
-	if (interactive)
+	if (interactive && validated_line)
 		add_history(line);
-	free(line);
 	if (!validated_line)
+	{
+		free(line);
 		return ;
+	}
 	tokens = NULL;
 	parse_input(validated_line, 0, &tokens, shell);
 	free(validated_line);

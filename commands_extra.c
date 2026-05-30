@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands_extra.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 14:34:55 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/30 18:56:15 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/05/30 19:34:03 by jpaulo-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,20 @@ char	**build_envp(t_shell *shell)
 	return (tmp);
 }
 
-int	exec_found_command(char *full_path, char **argv, char **envp,
-				t_shell *shell)
+int	exec_found_command(char *full_path, char *command, t_exec_ctx *ctx)
 {
 	pid_t	pid;
 	int		status;
+	char	**argv;
+	char	**envp;
 
+	argv = ctx->argv;
+	envp = ctx->envp;
 	pid = fork();
 	if (pid == 0)
 	{
 		execve(full_path, argv, envp);
-		fprintf(stderr, "%s: %s\n", argv[0], strerror(errno));
+		fprintf(stderr, "%s: %s\n", command, strerror(errno));
 		exit(126);
 	}
 	if (pid < 0)
@@ -90,28 +93,32 @@ int	exec_found_command(char *full_path, char **argv, char **envp,
 	}
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
-		shell->exit_status = WEXITSTATUS(status);
+		ctx->shell->exit_status = WEXITSTATUS(status);
 	else
-		shell->exit_status = 1;
+		ctx->shell->exit_status = 1;
 	return (0);
 }
 
 int	search_and_execute(char *command, char **argv, char **envp, t_shell *shell)
 {
-	char	*path;
-	char	*path_copy;
+	char		*path;
+	char		*path_copy;
+	t_exec_ctx	ctx;
 
 	if (!command || !argv || !envp)
 		return (-1);
+	ctx.argv = argv;
+	ctx.envp = envp;
+	ctx.shell = shell;
 	if (ft_strchr(command, '/'))
-		return (exec_direct_path(command, argv, envp, shell));
+		return (exec_direct_path(command, &ctx));
 	path = getenv("PATH");
 	if (!path)
 		return (-1);
 	path_copy = ft_strdup(path);
 	if (!path_copy)
 		return (-1);
-	if (try_exec_in_path(path_copy, command, argv, envp) == 0)
+	if (try_exec_in_path(path_copy, command, &ctx) == 0)
 	{
 		free(path_copy);
 		return (0);

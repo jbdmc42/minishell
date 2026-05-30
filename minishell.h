@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:34 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/30 19:00:56 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/05/30 19:31:26 by jpaulo-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,13 @@ typedef struct s_pipe_ctx
 	pid_t	last_pid;
 }	t_pipe_ctx;
 
+typedef struct s_exec_ctx
+{
+	char	**argv;
+	char	**envp;
+	t_shell	*shell;
+}	t_exec_ctx;
+
 // Function Declaration
 
 // main_helpers.c:
@@ -228,12 +235,9 @@ int		apply_redirection_stdout(t_token **tokens, t_token *redir,\
 				t_token *target, t_shell *shell);
 
 // commands_extra helpers
-int		exec_found_command(char *full_path, char **argv, char **envp,
-			t_shell *shell);
-int		exec_direct_path(char *command, char **argv, char **envp,
-			t_shell *shell);
-int		try_exec_in_path(char *path_copy, char *command, char **argv,
-			char **envp);
+int		exec_found_command(char *full_path, char *command, t_exec_ctx *ctx);
+int		exec_direct_path(char *command, t_exec_ctx *ctx);
+int		try_exec_in_path(char *path_copy, char *command, t_exec_ctx *ctx);
 
 // parsing.c:
 void	parse_input(char *line, size_t i, t_token **tokens, t_shell *shell);

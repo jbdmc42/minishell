@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands_extra_two.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 18:45:00 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/30 18:44:13 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/05/30 19:31:26 by jpaulo-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ static int	search_in_path_dirs(char *path_copy, char *full_path,
 	return (-1);
 }
 
-int	try_exec_in_path(char *path_copy, char *command, char **argv,
-		char **envp)
+int	try_exec_in_path(char *path_copy, char *command, t_exec_ctx *ctx)
 {
 	char	full_path[PATH_MAX];
 	int		found;
@@ -43,10 +42,10 @@ int	try_exec_in_path(char *path_copy, char *command, char **argv,
 	if (search_in_path_dirs(path_copy, full_path, command, &found) == -1
 		&& !found)
 		return (-1);
-	return (exec_found_command(full_path, argv, envp, NULL));
+	return (exec_found_command(full_path, command, ctx));
 }
 
-int	exec_direct_path(char *command, char **argv, char **envp, t_shell *shell)
+int	exec_direct_path(char *command, t_exec_ctx *ctx)
 {
 	pid_t	pid;
 	int		status;
@@ -54,7 +53,7 @@ int	exec_direct_path(char *command, char **argv, char **envp, t_shell *shell)
 	pid = fork();
 	if (pid == 0)
 	{
-		execve(command, argv, envp);
+		execve(command, ctx->argv, ctx->envp);
 		fprintf(stderr, "%s: %s\n", command, strerror(errno));
 		exit(126);
 	}
@@ -62,8 +61,8 @@ int	exec_direct_path(char *command, char **argv, char **envp, t_shell *shell)
 		return (-1);
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
-		shell->exit_status = WEXITSTATUS(status);
+		ctx->shell->exit_status = WEXITSTATUS(status);
 	else
-		shell->exit_status = 1;
+		ctx->shell->exit_status = 1;
 	return (0);
 }
