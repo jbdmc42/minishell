@@ -6,7 +6,11 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:24 by jbdmc             #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2026/05/30 16:52:04 by jbdmc            ###   ########.fr       */
+=======
+/*   Updated: 2026/05/30 16:40:13 by jbdmc            ###   ########.fr       */
+>>>>>>> 65d1981 (Tiny changes to main)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +87,6 @@ static void	main_loop(t_shell *shell, int interactive)
 			if (!process_input_line(&line, shell))
 				continue ;
 			execute_line(line, shell, 1);
-			//free(line);
 		}
 		else
 		{
@@ -101,9 +104,7 @@ static void	main_loop(t_shell *shell, int interactive)
 				buf[nread - 1] = '\0';
 			line = buf;
 			if (!process_input_line(&line, shell))
-			{
 				continue ;
-			}
 			execute_line(line, shell, 0);
 			buf = NULL;
 			len = 0;
