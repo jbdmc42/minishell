@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 15:10:00 by joaobarb          #+#    #+#             */
-/*   Updated: 2026/05/30 16:45:32 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/05/30 17:40:42 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ static int	is_operator_char(char c)
 
 static char	*expand_variable_in_part(char *part, struct s_shell *shell)
 {
-	size_t  i;
-	char    *res;
-	char    *name;
-	char    *val;
-	char    buf[32];
+	size_t	i;
+	char	*res;
+	char	*name;
+	char	*val;
+	char	buf[32];
 
 	if (!part)
 		return (NULL);

@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cleaning.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 10:44:36 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/26 17:19:55 by jpaulo-b         ###   ########.fr       */
+/*   Updated: 2026/05/30 17:41:19 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	free_all(void)
-{
-	// Placeholder for freeing all allocated resources
-}
 
 void	clean_exit(t_shell *shell)
 {
