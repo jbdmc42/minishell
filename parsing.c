@@ -6,11 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 13:54:22 by jbdmc             #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2026/05/28 09:38:07 by jpaulo-b         ###   ########.fr       */
-=======
 /*   Updated: 2026/05/30 16:06:17 by jbdmc            ###   ########.fr       */
->>>>>>> d0c3708 (Fixed double free on prompt line.)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +14,13 @@
 
 int	syntaxe_error(char *line, size_t i)
 {
-	if (line[i] == '>' || line[i] == '<' || line[i] == '|') // Check for operator at position
+	if (line[i] == '>' || line[i] == '<' || line[i] == '|')
 	{
 		printf("minishell: syntax error near");
-		printf(" unexpected token `%s'\n", &line[i]); // Print error with unexpected token
-		return (0); // Return 0 to indicate syntax error found
+		printf(" unexpected token `%s'\n", &line[i]);
+		return (0);
 	}
-	return (1); // Return 1 if no syntax error
+	return (1);
 }
 
 int	skip_spaces(char *line, size_t *i)

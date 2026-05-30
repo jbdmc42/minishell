@@ -6,11 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:34 by jbdmc             #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2026/05/28 09:38:12 by jpaulo-b         ###   ########.fr       */
-=======
-/*   Updated: 2026/05/30 16:06:17 by jbdmc            ###   ########.fr       */
->>>>>>> d0c3708 (Fixed double free on prompt line.)
+/*   Updated: 2026/05/30 17:24:07 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +119,6 @@ typedef struct s_token
 // Function Declaration
 
 // cleaning.c:
-void	free_all(void);
 void	clean_exit(t_shell *shell);
 
 // commands.c:
@@ -144,7 +139,7 @@ int		search_and_execute(char *command, char **argv, char **envp, t_shell *shell)
 
 // pipes.c:
 int		count_commands(t_token *tokens);
- t_token	*extract_command(t_token *tokens, t_token **next_token);
+t_token	*extract_command(t_token *tokens, t_token **next_token);
 int		create_pipe(int *pipe_fd);
 void	close_fd(int *fd);
 int		execute_pipe_chain(t_token *tokens, t_shell *shell);
@@ -192,12 +187,8 @@ int		parse_double_quotes(char *line, size_t *i, t_token **tokens);
 void	parse_input(char *line, size_t i, t_token **tokens, t_shell *shell);
 int		syntaxe_error(char *line, size_t i);
 int		skip_spaces(char *line, size_t *i);
-<<<<<<< HEAD
 void	parse_word(char *line, size_t *i, t_token **tokens, t_shell *shell);
-=======
-void	parse_word(char *line, size_t *i, t_token **tokens, struct s_shell *shell);
 char	*env_get_value(t_env *env, const char *name);
->>>>>>> d0c3708 (Fixed double free on prompt line.)
 
 // setup_signal_handlers.c:
 void	sigint_handler(int sig);

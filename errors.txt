@@ -1,0 +1,1173 @@
+Setting locale to en_US
+parsing_helpers_two.c: Error!
+Error: SPACE_BEFORE_FUNC    (line:  15, col:  12):	[94mFound space when expecting tab before function name[0m
+Error: SPACE_REPLACE_TAB    (line:  17, col:   9):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  42, col:  11):	[94mTwo or more consecutives spaces[0m
+Error: SPACE_REPLACE_TAB    (line:  42, col:  11):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  43, col:   9):	[94mTwo or more consecutives spaces[0m
+Error: SPACE_REPLACE_TAB    (line:  43, col:   9):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  44, col:   9):	[94mTwo or more consecutives spaces[0m
+Error: SPACE_REPLACE_TAB    (line:  44, col:   9):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  45, col:   9):	[94mTwo or more consecutives spaces[0m
+Error: SPACE_REPLACE_TAB    (line:  45, col:   9):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  46, col:   9):	[94mTwo or more consecutives spaces[0m
+Error: SPACE_REPLACE_TAB    (line:  46, col:   9):	Found space when expecting tab
+Error: WRONG_SCOPE_VAR      (line:  71, col:   1):	Variable declared in incorrect scope
+Error: SPACE_REPLACE_TAB    (line:  71, col:  23):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line:  71, col:  30):	Declaration and assignation on a single line
+Error: WRONG_SCOPE_COMMENT  (line:  82, col:  13):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_VAR      (line:  87, col:   1):	Variable declared in incorrect scope
+Error: SPACE_REPLACE_TAB    (line:  87, col:  17):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line:  87, col:  23):	Declaration and assignation on a single line
+Error: TOO_MANY_LINES       (line:  93, col:   1):	Function has more than 25 lines
+Error: WRONG_SCOPE_VAR      (line: 110, col:   1):	Variable declared in incorrect scope
+Error: SPACE_REPLACE_TAB    (line: 110, col:  17):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line: 110, col:  23):	Declaration and assignation on a single line
+Error: LINE_TOO_LONG        (line: 110, col:  83):	[94mline too long[0m
+Error: WRONG_SCOPE_VAR      (line: 111, col:   1):	Variable declared in incorrect scope
+Error: SPACE_REPLACE_TAB    (line: 111, col:  17):	Found space when expecting tab
+Error: WRONG_SCOPE_COMMENT  (line: 113, col:  28):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 113, col:  28):	[95mComment is invalid in this scope[0m
+Error: TOO_MANY_LINES       (line: 127, col:   1):	Function has more than 25 lines
+Error: WRONG_SCOPE_VAR      (line: 128, col:   1):	Variable declared in incorrect scope
+Error: SPACE_REPLACE_TAB    (line: 128, col:  13):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line: 128, col:  19):	Declaration and assignation on a single line
+Error: WRONG_SCOPE_VAR      (line: 129, col:   1):	Variable declared in incorrect scope
+Error: SPACE_REPLACE_TAB    (line: 129, col:  13):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line: 129, col:  19):	Declaration and assignation on a single line
+Error: TOO_MANY_LINES       (line: 133, col:   1):	Function has more than 25 lines
+Error: TOO_MANY_FUNCS       (line: 150, col:   1):	[92mToo many functions in file[0m
+Error: LINE_TOO_LONG        (line: 150, col:  82):	[94mline too long[0m
+input_handling.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  20, col:  16):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  20, col:  16):	[95mComment is invalid in this scope[0m
+Error: EMPTY_LINE_FUNCTION  (line:  21, col:   1):	Empty line in function
+Error: WRONG_SCOPE_COMMENT  (line:  22, col:  12):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  22, col:  12):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  23, col:  16):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  23, col:  16):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  24, col:  21):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  24, col:  21):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  25, col:  47):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  25, col:  47):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  26, col:  14):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  26, col:  14):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  27, col:  31):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  27, col:  31):	[95mComment is invalid in this scope[0m
+Error: MIXED_SPACE_TAB      (line:  37, col:  15):	[93mMixed spaces and tabs[0m
+Error: LINE_TOO_LONG        (line:  37, col:  65):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  37, col:  65):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  37, col:  65):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line:  37, col:  93):	[94mline too long[0m
+Error: VAR_DECL_START_FUNC  (line:  38, col:   1):	Variable declaration not at start of function
+Error: MIXED_SPACE_TAB      (line:  38, col:  19):	[93mMixed spaces and tabs[0m
+Error: LINE_TOO_LONG        (line:  38, col:  65):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  38, col:  65):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  38, col:  65):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line:  38, col:  92):	[94mline too long[0m
+Error: EMPTY_LINE_FUNCTION  (line:  39, col:   1):	Empty line in function
+Error: MIXED_SPACE_TAB      (line:  40, col:  11):	[93mMixed spaces and tabs[0m
+Error: TAB_INSTEAD_SPC      (line:  40, col:  12):	[94mFound tab when expecting space[0m
+Error: LINE_TOO_LONG        (line:  40, col:  65):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  40, col:  65):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  40, col:  65):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line:  40, col:  84):	[94mline too long[0m
+Error: MIXED_SPACE_TAB      (line:  41, col:  29):	[93mMixed spaces and tabs[0m
+Error: TAB_INSTEAD_SPC      (line:  41, col:  30):	[94mFound tab when expecting space[0m
+Error: LINE_TOO_LONG        (line:  41, col:  65):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  41, col:  65):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  41, col:  65):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line:  41, col:  88):	[94mline too long[0m
+Error: MIXED_SPACE_TAB      (line:  42, col:  15):	[93mMixed spaces and tabs[0m
+Error: TAB_INSTEAD_SPC      (line:  42, col:  16):	[94mFound tab when expecting space[0m
+Error: LINE_TOO_LONG        (line:  42, col:  65):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  42, col:  65):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  42, col:  65):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line:  42, col:  90):	[94mline too long[0m
+Error: MIXED_SPACE_TAB      (line:  43, col:  23):	[93mMixed spaces and tabs[0m
+Error: TAB_INSTEAD_SPC      (line:  43, col:  24):	[94mFound tab when expecting space[0m
+Error: LINE_TOO_LONG        (line:  43, col:  65):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  43, col:  65):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  43, col:  65):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line:  43, col:  86):	[94mline too long[0m
+Error: MIXED_SPACE_TAB      (line:  44, col:  59):	[93mMixed spaces and tabs[0m
+Error: TAB_INSTEAD_SPC      (line:  44, col:  60):	[94mFound tab when expecting space[0m
+Error: LINE_TOO_LONG        (line:  44, col:  65):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  44, col:  65):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  44, col:  65):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line:  44, col:  91):	[94mline too long[0m
+Error: MIXED_SPACE_TAB      (line:  45, col:  13):	[93mMixed spaces and tabs[0m
+Error: TAB_INSTEAD_SPC      (line:  45, col:  14):	[94mFound tab when expecting space[0m
+Error: LINE_TOO_LONG        (line:  45, col:  65):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  45, col:  65):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  45, col:  65):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line:  45, col:  90):	[94mline too long[0m
+Error: MIXED_SPACE_TAB      (line:  46, col:  30):	[93mMixed spaces and tabs[0m
+Error: TAB_INSTEAD_SPC      (line:  46, col:  31):	[94mFound tab when expecting space[0m
+Error: LINE_TOO_LONG        (line:  46, col:  65):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  46, col:  65):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  46, col:  65):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line:  46, col: 104):	[94mline too long[0m
+Error: MIXED_SPACE_TAB      (line:  47, col:  27):	[93mMixed spaces and tabs[0m
+Error: TAB_INSTEAD_SPC      (line:  47, col:  28):	[94mFound tab when expecting space[0m
+Error: LINE_TOO_LONG        (line:  47, col:  65):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  47, col:  65):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  47, col:  65):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line:  47, col:  91):	[94mline too long[0m
+Error: MIXED_SPACE_TAB      (line:  48, col:  19):	[93mMixed spaces and tabs[0m
+Error: TAB_INSTEAD_SPC      (line:  48, col:  20):	[94mFound tab when expecting space[0m
+Error: LINE_TOO_LONG        (line:  48, col:  65):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  48, col:  65):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  48, col:  65):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line:  48, col:  85):	[94mline too long[0m
+utilities.c: Error!
+Error: TOO_FEW_TAB          (line:  30, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  30, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  31, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  31, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line:  32, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  32, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  33, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  33, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  34, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  34, col:  13):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  35, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  35, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  36, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  36, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  37, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  37, col:   9):	Space on empty line
+Error: TOO_FEW_TAB          (line:  38, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  38, col:  13):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  39, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  39, col:  13):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  40, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  40, col:   9):	Space on empty line
+Error: TOO_FEW_TAB          (line:  41, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  41, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line:  42, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  42, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line:  43, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  43, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line:  44, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  44, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  45, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  45, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  46, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  46, col:  13):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  47, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  47, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  48, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  48, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  49, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  49, col:   9):	Space on empty line
+Error: TOO_FEW_TAB          (line:  50, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  50, col:  13):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  51, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  51, col:  13):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  52, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  52, col:   9):	Space on empty line
+Error: TOO_FEW_TAB          (line:  53, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  53, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line:  54, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  54, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  59, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  59, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  60, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  60, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  62, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  62, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  63, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  63, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  64, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  64, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  65, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  65, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  66, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  66, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  67, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  67, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line:  68, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  68, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  69, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  69, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  70, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  70, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line:  71, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  71, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  72, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  72, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  73, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  73, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  95, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  95, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  97, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  97, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  98, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  98, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  99, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  99, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 100, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line: 100, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line: 101, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 101, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 102, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 102, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 103, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 103, col:  13):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 104, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 104, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 105, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line: 105, col:   5):	Space on empty line
+Error: TOO_MANY_FUNCS       (line: 108, col:   1):	[92mToo many functions in file[0m
+Error: TOO_FEW_TAB          (line: 110, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 110, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 111, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line: 111, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line: 112, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 112, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 113, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 113, col:  13):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 114, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 114, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 115, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line: 115, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line: 116, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 116, col:   5):	Found space when expecting tab
+tokenization.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  17, col:  25):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  17, col:  25):	[95mComment is invalid in this scope[0m
+Error: VAR_DECL_START_FUNC  (line:  18, col:   1):	Variable declaration not at start of function
+Error: WRONG_SCOPE_COMMENT  (line:  18, col:  25):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  18, col:  25):	[95mComment is invalid in this scope[0m
+Error: EMPTY_LINE_FUNCTION  (line:  19, col:   1):	Empty line in function
+Error: WRONG_SCOPE_COMMENT  (line:  20, col:  42):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  20, col:  42):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  21, col:  21):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  21, col:  21):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  23, col:  42):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  23, col:  42):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  24, col:  29):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  24, col:  29):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  25, col:  29):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  25, col:  29):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  26, col:  26):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  26, col:  26):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  28, col:  30):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  28, col:  30):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  31, col:  26):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  31, col:  26):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  32, col:  29):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  32, col:  29):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  34, col:  34):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  34, col:  34):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  39, col:  20):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  39, col:  20):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line:  41, col:  75):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  41, col:  75):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  41, col:  75):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line:  41, col:  98):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  42, col:  32):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  42, col:  32):	[95mComment is invalid in this scope[0m
+minishell.h: Error!
+Error: INVALID_HEADER       (line:   9, col:   1):	[97mMissing or invalid 42 header[0m
+Error: SPC_AFTER_OPERATOR   (line:   9, col:   1):	[94mmissing space after operator[0m
+Error: SPC_AFTER_OPERATOR   (line:   9, col:   3):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line:   9, col:   3):	[94mmissing space before operator[0m
+Error: SPC_AFTER_OPERATOR   (line:   9, col:   5):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line:   9, col:   5):	[94mmissing space before operator[0m
+Error: SPC_BFR_OPERATOR     (line:   9, col:   7):	[94mmissing space before operator[0m
+Error: SPC_AFTER_OPERATOR   (line:  11, col:   1):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line:  11, col:   1):	[94mmissing space before operator[0m
+Error: SPC_AFTER_OPERATOR   (line:  11, col:   3):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line:  11, col:   3):	[94mmissing space before operator[0m
+Error: SPC_AFTER_OPERATOR   (line:  11, col:   5):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line:  11, col:   5):	[94mmissing space before operator[0m
+Error: SPC_BFR_OPERATOR     (line:  11, col:   7):	[94mmissing space before operator[0m
+Error: SPC_AFTER_OPERATOR   (line:  13, col:   1):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line:  13, col:   1):	[94mmissing space before operator[0m
+Error: SPC_AFTER_OPERATOR   (line:  13, col:   3):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line:  13, col:   3):	[94mmissing space before operator[0m
+Error: SPC_AFTER_OPERATOR   (line:  13, col:   5):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line:  13, col:   5):	[94mmissing space before operator[0m
+Error: SPC_BFR_OPERATOR     (line:  13, col:   7):	[94mmissing space before operator[0m
+Error: SPC_AFTER_OPERATOR   (line:  30, col:  11):	[94mmissing space after operator[0m
+Error: SPC_AFTER_OPERATOR   (line:  30, col:  20):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line:  30, col:  20):	[94mmissing space before operator[0m
+Error: SPC_BFR_OPERATOR     (line:  30, col:  31):	[94mmissing space before operator[0m
+Error: SPC_AFTER_OPERATOR   (line:  31, col:  11):	[94mmissing space after operator[0m
+Error: SPC_AFTER_OPERATOR   (line:  31, col:  20):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line:  31, col:  20):	[94mmissing space before operator[0m
+Error: SPC_BFR_OPERATOR     (line:  31, col:  30):	[94mmissing space before operator[0m
+Error: SPC_AFTER_OPERATOR   (line:  32, col:  11):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line:  32, col:  20):	[94mmissing space before operator[0m
+Error: SPC_AFTER_OPERATOR   (line:  33, col:  11):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line:  33, col:  19):	[94mmissing space before operator[0m
+Error: SPC_AFTER_OPERATOR   (line:  34, col:  11):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line:  34, col:  20):	[94mmissing space before operator[0m
+Error: SPC_AFTER_OPERATOR   (line:  35, col:  11):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line:  35, col:  20):	[94mmissing space before operator[0m
+Error: SPC_AFTER_OPERATOR   (line:  36, col:  11):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line:  36, col:  19):	[94mmissing space before operator[0m
+Error: SPC_AFTER_OPERATOR   (line:  37, col:  11):	[94mmissing space after operator[0m
+Error: SPC_AFTER_OPERATOR   (line:  37, col:  15):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line:  37, col:  15):	[94mmissing space before operator[0m
+Error: SPC_BFR_OPERATOR     (line:  37, col:  22):	[94mmissing space before operator[0m
+Error: SPC_AFTER_OPERATOR   (line:  38, col:  11):	[94mmissing space after operator[0m
+Error: SPC_AFTER_OPERATOR   (line:  38, col:  15):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line:  38, col:  15):	[94mmissing space before operator[0m
+Error: SPC_BFR_OPERATOR     (line:  38, col:  23):	[94mmissing space before operator[0m
+Error: SPC_AFTER_OPERATOR   (line:  39, col:  11):	[94mmissing space after operator[0m
+Error: SPC_AFTER_OPERATOR   (line:  39, col:  15):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line:  39, col:  15):	[94mmissing space before operator[0m
+Error: SPC_BFR_OPERATOR     (line:  39, col:  23):	[94mmissing space before operator[0m
+Error: SPC_AFTER_OPERATOR   (line:  40, col:  11):	[94mmissing space after operator[0m
+Error: SPC_AFTER_OPERATOR   (line:  40, col:  15):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line:  40, col:  15):	[94mmissing space before operator[0m
+Error: SPC_BFR_OPERATOR     (line:  40, col:  22):	[94mmissing space before operator[0m
+Error: SPC_AFTER_OPERATOR   (line:  41, col:  11):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line:  41, col:  20):	[94mmissing space before operator[0m
+Error: SPC_AFTER_OPERATOR   (line:  42, col:  11):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line:  42, col:  20):	[94mmissing space before operator[0m
+Error: SPC_AFTER_OPERATOR   (line:  43, col:  11):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line:  43, col:  20):	[94mmissing space before operator[0m
+Error: SPC_AFTER_OPERATOR   (line:  44, col:  11):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line:  44, col:  18):	[94mmissing space before operator[0m
+Error: SPC_AFTER_OPERATOR   (line:  45, col:  11):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line:  45, col:  20):	[94mmissing space before operator[0m
+Error: TAB_INSTEAD_SPC      (line:  62, col:  29):	[94mFound tab when expecting space[0m
+Error: CONSECUTIVE_SPC      (line: 140, col:  63):	[94mTwo or more consecutives spaces[0m
+Error: MIXED_SPACE_TAB      (line: 141, col:   1):	[93mMixed spaces and tabs[0m
+Error: LINE_TOO_LONG        (line: 143, col:  83):	[94mline too long[0m
+Error: SPACE_REPLACE_TAB    (line: 147, col:   2):	Found space when expecting tab
+Error: MISALIGNED_FUNC_DECL (line: 147, col:  14):	Misaligned function declaration
+Error: SPC_AFTER_OPERATOR   (line: 195, col:   1):	[94mmissing space after operator[0m
+Error: SPC_AFTER_OPERATOR   (line: 195, col:   3):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line: 195, col:   3):	[94mmissing space before operator[0m
+Error: SPC_AFTER_OPERATOR   (line: 195, col:   5):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line: 195, col:   5):	[94mmissing space before operator[0m
+Error: SPC_BFR_OPERATOR     (line: 195, col:   7):	[94mmissing space before operator[0m
+Error: TOO_FEW_TAB          (line: 196, col:   1):	Missing tabs for indent level
+Error: MISALIGNED_FUNC_DECL (line: 196, col:   9):	Misaligned function declaration
+Error: SPC_AFTER_OPERATOR   (line: 197, col:   1):	[94mmissing space after operator[0m
+Error: SPC_AFTER_OPERATOR   (line: 197, col:   3):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line: 197, col:   3):	[94mmissing space before operator[0m
+Error: SPC_AFTER_OPERATOR   (line: 197, col:   5):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line: 197, col:   5):	[94mmissing space before operator[0m
+Error: SPC_BFR_OPERATOR     (line: 197, col:   7):	[94mmissing space before operator[0m
+Error: TAB_INSTEAD_SPC      (line: 198, col:   5):	[94mFound tab when expecting space[0m
+Error: SPC_AFTER_OPERATOR   (line: 198, col:  39):	[94mmissing space after operator[0m
+Error: SPC_AFTER_OPERATOR   (line: 198, col:  76):	[94mmissing space after operator[0m
+Error: LINE_TOO_LONG        (line: 198, col:  82):	[94mline too long[0m
+Error: SPC_AFTER_OPERATOR   (line: 200, col:   1):	[94mmissing space after operator[0m
+Error: SPC_AFTER_OPERATOR   (line: 200, col:   3):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line: 200, col:   3):	[94mmissing space before operator[0m
+Error: SPC_AFTER_OPERATOR   (line: 200, col:   5):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line: 200, col:   5):	[94mmissing space before operator[0m
+Error: SPC_BFR_OPERATOR     (line: 200, col:   7):	[94mmissing space before operator[0m
+Error: TAB_INSTEAD_SPC      (line: 203, col:   5):	[94mFound tab when expecting space[0m
+Error: HEADER_PROT_NODEF    (line: 222, col:   1):	Header protection not containing #define
+Error: PREPROC_BAD_ENDIF    (line: 222, col:   1):	Endif preprocessor statement without if, elif or else
+echo.c: Error!
+Error: MIXED_SPACE_TAB      (line:  26, col:  27):	[93mMixed spaces and tabs[0m
+Error: TAB_INSTEAD_SPC      (line:  26, col:  28):	[94mFound tab when expecting space[0m
+Error: WRONG_SCOPE_COMMENT  (line:  26, col:  29):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  26, col:  29):	[95mComment is invalid in this scope[0m
+Error: MIXED_SPACE_TAB      (line:  29, col:  22):	[93mMixed spaces and tabs[0m
+Error: TAB_INSTEAD_SPC      (line:  29, col:  23):	[94mFound tab when expecting space[0m
+Error: WRONG_SCOPE_COMMENT  (line:  29, col:  29):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  29, col:  29):	[95mComment is invalid in this scope[0m
+Error: MIXED_SPACE_TAB      (line:  31, col:  24):	[93mMixed spaces and tabs[0m
+Error: TAB_INSTEAD_SPC      (line:  31, col:  25):	[94mFound tab when expecting space[0m
+Error: WRONG_SCOPE_COMMENT  (line:  31, col:  29):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  31, col:  29):	[95mComment is invalid in this scope[0m
+Error: MIXED_SPACE_TAB      (line:  33, col:  27):	[93mMixed spaces and tabs[0m
+Error: TAB_INSTEAD_SPC      (line:  33, col:  28):	[94mFound tab when expecting space[0m
+Error: WRONG_SCOPE_COMMENT  (line:  33, col:  29):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  33, col:  29):	[95mComment is invalid in this scope[0m
+Error: MIXED_SPACE_TAB      (line:  38, col:  17):	[93mMixed spaces and tabs[0m
+Error: TAB_INSTEAD_SPC      (line:  38, col:  18):	[94mFound tab when expecting space[0m
+Error: WRONG_SCOPE_COMMENT  (line:  38, col:  29):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  38, col:  29):	[95mComment is invalid in this scope[0m
+Error: VAR_DECL_START_FUNC  (line:  39, col:   1):	Variable declaration not at start of function
+Error: MIXED_SPACE_TAB      (line:  39, col:  18):	[93mMixed spaces and tabs[0m
+Error: LINE_TOO_LONG        (line:  39, col:  29):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  39, col:  29):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  39, col:  29):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line:  39, col:  85):	[94mline too long[0m
+Error: VAR_DECL_START_FUNC  (line:  40, col:   1):	Variable declaration not at start of function
+Error: MIXED_SPACE_TAB      (line:  40, col:  19):	[93mMixed spaces and tabs[0m
+Error: WRONG_SCOPE_COMMENT  (line:  40, col:  29):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  40, col:  29):	[95mComment is invalid in this scope[0m
+Error: VAR_DECL_START_FUNC  (line:  41, col:   1):	Variable declaration not at start of function
+Error: MIXED_SPACE_TAB      (line:  41, col:  18):	[93mMixed spaces and tabs[0m
+Error: WRONG_SCOPE_COMMENT  (line:  41, col:  29):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  41, col:  29):	[95mComment is invalid in this scope[0m
+Error: EMPTY_LINE_FUNCTION  (line:  42, col:   1):	Empty line in function
+Error: MIXED_SPACE_TAB      (line:  43, col:  14):	[93mMixed spaces and tabs[0m
+Error: TAB_INSTEAD_SPC      (line:  43, col:  15):	[94mFound tab when expecting space[0m
+Error: WRONG_SCOPE_COMMENT  (line:  43, col:  29):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  43, col:  29):	[95mComment is invalid in this scope[0m
+Error: MIXED_SPACE_TAB      (line:  44, col:  15):	[93mMixed spaces and tabs[0m
+Error: TAB_INSTEAD_SPC      (line:  44, col:  16):	[94mFound tab when expecting space[0m
+Error: WRONG_SCOPE_COMMENT  (line:  44, col:  29):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  44, col:  29):	[95mComment is invalid in this scope[0m
+Error: MIXED_SPACE_TAB      (line:  45, col:  24):	[93mMixed spaces and tabs[0m
+Error: TAB_INSTEAD_SPC      (line:  45, col:  25):	[94mFound tab when expecting space[0m
+Error: WRONG_SCOPE_COMMENT  (line:  45, col:  29):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  45, col:  29):	[95mComment is invalid in this scope[0m
+Error: MIXED_SPACE_TAB      (line:  46, col:  68):	[93mMixed spaces and tabs[0m
+Error: TAB_INSTEAD_SPC      (line:  46, col:  69):	[94mFound tab when expecting space[0m
+Error: LINE_TOO_LONG        (line:  46, col:  73):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  46, col:  73):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  46, col:  73):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line:  46, col:  96):	[94mline too long[0m
+Error: MIXED_SPACE_TAB      (line:  48, col:  18):	[93mMixed spaces and tabs[0m
+Error: TAB_INSTEAD_SPC      (line:  48, col:  19):	[94mFound tab when expecting space[0m
+Error: WRONG_SCOPE_COMMENT  (line:  48, col:  29):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  48, col:  29):	[95mComment is invalid in this scope[0m
+Error: MIXED_SPACE_TAB      (line:  49, col:  25):	[93mMixed spaces and tabs[0m
+Error: TAB_INSTEAD_SPC      (line:  49, col:  26):	[94mFound tab when expecting space[0m
+Error: WRONG_SCOPE_COMMENT  (line:  49, col:  29):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  49, col:  29):	[95mComment is invalid in this scope[0m
+Error: MIXED_SPACE_TAB      (line:  51, col:  16):	[93mMixed spaces and tabs[0m
+Error: TAB_INSTEAD_SPC      (line:  51, col:  17):	[94mFound tab when expecting space[0m
+Error: WRONG_SCOPE_COMMENT  (line:  51, col:  29):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  51, col:  29):	[95mComment is invalid in this scope[0m
+Error: MIXED_SPACE_TAB      (line:  53, col:  20):	[93mMixed spaces and tabs[0m
+Error: TAB_INSTEAD_SPC      (line:  53, col:  21):	[94mFound tab when expecting space[0m
+Error: WRONG_SCOPE_COMMENT  (line:  53, col:  29):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  53, col:  29):	[95mComment is invalid in this scope[0m
+Error: MIXED_SPACE_TAB      (line:  55, col:  53):	[93mMixed spaces and tabs[0m
+Error: TAB_INSTEAD_SPC      (line:  55, col:  54):	[94mFound tab when expecting space[0m
+Error: LINE_TOO_LONG        (line:  55, col:  73):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  55, col:  73):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  55, col:  73):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line:  55, col:  93):	[94mline too long[0m
+Error: MIXED_SPACE_TAB      (line:  56, col:  19):	[93mMixed spaces and tabs[0m
+Error: TAB_INSTEAD_SPC      (line:  56, col:  20):	[94mFound tab when expecting space[0m
+Error: WRONG_SCOPE_COMMENT  (line:  56, col:  29):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  56, col:  29):	[95mComment is invalid in this scope[0m
+Error: MIXED_SPACE_TAB      (line:  57, col:  25):	[93mMixed spaces and tabs[0m
+Error: TAB_INSTEAD_SPC      (line:  57, col:  26):	[94mFound tab when expecting space[0m
+Error: WRONG_SCOPE_COMMENT  (line:  57, col:  29):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  57, col:  29):	[95mComment is invalid in this scope[0m
+Error: MIXED_SPACE_TAB      (line:  59, col:  14):	[93mMixed spaces and tabs[0m
+Error: TAB_INSTEAD_SPC      (line:  59, col:  15):	[94mFound tab when expecting space[0m
+Error: WRONG_SCOPE_COMMENT  (line:  59, col:  29):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  59, col:  29):	[95mComment is invalid in this scope[0m
+quote_handling.c: Error!
+Error: LINE_TOO_LONG        (line:  38, col:  83):	[94mline too long[0m
+Error: SPACE_BEFORE_FUNC    (line:  73, col:  11):	[94mFound space when expecting tab before function name[0m
+Error: WRONG_SCOPE_COMMENT  (line:  96, col:  29):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  96, col:  29):	[95mComment is invalid in this scope[0m
+Error: EMPTY_LINE_FUNCTION  (line:  97, col:   1):	Empty line in function
+utilities_two.c: Error!
+Error: SPACE_EMPTY_LINE     (line:  34, col:   1):	Space on empty line
+Error: TOO_FEW_TAB          (line:  55, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  55, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  57, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  57, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  58, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  58, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line:  59, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  59, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  60, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  60, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  61, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  61, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  62, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  62, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line:  63, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  63, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  64, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  64, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line:  65, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  65, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  66, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  66, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  67, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  67, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  68, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  68, col:   5):	Space on empty line
+cd.c: Error!
+Error: TOO_MANY_TABS_FUNC   (line:  15, col:   9):	[94mextra tabs before function name[0m
+Error: TOO_MANY_TABS_FUNC   (line:  31, col:   9):	[94mextra tabs before function name[0m
+Error: TOO_MANY_FUNCS       (line:  90, col:   1):	[92mToo many functions in file[0m
+Error: TOO_MANY_TABS_FUNC   (line:  90, col:   5):	[94mextra tabs before function name[0m
+Error: TAB_INSTEAD_SPC      (line:  94, col:  23):	[94mFound tab when expecting space[0m
+Error: LINE_TOO_LONG        (line:  94, col:  29):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  94, col:  29):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  94, col:  29):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line:  94, col: 114):	[94mline too long[0m
+Error: TAB_INSTEAD_SPC      (line:  96, col:  28):	[94mFound tab when expecting space[0m
+Error: WRONG_SCOPE_COMMENT  (line:  96, col:  33):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  96, col:  33):	[95mComment is invalid in this scope[0m
+Error: CONSECUTIVE_SPC      (line:  98, col:  75):	[94mTwo or more consecutives spaces[0m
+Error: LINE_TOO_LONG        (line:  98, col:  77):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  98, col:  77):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  98, col:  77):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line:  98, col: 101):	[94mline too long[0m
+redir.c: Error!
+Error: INVALID_HEADER       (line:   9, col:   1):	[97mMissing or invalid 42 header[0m
+Error: SPC_AFTER_OPERATOR   (line:   9, col:   1):	[94mmissing space after operator[0m
+Error: SPC_AFTER_OPERATOR   (line:   9, col:   3):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line:   9, col:   3):	[94mmissing space before operator[0m
+Error: SPC_AFTER_OPERATOR   (line:   9, col:   5):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line:   9, col:   5):	[94mmissing space before operator[0m
+Error: SPC_BFR_OPERATOR     (line:   9, col:   7):	[94mmissing space before operator[0m
+Error: SPC_AFTER_OPERATOR   (line:  11, col:   1):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line:  11, col:   1):	[94mmissing space before operator[0m
+Error: SPC_AFTER_OPERATOR   (line:  11, col:   3):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line:  11, col:   3):	[94mmissing space before operator[0m
+Error: SPC_AFTER_OPERATOR   (line:  11, col:   5):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line:  11, col:   5):	[94mmissing space before operator[0m
+Error: SPC_BFR_OPERATOR     (line:  11, col:   7):	[94mmissing space before operator[0m
+Error: SPC_AFTER_OPERATOR   (line:  13, col:   1):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line:  13, col:   1):	[94mmissing space before operator[0m
+Error: SPC_AFTER_OPERATOR   (line:  13, col:   3):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line:  13, col:   3):	[94mmissing space before operator[0m
+Error: SPC_AFTER_OPERATOR   (line:  13, col:   5):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line:  13, col:   5):	[94mmissing space before operator[0m
+Error: SPC_BFR_OPERATOR     (line:  13, col:   7):	[94mmissing space before operator[0m
+Error: SPC_AFTER_OPERATOR   (line:  18, col:  10):	[94mmissing space after operator[0m
+Error: SPC_BFR_OPERATOR     (line:  18, col:  18):	[94mmissing space before operator[0m
+Error: TAB_INSTEAD_SPC      (line:  21, col:  12):	[94mFound tab when expecting space[0m
+Error: SPC_AFTER_OPERATOR   (line:  21, col:  37):	[94mmissing space after operator[0m
+Error: TOO_MANY_TAB         (line:  25, col:   1):	Extra tabs for indent level
+Error: TOO_MANY_TAB         (line:  26, col:   1):	Extra tabs for indent level
+Error: NEWLINE_PRECEDES_FUNC (line:  27, col:   1):	Functions must be separated by a newline
+Error: MISALIGNED_VAR_DECL  (line:  33, col:  13):	Misaligned variable declaration
+Error: MISALIGNED_VAR_DECL  (line:  34, col:  13):	Misaligned variable declaration
+Error: MISALIGNED_VAR_DECL  (line:  35, col:  13):	Misaligned variable declaration
+Error: TOO_MANY_LINES       (line:  66, col:   1):	Function has more than 25 lines
+Error: TOO_MANY_ARGS        (line:  84, col:  58):	[91mFunction has more than 4 arguments[0m
+Error: MISALIGNED_VAR_DECL  (line:  87, col:   9):	Misaligned variable declaration
+Error: TERNARY_FBIDDEN      (line:  94, col:  20):	Ternaries are forbidden
+Error: TOO_MANY_LINES       (line: 135, col:   1):	Function has more than 25 lines
+Error: TOO_MANY_LINES       (line: 174, col:   1):	Function has more than 25 lines
+export_helpers.c: OK!
+commands.c: Error!
+Error: TOO_FEW_TAB          (line:  17, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  17, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  18, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  18, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  19, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  19, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  20, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  20, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  21, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  21, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  22, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  22, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  27, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  27, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  28, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  28, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  29, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  29, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  30, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  30, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  31, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  31, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  32, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  32, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  33, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  33, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  34, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  34, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  35, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  35, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  36, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  36, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  37, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  37, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  38, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  38, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  39, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  39, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  40, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  40, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  45, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  45, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  46, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  46, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  48, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  48, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  49, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  49, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  50, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  50, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  51, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  51, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  52, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  52, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  53, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  53, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line:  54, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  54, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  55, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  55, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  56, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  56, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line:  57, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  57, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  58, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  58, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line:  59, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  59, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  60, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  60, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  61, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  61, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line:  62, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  62, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  63, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  63, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  68, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  68, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  68, col:   8):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  69, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  69, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  69, col:   8):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  70, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  70, col:   5):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  70, col:  13):	Misaligned variable declaration
+Error: TOO_FEW_TAB          (line:  72, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  72, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  73, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  73, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  74, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  74, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  75, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  75, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line:  76, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  76, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  77, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  77, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  78, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  78, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line:  79, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  79, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  80, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  80, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  81, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  81, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line:  82, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  82, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  83, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  83, col:   9):	Space on empty line
+Error: TOO_FEW_TAB          (line:  84, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  84, col:  13):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  85, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  85, col:  13):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  86, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  86, col:  13):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  87, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  87, col:   9):	Space on empty line
+Error: TOO_FEW_TAB          (line:  88, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  88, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  89, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  89, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line:  90, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  90, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  91, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  91, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  92, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  92, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line:  93, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  93, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  94, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  94, col:   5):	Found space when expecting tab
+Error: TOO_MANY_LINES       (line:  95, col:   1):	Function has more than 25 lines
+setup_signal_handlers.c: Error!
+Error: MIXED_SPACE_TAB      (line:  32, col:  28):	[93mMixed spaces and tabs[0m
+Error: LINE_TOO_LONG        (line:  32, col:  65):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  32, col:  65):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  32, col:  65):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line:  32, col:  91):	[94mline too long[0m
+Error: EMPTY_LINE_FUNCTION  (line:  33, col:   1):	Empty line in function
+Error: MIXED_SPACE_TAB      (line:  34, col:  30):	[93mMixed spaces and tabs[0m
+Error: TAB_INSTEAD_SPC      (line:  34, col:  31):	[94mFound tab when expecting space[0m
+Error: LINE_TOO_LONG        (line:  34, col:  65):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  34, col:  65):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  34, col:  65):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line:  34, col:  99):	[94mline too long[0m
+Error: MIXED_SPACE_TAB      (line:  35, col:  21):	[93mMixed spaces and tabs[0m
+Error: TAB_INSTEAD_SPC      (line:  35, col:  22):	[94mFound tab when expecting space[0m
+Error: LINE_TOO_LONG        (line:  35, col:  65):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  35, col:  65):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  35, col:  65):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line:  35, col:  84):	[94mline too long[0m
+Error: MIXED_SPACE_TAB      (line:  36, col:  36):	[93mMixed spaces and tabs[0m
+Error: TAB_INSTEAD_SPC      (line:  36, col:  37):	[94mFound tab when expecting space[0m
+Error: LINE_TOO_LONG        (line:  36, col:  65):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  36, col:  65):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  36, col:  65):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line:  36, col:  99):	[94mline too long[0m
+Error: MIXED_SPACE_TAB      (line:  37, col:  34):	[93mMixed spaces and tabs[0m
+Error: TAB_INSTEAD_SPC      (line:  37, col:  35):	[94mFound tab when expecting space[0m
+Error: LINE_TOO_LONG        (line:  37, col:  65):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  37, col:  65):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  37, col:  65):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line:  37, col:  91):	[94mline too long[0m
+Error: MIXED_SPACE_TAB      (line:  38, col:  30):	[93mMixed spaces and tabs[0m
+Error: TAB_INSTEAD_SPC      (line:  38, col:  31):	[94mFound tab when expecting space[0m
+Error: LINE_TOO_LONG        (line:  38, col:  65):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  38, col:  65):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  38, col:  65):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line:  38, col:  91):	[94mline too long[0m
+env.c: OK!
+ft_lsttochpp.c: Error!
+Error: SPACE_EMPTY_LINE     (line:  20, col:   1):	Space on empty line
+parsing_helpers.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  22, col:  26):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  22, col:  26):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  24, col:  39):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  24, col:  39):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  25, col:  17):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  25, col:  17):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  26, col:  39):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  26, col:  39):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  27, col:  37):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  27, col:  37):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  28, col:  21):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  28, col:  21):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  30, col:  17):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  30, col:  17):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  40, col:  26):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  40, col:  26):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  42, col:  34):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  42, col:  34):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  44, col:  45):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  44, col:  45):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  45, col:  24):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  45, col:  24):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  46, col:  43):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  46, col:  43):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  47, col:  41):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  47, col:  41):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  48, col:  25):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  48, col:  25):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  50, col:  39):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  50, col:  39):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  51, col:  17):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  51, col:  17):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  52, col:  39):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  52, col:  39):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  53, col:  37):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  53, col:  37):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  54, col:  21):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  54, col:  21):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  56, col:  17):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  56, col:  17):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  67, col:  26):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  67, col:  26):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  69, col:  34):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  69, col:  34):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  71, col:  46):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  71, col:  46):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  72, col:  24):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  72, col:  24):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  73, col:  43):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  73, col:  43):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  74, col:  41):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  74, col:  41):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  75, col:  25):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  75, col:  25):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  77, col:  40):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  77, col:  40):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  78, col:  17):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  78, col:  17):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  79, col:  39):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  79, col:  39):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  80, col:  37):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  80, col:  37):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  81, col:  21):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  81, col:  21):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  83, col:  17):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  83, col:  17):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  96, col:  27):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  96, col:  27):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  97, col:  21):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  97, col:  21):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  98, col:  13):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  98, col:  13):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  99, col:  17):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  99, col:  17):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 100, col:  42):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 100, col:  42):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 101, col:  17):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 101, col:  17):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 102, col:  27):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 102, col:  27):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 105, col:  22):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 105, col:  22):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line: 107, col:  49):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line: 107, col:  49):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 107, col:  49):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line: 107, col:  82):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line: 108, col:  37):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 108, col:  37):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 109, col:  18):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 109, col:  18):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 110, col:  27):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 110, col:  27):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 112, col:  17):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 112, col:  17):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 125, col:  26):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 125, col:  26):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 126, col:  21):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 126, col:  21):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 127, col:  13):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 127, col:  13):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 128, col:  17):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 128, col:  17):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 129, col:  41):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 129, col:  41):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 130, col:  17):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 130, col:  17):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 131, col:  27):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 131, col:  27):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 134, col:  22):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 134, col:  22):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line: 136, col:  49):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line: 136, col:  49):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 136, col:  49):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line: 136, col:  82):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line: 137, col:  37):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 137, col:  37):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 138, col:  18):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 138, col:  18):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 139, col:  26):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 139, col:  26):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 141, col:  17):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 141, col:  17):	[95mComment is invalid in this scope[0m
+exit.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  24, col:  24):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  24, col:  24):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  27, col:  41):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  27, col:  41):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  29, col:  18):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  29, col:  18):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  31, col:  20):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  31, col:  20):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  33, col:  34):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  33, col:  34):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  37, col:  17):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  37, col:  17):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  46, col:  20):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  46, col:  20):	[95mComment is invalid in this scope[0m
+Error: VAR_DECL_START_FUNC  (line:  47, col:   1):	Variable declaration not at start of function
+Error: WRONG_SCOPE_COMMENT  (line:  47, col:  19):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  47, col:  19):	[95mComment is invalid in this scope[0m
+Error: EMPTY_LINE_FUNCTION  (line:  48, col:   1):	Empty line in function
+Error: WRONG_SCOPE_COMMENT  (line:  49, col:  16):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  49, col:  16):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  50, col:  19):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  50, col:  19):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  51, col:  17):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  51, col:  17):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  53, col:  18):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  53, col:  18):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  54, col:  26):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  54, col:  26):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  56, col:  21):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  56, col:  21):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  61, col:  26):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  61, col:  26):	[95mComment is invalid in this scope[0m
+Error: EMPTY_LINE_FUNCTION  (line:  62, col:   1):	Empty line in function
+Error: WRONG_SCOPE_COMMENT  (line:  63, col:  41):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  63, col:  41):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  64, col:  26):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  64, col:  26):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  67, col:  33):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  67, col:  33):	[95mComment is invalid in this scope[0m
+Error: NO_SPC_BFR_OPR       (line:  68, col:  16):	[94mextra space before operator[0m
+Error: WRONG_SCOPE_COMMENT  (line:  68, col:  18):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  68, col:  18):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  70, col:  27):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  70, col:  27):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  72, col:  47):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  72, col:  47):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  76, col:  37):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  76, col:  37):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  77, col:  25):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  77, col:  25):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  78, col:  39):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  78, col:  39):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line:  80, col:  60):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  80, col:  60):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  80, col:  60):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line:  80, col:  92):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  82, col:  17):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  82, col:  17):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  83, col:  31):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  83, col:  31):	[95mComment is invalid in this scope[0m
+commands_extra.c: Error!
+Error: TOO_MANY_ARGS        (line:  75, col:  64):	[91mFunction has more than 4 arguments[0m
+Error: WRONG_SCOPE_VAR      (line: 113, col:   1):	Variable declared in incorrect scope
+Error: SPACE_REPLACE_TAB    (line: 113, col:  14):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line: 113, col:  19):	Declaration and assignation on a single line
+Error: WRONG_SCOPE_VAR      (line: 114, col:   1):	Variable declared in incorrect scope
+Error: SPACE_REPLACE_TAB    (line: 114, col:  12):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line: 114, col:  13):	Misaligned variable declaration
+Error: LINE_TOO_LONG        (line: 141, col:  82):	[94mline too long[0m
+Error: TOO_MANY_LINES       (line: 146, col:   1):	Function has more than 25 lines
+main.c: Error!
+Notice: GLOBAL_VAR_DETECTED  (line:  15, col:   1):	Global variable present in file. Make sure it is a reasonable choice.
+Error: CONSECUTIVE_SPC      (line:  43, col:  22):	[94mTwo or more consecutives spaces[0m
+Error: WRONG_SCOPE_COMMENT  (line:  43, col:  24):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  43, col:  24):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_VAR      (line:  89, col:   1):	Variable declared in incorrect scope
+Error: SPACE_REPLACE_TAB    (line:  89, col:  20):	Found space when expecting tab
+Error: WRONG_SCOPE_VAR      (line:  90, col:   1):	Variable declared in incorrect scope
+Error: SPACE_REPLACE_TAB    (line:  90, col:  19):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  90, col:  20):	Misaligned variable declaration
+Error: DECL_ASSIGN_LINE     (line:  90, col:  24):	Declaration and assignation on a single line
+Error: WRONG_SCOPE_VAR      (line:  91, col:   1):	Variable declared in incorrect scope
+Error: SPACE_REPLACE_TAB    (line:  91, col:  17):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  91, col:  18):	Misaligned variable declaration
+Error: DECL_ASSIGN_LINE     (line:  91, col:  23):	Declaration and assignation on a single line
+Error: TOO_MANY_LINES       (line: 109, col:   1):	Function has more than 25 lines
+Error: VAR_DECL_START_FUNC  (line: 119, col:   1):	Variable declaration not at start of function
+Error: MIXED_SPACE_TAB      (line: 119, col:  19):	[93mMixed spaces and tabs[0m
+Error: LINE_TOO_LONG        (line: 119, col:  69):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line: 119, col:  69):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 119, col:  69):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line: 119, col:  93):	[94mline too long[0m
+Error: VAR_DECL_START_FUNC  (line: 120, col:   1):	Variable declaration not at start of function
+Error: LINE_TOO_LONG        (line: 120, col:  29):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line: 120, col:  29):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 120, col:  29):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line: 120, col:  91):	[94mline too long[0m
+Error: EMPTY_LINE_FUNCTION  (line: 121, col:   1):	Empty line in function
+Error: MIXED_SPACE_TAB      (line: 122, col:  27):	[93mMixed spaces and tabs[0m
+Error: TAB_INSTEAD_SPC      (line: 122, col:  28):	[94mFound tab when expecting space[0m
+Error: LINE_TOO_LONG        (line: 122, col:  61):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line: 122, col:  61):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 122, col:  61):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line: 122, col:  91):	[94mline too long[0m
+Error: MIXED_SPACE_TAB      (line: 123, col:  28):	[93mMixed spaces and tabs[0m
+Error: TAB_INSTEAD_SPC      (line: 123, col:  29):	[94mFound tab when expecting space[0m
+Error: LINE_TOO_LONG        (line: 123, col:  61):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line: 123, col:  61):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 123, col:  61):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line: 123, col: 106):	[94mline too long[0m
+Error: MIXED_SPACE_TAB      (line: 124, col:  29):	[93mMixed spaces and tabs[0m
+Error: TAB_INSTEAD_SPC      (line: 124, col:  30):	[94mFound tab when expecting space[0m
+Error: LINE_TOO_LONG        (line: 124, col:  57):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line: 124, col:  57):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 124, col:  57):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line: 124, col: 104):	[94mline too long[0m
+Error: TAB_INSTEAD_SPC      (line: 125, col:  40):	[94mFound tab when expecting space[0m
+Error: LINE_TOO_LONG        (line: 125, col:  53):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line: 125, col:  53):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 125, col:  53):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line: 125, col:  89):	[94mline too long[0m
+Error: MIXED_SPACE_TAB      (line: 126, col:  36):	[93mMixed spaces and tabs[0m
+Error: TAB_INSTEAD_SPC      (line: 126, col:  37):	[94mFound tab when expecting space[0m
+Error: LINE_TOO_LONG        (line: 126, col:  61):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line: 126, col:  61):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 126, col:  61):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line: 126, col:  89):	[94mline too long[0m
+Error: MIXED_SPACE_TAB      (line: 127, col:  32):	[93mMixed spaces and tabs[0m
+Error: TAB_INSTEAD_SPC      (line: 127, col:  33):	[94mFound tab when expecting space[0m
+Error: LINE_TOO_LONG        (line: 127, col:  57):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line: 127, col:  57):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line: 127, col:  57):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line: 127, col:  94):	[94mline too long[0m
+pipes.c: Error!
+Error: TOO_MANY_FUNCS       (line: 110, col:   1):	[92mToo many functions in file[0m
+Error: TOO_MANY_VARS_FUNC   (line: 117, col:   1):	[91mToo many variables declarations in a function[0m
+Error: TOO_MANY_VARS_FUNC   (line: 118, col:   1):	[91mToo many variables declarations in a function[0m
+Error: TOO_MANY_VARS_FUNC   (line: 119, col:   1):	[91mToo many variables declarations in a function[0m
+Error: TOO_MANY_VARS_FUNC   (line: 120, col:   1):	[91mToo many variables declarations in a function[0m
+Error: TOO_MANY_VARS_FUNC   (line: 121, col:   1):	[91mToo many variables declarations in a function[0m
+Error: TERNARY_FBIDDEN      (line: 154, col:  41):	Ternaries are forbidden
+Error: SPC_BEFORE_NL        (line: 154, col:  61):	Space before newline
+Error: TERNARY_FBIDDEN      (line: 155, col:  36):	Ternaries are forbidden
+Error: TOO_MANY_LINES       (line: 184, col:   1):	Function has more than 25 lines
+unset.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  18, col:  25):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  18, col:  25):	[95mComment is invalid in this scope[0m
+Error: VAR_DECL_START_FUNC  (line:  19, col:   1):	Variable declaration not at start of function
+Error: TAB_INSTEAD_SPC      (line:  21, col:  26):	[94mFound tab when expecting space[0m
+Error: WRONG_SCOPE_COMMENT  (line:  21, col:  29):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  21, col:  29):	[95mComment is invalid in this scope[0m
+Error: TAB_INSTEAD_SPC      (line:  24, col:  30):	[94mFound tab when expecting space[0m
+Error: LINE_TOO_LONG        (line:  24, col:  33):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  24, col:  33):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  24, col:  33):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line:  24, col:  82):	[94mline too long[0m
+Error: SPC_AFTER_PAR        (line:  25, col:  48):	[94mMissing space after parenthesis (brace/bracket)[0m
+Error: LINE_TOO_LONG        (line:  25, col:  49):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  25, col:  49):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  25, col:  49):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line:  25, col:  92):	[94mline too long[0m
+Error: SPC_AFTER_PAR        (line:  27, col:  30):	[94mMissing space after parenthesis (brace/bracket)[0m
+Error: LINE_TOO_LONG        (line:  27, col:  31):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  27, col:  31):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  27, col:  31):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line:  27, col: 102):	[94mline too long[0m
+Error: LINE_TOO_LONG        (line:  28, col:  53):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  28, col:  53):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  28, col:  53):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line:  28, col:  91):	[94mline too long[0m
+Error: SPACE_AFTER_KW       (line:  29, col:  13):	Missing space after keyword
+Error: TAB_INSTEAD_SPC      (line:  29, col:  17):	[94mFound tab when expecting space[0m
+Error: LINE_TOO_LONG        (line:  29, col:  21):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  29, col:  21):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  29, col:  21):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line:  29, col:  96):	[94mline too long[0m
+Error: SPC_AFTER_PAR        (line:  31, col:  30):	[94mMissing space after parenthesis (brace/bracket)[0m
+Error: LINE_TOO_LONG        (line:  31, col:  31):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  31, col:  31):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  31, col:  31):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line:  31, col: 102):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  37, col:  24):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  37, col:  24):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  44, col:  18):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  44, col:  18):	[95mComment is invalid in this scope[0m
+Error: EMPTY_LINE_FUNCTION  (line:  45, col:   1):	Empty line in function
+Error: TAB_INSTEAD_SPC      (line:  46, col:  21):	[94mFound tab when expecting space[0m
+Error: WRONG_SCOPE_COMMENT  (line:  46, col:  29):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  46, col:  29):	[95mComment is invalid in this scope[0m
+Error: TAB_INSTEAD_SPC      (line:  48, col:  20):	[94mFound tab when expecting space[0m
+Error: WRONG_SCOPE_COMMENT  (line:  48, col:  29):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  48, col:  29):	[95mComment is invalid in this scope[0m
+Error: TAB_INSTEAD_SPC      (line:  49, col:  24):	[94mFound tab when expecting space[0m
+Error: WRONG_SCOPE_COMMENT  (line:  49, col:  29):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  49, col:  29):	[95mComment is invalid in this scope[0m
+Error: TAB_INSTEAD_SPC      (line:  52, col:  44):	[94mFound tab when expecting space[0m
+Error: WRONG_SCOPE_COMMENT  (line:  52, col:  49):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  52, col:  49):	[95mComment is invalid in this scope[0m
+Error: TAB_INSTEAD_SPC      (line:  54, col:  71):	[94mFound tab when expecting space[0m
+Error: WRONG_SCOPE_COMMENT  (line:  54, col:  77):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line:  54, col: 100):	[94mline too long[0m
+Error: SPACE_AFTER_KW       (line:  58, col:   9):	Missing space after keyword
+Error: TAB_INSTEAD_SPC      (line:  58, col:  13):	[94mFound tab when expecting space[0m
+Error: LINE_TOO_LONG        (line:  58, col:  37):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  58, col:  37):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  58, col:  37):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line:  58, col:  93):	[94mline too long[0m
+Error: TAB_INSTEAD_SPC      (line:  62, col:  25):	[94mFound tab when expecting space[0m
+Error: WRONG_SCOPE_COMMENT  (line:  62, col:  33):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  62, col:  33):	[95mComment is invalid in this scope[0m
+Error: TAB_INSTEAD_SPC      (line:  64, col:  38):	[94mFound tab when expecting space[0m
+Error: WRONG_SCOPE_COMMENT  (line:  64, col:  41):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  64, col:  41):	[95mComment is invalid in this scope[0m
+Error: BRACE_SHOULD_EOL     (line:  66, col:   1):	Expected newline after brace
+export.c: Error!
+Error: SPACE_EMPTY_LINE     (line:  34, col:   1):	Space on empty line
+Error: SPACE_AFTER_KW       (line:  91, col:   9):	Missing space after keyword
+Error: SPACE_AFTER_KW       (line:  95, col:   9):	Missing space after keyword
+parsing.c: Error!
+Error: LINE_TOO_LONG        (line:  17, col:  61):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  17, col:  61):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  17, col:  61):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line:  17, col:  94):	[94mline too long[0m
+Error: LINE_TOO_LONG        (line:  20, col:  55):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  20, col:  55):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  20, col:  55):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line:  20, col:  91):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  21, col:  21):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  21, col:  21):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  23, col:  17):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  23, col:  17):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  28, col:  18):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  28, col:  18):	[95mComment is invalid in this scope[0m
+Error: EMPTY_LINE_FUNCTION  (line:  29, col:   1):	Empty line in function
+Error: WRONG_SCOPE_COMMENT  (line:  30, col:  18):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  30, col:  18):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  31, col:  49):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  31, col:  49):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  33, col:  17):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  33, col:  17):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  34, col:  22):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  34, col:  22):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  36, col:  23):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  36, col:  23):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  41, col:  29):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  41, col:  29):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  43, col:  36):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  43, col:  36):	[95mComment is invalid in this scope[0m
+Error: NO_SPC_BFR_OPR       (line:  44, col:  22):	[94mextra space before operator[0m
+Error: WRONG_SCOPE_COMMENT  (line:  44, col:  24):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  44, col:  24):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  45, col:  50):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  45, col:  50):	[95mComment is invalid in this scope[0m
+Error: NO_SPC_BFR_OPR       (line:  46, col:  22):	[94mextra space before operator[0m
+Error: WRONG_SCOPE_COMMENT  (line:  46, col:  24):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  46, col:  24):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  47, col:  50):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  47, col:  50):	[95mComment is invalid in this scope[0m
+Error: NO_SPC_BFR_OPR       (line:  48, col:  22):	[94mextra space before operator[0m
+Error: WRONG_SCOPE_COMMENT  (line:  48, col:  24):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  48, col:  24):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  49, col:  51):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  49, col:  51):	[95mComment is invalid in this scope[0m
+Error: NO_SPC_BFR_OPR       (line:  50, col:  22):	[94mextra space before operator[0m
+Error: WRONG_SCOPE_COMMENT  (line:  50, col:  24):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  50, col:  24):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line:  51, col:  46):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  51, col:  46):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  51, col:  46):	[95mComment is invalid in this scope[0m
+Error: LINE_TOO_LONG        (line:  51, col:  84):	[94mline too long[0m
+Error: WRONG_SCOPE_COMMENT  (line:  53, col:  35):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  53, col:  35):	[95mComment is invalid in this scope[0m
+cleaning.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  17, col:   5):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  22, col:  17):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  22, col:  17):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  24, col:  23):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  24, col:  23):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  25, col:  31):	[95mComment is invalid in this scope[0m
+Error: WRONG_SCOPE_COMMENT  (line:  25, col:  31):	[95mComment is invalid in this scope[0m
+pwd.c: Error!
+Error: BRACE_SHOULD_EOL     (line:  20, col:   1):	Expected newline after brace
+ft_isascii.c: OK!
+ft_strlcat.c: OK!
+ft_putendl_fd.c: OK!
+ft_tolower.c: OK!
+ft_toupper.c: OK!
+ft_substr.c: OK!
+ft_putstr_fd.c: OK!
+ft_lstadd_front.c: OK!
+ft_striteri.c: OK!
+ft_bzero.c: OK!
+ft_isprint.c: OK!
+ft_strlcpy.c: OK!
+ft_isdigit.c: OK!
+ft_calloc.c: OK!
+ft_lstnew.c: OK!
+libft.h: OK!
+ft_lstmap.c: OK!
+ft_split.c: OK!
+ft_memchr.c: OK!
+ft_isalpha.c: OK!
+ft_strlen.c: OK!
+ft_lstdelone.c: OK!
+ft_strdup.c: OK!
+ft_memcmp.c: OK!
+ft_strnstr.c: OK!
+ft_isalnum.c: OK!
+ft_lstiter.c: OK!
+ft_memmove.c: OK!
+ft_memset.c: OK!
+ft_putchar_fd.c: OK!
+ft_memcpy.c: OK!
+ft_strtrim.c: OK!
+ft_lstclear.c: OK!
+ft_strmapi.c: OK!
+ft_lstadd_back.c: OK!
+ft_lstlast.c: OK!
+ft_strjoin.c: OK!
+ft_strncmp.c: OK!
+ft_strrchr.c: OK!
+ft_strchr.c: OK!
+ft_putnbr_fd.c: OK!
+ft_itoa.c: OK!
+ft_strcmp.c: OK!
+ft_atoi.c: OK!
+ft_lstsize.c: OK!
