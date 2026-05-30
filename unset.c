@@ -6,13 +6,12 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 16:50:42 by joaobarb          #+#    #+#             */
-/*   Updated: 2026/05/30 17:31:53 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/05/30 17:43:37 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// Remove an environment variable from the shell's env list
 static void	remove_env_var(t_shell *shell, char *name)
 {
 	t_env	*current;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 10:00:45 by joaobarb          #+#    #+#             */
-/*   Updated: 2026/05/12 11:26:18 by jpaulo-b         ###   ########.fr       */
+/*   Updated: 2026/05/30 17:42:53 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ static int	is_valid_n_flag(char *s)
 
 void	ft_echo(t_token *tokens, t_shell *shell)
 {
-	(void)shell;
 	int		flag;
 	int		first;
 	t_token	*cur;
 
+	(void)shell;
 	flag = 1;
 	first = 1;
 	cur = tokens->next;

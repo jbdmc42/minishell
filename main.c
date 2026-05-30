@@ -77,6 +77,9 @@ static void	execute_line(char *line, t_shell *shell, int interactive)
 static void	main_loop(t_shell *shell, int interactive)
 {
 	char	*line;
+	ssize_t	nread;
+	size_t	len;
+	char	*buf;
 
 	while (1)
 	{
@@ -90,10 +93,8 @@ static void	main_loop(t_shell *shell, int interactive)
 		}
 		else
 		{
-			ssize_t nread;
-			size_t len = 0;
-			char *buf = NULL;
-
+			len = 0;
+			buf = NULL;
 			nread = getline(&buf, &len, stdin);
 			if (nread == -1)
 			{
@@ -118,11 +119,11 @@ static void	main_loop(t_shell *shell, int interactive)
 */
 int	main(int argc, char **argv, char **envp)
 {
-	(void)argc;
-	(void)argv;
 	t_shell	shell;
 	int		interactive;
 
+	(void)argc;
+	(void)argv;
 	shell.exit_status = 0;
 	init_env(&shell, envp);
 	setup_signal_handlers();
