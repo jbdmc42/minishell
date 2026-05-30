@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 16:50:42 by joaobarb          #+#    #+#             */
-/*   Updated: 2026/05/14 17:24:25 by jpaulo-b         ###   ########.fr       */
+/*   Updated: 2026/05/30 17:31:53 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,20 @@
 // Remove an environment variable from the shell's env list
 static void	remove_env_var(t_shell *shell, char *name)
 {
-	t_env	*current;	// Pointers to traverse the env list
+	t_env	*current;
 	t_env	*next;
 
-	current = shell->env;	// Start from the head of the env list
+	current = shell->env;
 	while (current)
 	{
-		next = current->next;	// Store next pointer before freeing current node
-		if (ft_strcmp(current->name, name) == 0)// If current env var matches name to unset
+		next = current->next;
+		if (ft_strcmp(current->name, name) == 0)
 		{
-			if (current->prev)// If current node is not the head, update previous node's next pointer
-				current->prev->next = current->next;// Update previous node's next pointer
-			else	// If current node is the head, update shell's env pointer to the next node
+			if (current->prev)
+				current->prev->next = current->next;
+			else
 				shell->env = current->next;
-			if (current->next)// If current node is not the tail, update next node's previous pointer
+			if (current->next)
 				current->next->prev = current->prev;
 			free(current->name);
 			free(current->val);

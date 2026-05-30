@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 16:49:55 by joaobarb          #+#    #+#             */
-/*   Updated: 2026/05/28 09:28:58 by jpaulo-b         ###   ########.fr       */
+/*   Updated: 2026/05/30 17:31:53 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	parse_argument(t_token *tokens, t_shell *shell)
 	arg = tokens->value;
 	nameval = split_export_arg(tokens->value);
 	if (!nameval)
-		return;
+		return ;
 	if (!nameval[0])
 	{
 		free(nameval);
