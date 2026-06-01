@@ -6,11 +6,12 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 17:49:50 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/30 17:58:07 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/01 14:34:12 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <errno.h>
 
 int	handle_pipe_fork_error(t_pipe_ctx *ctx)
 {
@@ -31,10 +32,14 @@ int	wait_pipe_children(t_pipe_ctx *ctx)
 	while (ctx->child_count > 0)
 	{
 		ctx->pid = waitpid(-1, &ctx->status, 0);
+		if (ctx->pid == -1 && errno == EINTR)
+			continue ;
 		if (ctx->pid == ctx->last_pid)
 		{
 			if (WIFEXITED(ctx->status))
 				ctx->shell->exit_status = WEXITSTATUS(ctx->status);
+			else if (WIFSIGNALED(ctx->status))
+				ctx->shell->exit_status = 128 + WTERMSIG(ctx->status);
 			else
 				ctx->shell->exit_status = 1;
 		}

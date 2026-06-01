@@ -6,16 +6,12 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 12:00:00 by copilot           #+#    #+#             */
-/*   Updated: 2026/05/30 19:02:01 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/01 15:10:42 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-** Counts the number of commands separated by pipes in the token list.
-** Each command is a sequence of tokens ending at a PIPE token or end of list.
-*/
 int	count_commands(t_token *tokens)
 {
 	int	count;
@@ -30,38 +26,47 @@ int	count_commands(t_token *tokens)
 	return (count);
 }
 
-/*
-** Extracts a single command from the token list.
-** Returns a command token list ending before the next PIPE.
-** Does NOT modify the original token list.
-** Sets *next_token to point to the next command after the PIPE.
-*/
+static t_token	*dup_token_node(t_token *src)
+{
+	t_token	*node;
+
+	node = malloc(sizeof(t_token));
+	if (!node)
+		return (NULL);
+	node->value = ft_strdup(src->value);
+	node->type = src->type;
+	node->next = NULL;
+	return (node);
+}
+
 t_token	*extract_command(t_token *tokens, t_token **next_token)
 {
-	t_token	*cmd_start;
 	t_token	*current;
-	t_token	*prev;
+	t_token	*new_head;
+	t_token	*new_tail;
+	t_token	*node;
 
-	cmd_start = tokens;
+	new_head = NULL;
+	new_tail = NULL;
 	*next_token = NULL;
-	prev = NULL;
 	current = tokens;
 	while (current && current->type != PIPE)
 	{
-		prev = current;
+		node = dup_token_node(current);
+		if (!node)
+			return (free_tokens(new_head), NULL);
+		if (!new_head)
+			new_head = node;
+		else
+			new_tail->next = node;
+		new_tail = node;
 		current = current->next;
 	}
 	if (current && current->type == PIPE)
 		*next_token = current->next;
-	if (prev)
-		prev->next = NULL;
-	return (cmd_start);
+	return (new_head);
 }
 
-/*
-** Creates a pipe pair (write_fd, read_fd).
-** Returns 0 on success, -1 on failure.
-*/
 int	create_pipe(int *pipe_fd)
 {
 	if (pipe(pipe_fd) == -1)
@@ -72,9 +77,6 @@ int	create_pipe(int *pipe_fd)
 	return (0);
 }
 
-/*
-** Closes a file descriptor if it is >= 0.
-*/
 void	close_fd(int *fd)
 {
 	if (*fd >= 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands_extra_two.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 18:45:00 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/30 19:31:26 by jpaulo-b         ###   ########.fr       */
+/*   Updated: 2026/06/01 14:42:27 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,53 @@ int	exec_direct_path(char *command, t_exec_ctx *ctx)
 	pid = fork();
 	if (pid == 0)
 	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 		execve(command, ctx->argv, ctx->envp);
 		fprintf(stderr, "%s: %s\n", command, strerror(errno));
 		exit(126);
 	}
 	if (pid < 0)
 		return (-1);
-	waitpid(pid, &status, 0);
+	status = 0;
+	while (waitpid(pid, &status, 0) == -1 && errno == EINTR)
+		;
 	if (WIFEXITED(status))
 		ctx->shell->exit_status = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+		ctx->shell->exit_status = 128 + WTERMSIG(status);
 	else
 		ctx->shell->exit_status = 1;
+	return (0);
+}
+
+void	finalize_processing(t_token *tokens, t_shell *shell,
+	int saved_stdin, int saved_stdout)
+{
+	free_tokens(tokens);
+	restore_redirections(saved_stdin, saved_stdout);
+	shell->saved_stdin = -1;
+	shell->saved_stdout = -1;
+	shell->redirs_saved = 0;
+}
+
+int	setup_and_store(t_token **tokens, t_shell *shell,
+	int *saved_stdin, int *saved_stdout)
+{
+	*saved_stdin = -1;
+	*saved_stdout = -1;
+	if (setup_redirections(tokens, saved_stdin, saved_stdout, shell) == -1)
+	{
+		if (*saved_stdin >= 0)
+			close(*saved_stdin);
+		if (*saved_stdout >= 0)
+			close(*saved_stdout);
+		free_tokens(*tokens);
+		shell->saved_stdin = -1;
+		shell->saved_stdout = -1;
+		shell->redirs_saved = 0;
+		return (-1);
+	}
+	store_saved_redirections(shell, *saved_stdin, *saved_stdout);
 	return (0);
 }

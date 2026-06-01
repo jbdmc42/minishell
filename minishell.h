@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:34 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/06/01 11:19:13 by jpaulo-b         ###   ########.fr       */
+/*   Updated: 2026/06/01 15:13:43 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,15 +153,21 @@ void	ft_export(t_token *tokens, t_shell *shell);
 int		ft_unset(t_token *tokens, t_shell *shell);
 void	get_commands(t_token *tokens, t_shell *shell);
 char	**build_argv(t_token *tokens);
+int		count_tokens_for_argv(t_token *tokens);
 char	**build_envp(t_shell *shell);
 void	free_envp_array(char **envp);
 void	cleanup_redirections(t_shell *shell);
-void	store_saved_redirections(t_shell *shell, int saved_stdin, int saved_stdout);
-int		setup_redirections(t_token **tokens, int *saved_stdin,\
-				int *saved_stdout, t_shell *shell);
+void	store_saved_redirections(t_shell *shell, int saved_stdin,
+			int saved_stdout);
+int		setup_redirections(t_token **tokens, int *saved_stdin,
+			int *saved_stdout, t_shell *shell);
 void	restore_redirections(int saved_stdin, int saved_stdout);
-int		search_and_execute(char *command, char **argv,\
-				char **envp, t_shell *shell);
+int		search_and_execute(char *command, char **argv,
+			char **envp, t_shell *shell);
+
+// helpers moved from commands.c
+int		is_builtin_command(char *cmd);
+void	execute_builtin(t_token *tokens, t_shell *shell);
 
 // pipes_helpers.c:
 int		execute_pipe_chain(t_token *tokens, t_shell *shell);
@@ -172,6 +178,13 @@ void	setup_pipe_child(t_pipe_ctx *ctx);
 int		run_pipe_stage(t_pipe_ctx *ctx);
 int		handle_pipe_fork_error(t_pipe_ctx *ctx);
 int		wait_pipe_children(t_pipe_ctx *ctx);
+
+// pipes_helpers_three.c (moved helpers)
+void	free_inherited_resources(t_pipe_ctx *ctx);
+void	child_dup_fds(t_pipe_ctx *ctx);
+void	child_finish(t_pipe_ctx *ctx);
+int		create_pipe_if_needed(t_pipe_ctx *ctx);
+void	post_parent_housekeeping(t_pipe_ctx *ctx);
 
 // pipes.c:
 int		count_commands(t_token *tokens);
@@ -227,17 +240,18 @@ int		append_word_part(char **token, char *part);
 // redir helpers
 int		create_heredoc_fd(char *delimiter);
 int		perform_dup2_and_close(int fd, int target_fd, t_shell *shell);
-void	unlink_token_node(t_token **tokens, t_token *node, t_token *next);
-
-// redir_helpers_two.c:
+int		apply_redir_by_type(t_token **tokens, t_token *redir,
+			t_token *target, t_shell *shell);
+int		handle_one_redirection(t_token **tokens, t_token *redir,
+			t_shell *shell);
+int		process_token_redirections(t_token **tokens, t_shell *shell,
+			int saved_stdin, int saved_stdout);
 int		heredoc_loop(int write_fd, char *delimiter);
-
-// redir_helpers_three.c:
 int		check_target_valid(t_token *target, t_shell *shell);
-int		apply_redirection_stdin(t_token **tokens, t_token *redir,\
-				t_token *target, t_shell *shell);
-int		apply_redirection_stdout(t_token **tokens, t_token *redir,\
-				t_token *target, t_shell *shell);
+int		apply_redirection_stdin(t_token **tokens, t_token *redir,
+			t_token *target, t_shell *shell);
+int		apply_redirection_stdout(t_token **tokens, t_token *redir,
+			t_token *target, t_shell *shell);
 
 // commands_extra helpers
 int		exec_found_command(char *full_path, char *command, t_exec_ctx *ctx);

@@ -3,15 +3,67 @@
 /*                                                        :::      ::::::::   */
 /*   commands_extra.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 14:34:55 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/30 19:34:03 by jpaulo-b         ###   ########.fr       */
+/*   Updated: 2026/06/01 15:10:13 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <errno.h>
+
+static int	wait_and_set_status(pid_t pid, t_shell *shell)
+{
+	int	status;
+
+	status = 0;
+	while (waitpid(pid, &status, 0) == -1 && errno == EINTR)
+		;
+	if (WIFEXITED(status))
+		shell->exit_status = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+		shell->exit_status = 128 + WTERMSIG(status);
+	else
+		shell->exit_status = 1;
+	return (0);
+}
+
+int	exec_found_command(char *full_path, char *command, t_exec_ctx *ctx)
+{
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
+		execve(full_path, ctx->argv, ctx->envp);
+		fprintf(stderr, "%s: %s\n", command, strerror(errno));
+		exit(126);
+	}
+	if (pid < 0)
+		return (-1);
+	return (wait_and_set_status(pid, ctx->shell));
+}
+
+char	**build_envp(t_shell *shell)
+{
+	char	**envp;
+	int		size;
+
+	size = env_lstsize(shell->env);
+	envp = malloc(sizeof(char *) * (size + 1));
+	if (!envp)
+		return (NULL);
+	envp = ft_lsttochpp_no_quotes(envp, shell->env);
+	if (!envp)
+	{
+		free_envp_array(envp);
+		return (NULL);
+	}
+	return (envp);
+}
 
 void	free_envp_array(char **envp)
 {
@@ -23,80 +75,6 @@ void	free_envp_array(char **envp)
 	while (envp[i])
 		free(envp[i++]);
 	free(envp);
-}
-
-char	**build_argv(t_token *tokens)
-{
-	char	**argv;
-	t_token	*temp;
-	int		count;
-
-	temp = tokens;
-	count = 0;
-	while (temp)
-	{
-		count++;
-		temp = temp->next;
-	}
-	argv = malloc(sizeof(char *) * (count + 1));
-	if (!argv)
-		return (NULL);
-	temp = tokens;
-	count = 0;
-	while (temp)
-	{
-		argv[count++] = temp->value;
-		temp = temp->next;
-	}
-	argv[count] = NULL;
-	return (argv);
-}
-
-char	**build_envp(t_shell *shell)
-{
-	char	**envp;
-	char	**tmp;
-	int		size;
-
-	size = env_lstsize(shell->env);
-	envp = malloc(sizeof(char *) * (size + 1));
-	if (!envp)
-		return (NULL);
-	tmp = ft_lsttochpp_no_quotes(envp, shell->env);
-	if (!tmp)
-	{
-		free_envp_array(envp);
-		return (NULL);
-	}
-	return (tmp);
-}
-
-int	exec_found_command(char *full_path, char *command, t_exec_ctx *ctx)
-{
-	pid_t	pid;
-	int		status;
-	char	**argv;
-	char	**envp;
-
-	argv = ctx->argv;
-	envp = ctx->envp;
-	pid = fork();
-	if (pid == 0)
-	{
-		execve(full_path, argv, envp);
-		fprintf(stderr, "%s: %s\n", command, strerror(errno));
-		exit(126);
-	}
-	if (pid < 0)
-	{
-		return (-1);
-	}
-	waitpid(pid, &status, 0);
-	if (WIFEXITED(status))
-		ctx->shell->exit_status = WEXITSTATUS(status);
-	else
-		ctx->shell->exit_status = 1;
-	return (0);
 }
 
 int	search_and_execute(char *command, char **argv, char **envp, t_shell *shell)

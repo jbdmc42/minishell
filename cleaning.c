@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleaning.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 10:44:36 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/06/01 12:11:08 by jpaulo-b         ###   ########.fr       */
+/*   Updated: 2026/06/01 14:25:14 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 void	clean_exit(t_shell *shell)
 {
-	cleanup_redirections(shell);//
+	if (!shell)
+		exit(0);
+	cleanup_redirections(shell);
+	free_shell_env(shell);
 	if (isatty(STDIN_FILENO))
 		printf(EXIT);
 	exit(shell->exit_status);

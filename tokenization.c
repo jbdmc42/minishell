@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 18:55:49 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/30 16:06:17 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/01 13:36:41 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ void	add_token(char *value, t_tokentype type, t_token **tokens)
 	if (!new_token)
 		return ;
 	new_token->value = ft_strdup(value);
+	if (!new_token->value)
+	{
+		free(new_token);
+		return ;
+	}
 	new_token->type = type;
 	new_token->next = NULL;
 	if (*tokens == NULL)

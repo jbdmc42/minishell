@@ -6,11 +6,17 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 17:49:50 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/30 17:58:30 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/01 15:14:06 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	free_inherited_resources(t_pipe_ctx *ctx);
+void	child_dup_fds(t_pipe_ctx *ctx);
+void	child_finish(t_pipe_ctx *ctx);
+int		create_pipe_if_needed(t_pipe_ctx *ctx);
+void	post_parent_housekeeping(t_pipe_ctx *ctx);
 
 void	init_pipe_ctx(t_pipe_ctx *ctx, t_token *tokens, t_shell *shell)
 {
@@ -31,47 +37,35 @@ void	init_pipe_ctx(t_pipe_ctx *ctx, t_token *tokens, t_shell *shell)
 
 void	setup_pipe_child(t_pipe_ctx *ctx)
 {
-	if (ctx->i < ctx->num_cmds - 1)
-		close_fd(&ctx->pipe_fd[0]);
-	if (ctx->prev_read_fd >= 0)
+	child_dup_fds(ctx);
+	child_finish(ctx);
+}
+
+static int	fork_and_handle(t_pipe_ctx *ctx)
+{
+	ctx->pid = fork();
+	if (ctx->pid == -1)
 	{
-		dup2(ctx->prev_read_fd, STDIN_FILENO);
-		close_fd(&ctx->prev_read_fd);
+		if (ctx->cmd)
+		{
+			free_tokens(ctx->cmd);
+			ctx->cmd = NULL;
+		}
+		return (handle_pipe_fork_error(ctx));
 	}
-	if (ctx->i < ctx->num_cmds - 1)
-	{
-		dup2(ctx->pipe_fd[1], STDOUT_FILENO);
-		close_fd(&ctx->pipe_fd[1]);
-	}
-	get_commands(ctx->cmd, ctx->shell);
-	exit(ctx->shell->exit_status);
+	if (ctx->pid == 0)
+		setup_pipe_child(ctx);
+	return (0);
 }
 
 int	run_pipe_stage(t_pipe_ctx *ctx)
 {
 	ctx->cmd = extract_command(ctx->tokens, &ctx->next_token);
-	if (ctx->i < ctx->num_cmds - 1)
-	{
-		if (create_pipe(ctx->pipe_fd) == -1)
-		{
-			close_fd(&ctx->prev_read_fd);
-			return (1);
-		}
-	}
-	ctx->pid = fork();
-	if (ctx->pid == -1)
-		return (handle_pipe_fork_error(ctx));
-	if (ctx->pid == 0)
-		setup_pipe_child(ctx);
-	if (ctx->i == ctx->num_cmds - 1)
-		ctx->last_pid = ctx->pid;
-	if (ctx->prev_read_fd >= 0)
-		close_fd(&ctx->prev_read_fd);
-	if (ctx->i < ctx->num_cmds - 1)
-	{
-		close_fd(&ctx->pipe_fd[1]);
-		ctx->prev_read_fd = ctx->pipe_fd[0];
-	}
+	if (create_pipe_if_needed(ctx) == 1)
+		return (1);
+	if (fork_and_handle(ctx) == 1)
+		return (1);
+	post_parent_housekeeping(ctx);
 	return (0);
 }
 

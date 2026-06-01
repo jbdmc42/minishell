@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_helpers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 18:10:00 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/06/01 10:57:51 by jpaulo-b         ###   ########.fr       */
+/*   Updated: 2026/06/01 14:40:31 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@ int	process_input_line(char **line, t_shell *shell)
 	if (!*line)
 	{
 		if (g_signal_received)
-		{
-			shell->exit_status = 130;
-			return (0);
-		}
+			return (shell->exit_status = 130, 0);
 		clean_exit(shell);
 	}
 	if (g_signal_received)
@@ -51,14 +48,9 @@ void	execute_line(char *line, t_shell *shell, int interactive)
 	if (interactive && validated_line)
 		add_history(line);
 	if (!validated_line)
-	{
-		free(line);
 		return ;
-	}
 	tokens = NULL;
 	parse_input(validated_line, 0, &tokens, shell);
-	free(validated_line);
-	free_tokens(tokens);
 }
 
 int	run_interactive_cycle(t_shell *shell)
@@ -69,6 +61,11 @@ int	run_interactive_cycle(t_shell *shell)
 	if (!process_input_line(&line, shell))
 		return (0);
 	execute_line(line, shell, 1);
+	if (line)
+	{
+		free(line);
+		line = NULL;
+	}
 	return (1);
 }
 
@@ -93,5 +90,10 @@ int	run_noninteractive_cycle(t_shell *shell)
 	if (!process_input_line(&line, shell))
 		return (0);
 	execute_line(line, shell, 0);
+	if (line)
+	{
+		free(line);
+		line = NULL;
+	}
 	return (1);
 }

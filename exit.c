@@ -3,20 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 09:15:11 by joaobarb          #+#    #+#             */
-/*   Updated: 2026/06/01 12:09:42 by jpaulo-b         ###   ########.fr       */
+/*   Updated: 2026/06/01 14:46:05 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/* 
-**  exit helper function: in short, an atoi function that returns a boolean 
-** instead of a converted number. 
-**  Checks if the token received if numeric or not.
-*/
 static int	is_numeric(char *str)
 {
 	int	i;
@@ -37,10 +32,6 @@ static int	is_numeric(char *str)
 	return (1);
 }
 
-/*
-**  exit helper function: counts the number of tokens to check if there are 
-** more than 2.
-*/
 static int	count_tokens(t_token *tokens)
 {
 	int		count;
@@ -54,6 +45,14 @@ static int	count_tokens(t_token *tokens)
 		cur = cur->next;
 	}
 	return (count);
+}
+
+static void	cleanup(t_token *tokens, t_shell *shell)
+{
+	free_tokens(tokens);
+	cleanup_redirections(shell);
+	free_shell_env(shell);
+	clean_exit(shell);
 }
 
 void	ft_exit(t_token *tokens, t_shell *shell)
@@ -74,15 +73,10 @@ void	ft_exit(t_token *tokens, t_shell *shell)
 			printf("bash: line 1: exit: %s: numeric argument required\n",
 				tokens->next->value);
 			shell->exit_status = 2;
-			free_tokens(tokens);
-			cleanup_redirections(shell);//
-			free_shell_env(shell);
-			clean_exit(shell);
+			cleanup(tokens, shell);
+			return ;
 		}
 		shell->exit_status = ft_atoi(tokens->next->value);
 	}
-	free_tokens(tokens);
-	cleanup_redirections(shell);//
-	free_shell_env(shell);
-	clean_exit(shell);
+	cleanup(tokens, shell);
 }

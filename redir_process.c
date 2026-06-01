@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redir.c                                            :+:      :+:    :+:   */
+/*   redir_process.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/26 12:00:00 by copilot           #+#    #+#             */
-/*   Updated: 2026/06/01 15:02:58 by jbdmc            ###   ########.fr       */
+/*   Created: 2026/06/01 15:40:00 by jbdmc             #+#    #+#             */
+/*   Updated: 2026/06/01 15:11:18 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <errno.h>
+#include <unistd.h>
 
-static int	apply_redir_by_type(t_token **tokens, t_token *redir,
-		t_token *target, t_shell *shell)
+int	apply_redir_by_type(t_token **tokens, t_token *redir,
+			t_token *target, t_shell *shell)
 {
 	if (redir->type == LESS || redir->type == DLESS)
 		return (apply_redirection_stdin(tokens, redir, target, shell));
@@ -22,8 +22,8 @@ static int	apply_redir_by_type(t_token **tokens, t_token *redir,
 		return (apply_redirection_stdout(tokens, redir, target, shell));
 }
 
-static int	handle_one_redirection(t_token **tokens, t_token *redir,
-		t_shell *shell)
+int	handle_one_redirection(t_token **tokens, t_token *redir,
+			t_shell *shell)
 {
 	t_token	*target;
 
@@ -35,8 +35,8 @@ static int	handle_one_redirection(t_token **tokens, t_token *redir,
 	return (apply_redir_by_type(tokens, redir, target, shell));
 }
 
-static int	process_token_redirections(t_token **tokens, t_shell *shell,
-		int saved_stdin, int saved_stdout)
+int	process_token_redirections(t_token **tokens, t_shell *shell,
+			int saved_stdin, int saved_stdout)
 {
 	t_token	*current;
 	t_token	*next;
@@ -59,20 +59,4 @@ static int	process_token_redirections(t_token **tokens, t_shell *shell,
 		current = next;
 	}
 	return (0);
-}
-
-int	setup_redirections(t_token **tokens, int *saved_stdin,
-			int *saved_stdout, t_shell *shell)
-{
-	if (!tokens || !*tokens)
-		return (0);
-	*saved_stdin = dup(STDIN_FILENO);
-	*saved_stdout = dup(STDOUT_FILENO);
-	if (*saved_stdin < 0 || *saved_stdout < 0)
-	{
-		perror("dup");
-		return (-1);
-	}
-	return (process_token_redirections(tokens, shell, *saved_stdin,
-			*saved_stdout));
 }

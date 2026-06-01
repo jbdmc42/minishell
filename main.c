@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:24 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/06/01 12:13:32 by jpaulo-b         ###   ########.fr       */
+/*   Updated: 2026/06/01 14:37:49 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,6 @@ void	main_loop(t_shell *shell, int interactive)
 	}
 }
 
-/*
-**  main program function: starts the user input request loop and prepares the
-** signal handlers for CTRL-D, CTRL-C and CTRL-\.
-*/
 int	main(int argc, char **argv, char **envp)
 {
 	t_shell	shell;
@@ -48,9 +44,9 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	shell.exit_status = 0;
-	shell.saved_stdin = -1;//
-	shell.saved_stdout = -1;//
-	shell.redirs_saved = 0;//
+	shell.saved_stdin = -1;
+	shell.saved_stdout = -1;
+	shell.redirs_saved = 0;
 	init_env(&shell, envp);
 	setup_signal_handlers();
 	interactive = isatty(STDIN_FILENO);
