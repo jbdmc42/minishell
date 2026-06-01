@@ -6,60 +6,16 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 12:00:00 by copilot           #+#    #+#             */
-/*   Updated: 2026/06/01 15:02:58 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/01 15:30:32 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <errno.h>
 
-static int	apply_redir_by_type(t_token **tokens, t_token *redir,
-		t_token *target, t_shell *shell)
-{
-	if (redir->type == LESS || redir->type == DLESS)
-		return (apply_redirection_stdin(tokens, redir, target, shell));
-	else
-		return (apply_redirection_stdout(tokens, redir, target, shell));
-}
-
-static int	handle_one_redirection(t_token **tokens, t_token *redir,
-		t_shell *shell)
-{
-	t_token	*target;
-
-	target = redir->next;
-	if (check_target_valid(target, shell) == -1)
-		return (-1);
-	if (redir->type == DLESS)
-		target->value = (char *)(long)create_heredoc_fd(target->value);
-	return (apply_redir_by_type(tokens, redir, target, shell));
-}
-
-static int	process_token_redirections(t_token **tokens, t_shell *shell,
-		int saved_stdin, int saved_stdout)
-{
-	t_token	*current;
-	t_token	*next;
-
-	current = *tokens;
-	while (current)
-	{
-		next = current->next;
-		if (current->type == LESS || current->type == DLESS
-			|| current->type == GREAT || current->type == DGREAT)
-		{
-			if (handle_one_redirection(tokens, current, shell) == -1)
-			{
-				restore_redirections(saved_stdin, saved_stdout);
-				return (-1);
-			}
-			current = next;
-			continue ;
-		}
-		current = next;
-	}
-	return (0);
-}
+/* The redirection processing helpers were moved to redir_process.c to
+   satisfy Norminette and avoid large files. Their prototypes are in
+   minishell.h, so they are referenced here but not redefined. */
 
 int	setup_redirections(t_token **tokens, int *saved_stdin,
 			int *saved_stdout, t_shell *shell)
@@ -76,3 +32,6 @@ int	setup_redirections(t_token **tokens, int *saved_stdin,
 	return (process_token_redirections(tokens, shell, *saved_stdin,
 			*saved_stdout));
 }
+
+/* Note: restore_redirections, store_saved_redirections and cleanup_redirections
+   were moved to redir_utils.c. */

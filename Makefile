@@ -17,6 +17,7 @@ INCLUDES	= -I. -I$(LIBFT_DIR)
 SRCS		= main.c \
 			cd.c \
 			cleaning.c \
+			commands_builtin.c \
 			commands_extra_two.c \
 			commands_extra.c \
 			commands.c \
@@ -33,6 +34,7 @@ SRCS		= main.c \
 			parsing_helpers_two.c \
 			parsing_helpers.c \
 			parsing.c \
+			pipes_helpers_three.c \
 			pipes_helpers_two.c \
 			pipes_helpers.c \
 			pipes.c \
@@ -41,6 +43,8 @@ SRCS		= main.c \
 			redir_helpers_three.c \
 			redir_helpers_two.c \
 			redir_helpers.c \
+			redir_process.c \
+			redir_utils.c \
 			redir.c \
 			setup_signal_handlers.c \
 			tokenization.c \

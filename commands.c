@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 14:18:09 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/06/01 14:52:02 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/01 15:21:29 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ static void	handle_external_command(t_token *tokens, t_shell *shell)
 	free_envp_array(envp);
 }
 
-static int	check_and_execute_pipes(t_token *tokens, t_shell *shell,
-	int saved_stdin, int saved_stdout)
+static int	check_and_execute_pipes(t_token *tokens, t_shell *shell)
 {
 	t_token	*current;
 
@@ -97,7 +96,7 @@ void	get_commands(t_token *tokens, t_shell *shell)
 		finalize_processing(tokens, shell, saved_stdin, saved_stdout);
 		return ;
 	}
-	if (check_and_execute_pipes(tokens, shell, saved_stdin, saved_stdout))
+	if (check_and_execute_pipes(tokens, shell))
 	{
 		finalize_processing(tokens, shell, saved_stdin, saved_stdout);
 		return ;

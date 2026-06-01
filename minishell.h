@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:34 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/06/01 15:13:43 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/01 15:24:40 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,6 +252,7 @@ int		apply_redirection_stdin(t_token **tokens, t_token *redir,
 			t_token *target, t_shell *shell);
 int		apply_redirection_stdout(t_token **tokens, t_token *redir,
 			t_token *target, t_shell *shell);
+void	unlink_token_node(t_token **tokens, t_token *node, t_token *next);
 
 // commands_extra helpers
 int		exec_found_command(char *full_path, char *command, t_exec_ctx *ctx);
