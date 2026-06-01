@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 18:10:00 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/06/01 14:40:31 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/01 15:51:38 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	run_noninteractive_cycle(t_shell *shell)
 
 	len = 0;
 	buf = NULL;
-	nread = getline(&buf, &len, stdin);
+	nread = ft_getline_fd(&buf, &len, STDIN_FILENO);
 	if (nread == -1)
 	{
 		free(buf);

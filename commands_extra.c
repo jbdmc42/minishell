@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 14:34:55 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/06/01 15:10:13 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/01 16:12:28 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,42 +39,12 @@ int	exec_found_command(char *full_path, char *command, t_exec_ctx *ctx)
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
 		execve(full_path, ctx->argv, ctx->envp);
-		fprintf(stderr, "%s: %s\n", command, strerror(errno));
+		print_exec_error(command);
 		exit(126);
 	}
 	if (pid < 0)
 		return (-1);
 	return (wait_and_set_status(pid, ctx->shell));
-}
-
-char	**build_envp(t_shell *shell)
-{
-	char	**envp;
-	int		size;
-
-	size = env_lstsize(shell->env);
-	envp = malloc(sizeof(char *) * (size + 1));
-	if (!envp)
-		return (NULL);
-	envp = ft_lsttochpp_no_quotes(envp, shell->env);
-	if (!envp)
-	{
-		free_envp_array(envp);
-		return (NULL);
-	}
-	return (envp);
-}
-
-void	free_envp_array(char **envp)
-{
-	int	i;
-
-	if (!envp)
-		return ;
-	i = 0;
-	while (envp[i])
-		free(envp[i++]);
-	free(envp);
 }
 
 int	search_and_execute(char *command, char **argv, char **envp, t_shell *shell)

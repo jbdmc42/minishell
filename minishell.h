@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:34 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/06/01 15:24:40 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/01 16:12:11 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,6 +212,9 @@ void	process_export_var(char **nameval, t_shell *shell);
 // env.c:
 void	ft_env(t_token *tokens, t_shell *shell);
 
+// ft_getline.c:
+ssize_t	ft_getline_fd(char **lineptr, size_t *n, int fd);
+
 // ft_lsttochpp.c:
 char	**ft_lsttochpp(char **chpp, t_env *env);
 char	**ft_lsttochpp_no_quotes(char **chpp, t_env *env);
@@ -258,6 +261,9 @@ void	unlink_token_node(t_token **tokens, t_token *node, t_token *next);
 int		exec_found_command(char *full_path, char *command, t_exec_ctx *ctx);
 int		exec_direct_path(char *command, t_exec_ctx *ctx);
 int		try_exec_in_path(char *path_copy, char *command, t_exec_ctx *ctx);
+
+// exec_error.c
+void	print_exec_error(char *command);
 
 // parsing.c:
 void	parse_input(char *line, size_t i, t_token **tokens, t_shell *shell);

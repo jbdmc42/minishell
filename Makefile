@@ -20,12 +20,18 @@ SRCS		= main.c \
 			commands_builtin.c \
 			commands_extra_two.c \
 			commands_extra.c \
+			commands_path_exec.c \
+			commands_exec_direct.c \
 			commands.c \
 			echo.c \
 			env.c \
+			env_helpers.c \
+			exec_error.c \
 			exit.c \
 			export_helpers.c \
 			export.c \
+			ft_getline_fd.c \
+			ft_getline.c \
 			ft_lsttochpp.c \
 			input_handling.c \
 			main_helpers.c \

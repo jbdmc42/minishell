@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 19:00:00 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/30 19:01:33 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/01 16:18:11 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,12 @@ static char	*get_heredoc_input(void)
 		line = readline("> ");
 	else
 	{
-		nread = getline(&line, &len, stdin);
+		nread = ft_getline_fd(&line, &len, STDIN_FILENO);
 		if (nread == -1)
+		{
+			free(line);
 			return (NULL);
+		}
 		if (nread > 0 && line[nread - 1] == '\n')
 			line[nread - 1] = '\0';
 	}

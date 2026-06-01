@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 18:30:00 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/30 18:29:04 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/01 15:46:33 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static char	*expand_question(t_shell *shell)
 {
-	char	buf[32];
+	char	*buf;
 
-	snprintf(buf, sizeof(buf), "%d", shell->exit_status);
-	return (ft_strdup(buf));
+	buf = ft_itoa(shell->exit_status);
+	return (buf);
 }
 
 static char	*get_env_name_and_value(char *part, size_t *idx,

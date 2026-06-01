@@ -26,7 +26,11 @@ static int	has_value_in_env_string(char *var_str)
 
 static int	env_has_arguments(t_token *tokens, t_shell *shell)
 {
+	/* If there is no following token, no arguments were provided. */
 	if (tokens->next == NULL)
+		return (0);
+	/* If next token is not a WORD (e.g. PIPE or redirection), it's not an argument. */
+	if (tokens->next->type != WORD)
 		return (0);
 	printf("minishell: env: syntax error near unexpected token `%s'\n",
 		tokens->next->value);
