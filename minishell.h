@@ -6,7 +6,7 @@
 /*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:34 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/30 19:31:26 by jpaulo-b         ###   ########.fr       */
+/*   Updated: 2026/06/01 11:19:13 by jpaulo-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,9 @@ typedef struct s_shell
 {
 	int		exit_status;
 	t_env	*env;	
+	int		saved_stdin;
+	int		saved_stdout;
+	int		redirs_saved;
 }	t_shell;
 
 // More Structs
@@ -152,6 +155,8 @@ void	get_commands(t_token *tokens, t_shell *shell);
 char	**build_argv(t_token *tokens);
 char	**build_envp(t_shell *shell);
 void	free_envp_array(char **envp);
+void	cleanup_redirections(t_shell *shell);
+void	store_saved_redirections(t_shell *shell, int saved_stdin, int saved_stdout);
 int		setup_redirections(t_token **tokens, int *saved_stdin,\
 				int *saved_stdout, t_shell *shell);
 void	restore_redirections(int saved_stdin, int saved_stdout);
@@ -258,6 +263,7 @@ void	free_tokens(t_token *tokens);
 // utilities_three.c:
 int		env_lstsize(t_env *env);
 t_env	*get_env_node(t_env *env_list, char *key);
+void	free_shell_env(t_shell *shell);
 
 // utilities_two.c:
 void	ft_swap(char **a, char **b);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:24 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/30 18:03:19 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/01 12:13:32 by jpaulo-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,13 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	shell.exit_status = 0;
+	shell.saved_stdin = -1;//
+	shell.saved_stdout = -1;//
+	shell.redirs_saved = 0;//
 	init_env(&shell, envp);
 	setup_signal_handlers();
 	interactive = isatty(STDIN_FILENO);
 	main_loop(&shell, interactive);
+	free_shell_env(&shell);
 	return (shell.exit_status);
 }

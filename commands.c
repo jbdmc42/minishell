@@ -70,9 +70,21 @@ void	get_commands(t_token *tokens, t_shell *shell)
 	t_token	*current;
 
 	if (setup_redirections(&tokens, &saved_stdin, &saved_stdout, shell) == -1)
+	{
+		shell->saved_stdin = -1;
+		shell->saved_stdout = -1;
+		shell->redirs_saved = 0;
 		return ;
+	}
+	store_saved_redirections(shell, saved_stdin, saved_stdout);
 	if (!tokens || !tokens->value)
-		return (restore_redirections(saved_stdin, saved_stdout));
+	{
+		restore_redirections(saved_stdin, saved_stdout);
+		shell->saved_stdin = -1;
+		shell->saved_stdout = -1;
+		shell->redirs_saved = 0;
+		return ;
+	}
 	current = tokens;
 	while (current)
 	{
@@ -80,6 +92,9 @@ void	get_commands(t_token *tokens, t_shell *shell)
 		{
 			execute_pipe_chain(tokens, shell);
 			restore_redirections(saved_stdin, saved_stdout);
+			shell->saved_stdin = -1;
+			shell->saved_stdout = -1;
+			shell->redirs_saved = 0;
 			return ;
 		}
 		current = current->next;
@@ -89,4 +104,7 @@ void	get_commands(t_token *tokens, t_shell *shell)
 	else
 		handle_external_command(tokens, shell);
 	restore_redirections(saved_stdin, saved_stdout);
+	shell->saved_stdin = -1;
+	shell->saved_stdout = -1;
+	shell->redirs_saved = 0;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilities_three.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 18:08:07 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/30 18:11:36 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/01 11:17:40 by jpaulo-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,18 @@ int	env_lstsize(t_env *env)
 		env = env->next;
 	}
 	return (i);
+}
+
+void	free_shell_env(t_shell *shell)
+{
+	t_env	*tmp;
+
+	while (shell && shell->env)
+	{
+		tmp = shell->env->next;
+		free(shell->env->name);
+		free(shell->env->val);
+		free(shell->env);
+		shell->env = tmp;
+	}
 }

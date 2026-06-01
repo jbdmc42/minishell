@@ -6,7 +6,7 @@
 /*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 18:10:00 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/30 19:26:08 by jpaulo-b         ###   ########.fr       */
+/*   Updated: 2026/06/01 10:57:51 by jpaulo-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,14 @@ int	process_input_line(char **line, t_shell *shell)
 	size_t	start;
 
 	if (!*line)
+	{
+		if (g_signal_received)
+		{
+			shell->exit_status = 130;
+			return (0);
+		}
 		clean_exit(shell);
+	}
 	if (g_signal_received)
 	{
 		shell->exit_status = 130;

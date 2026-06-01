@@ -90,3 +90,22 @@ void	restore_redirections(int saved_stdin, int saved_stdout)
 		close(saved_stdout);
 	}
 }
+
+void	store_saved_redirections(t_shell *shell, int saved_stdin, int saved_stdout)
+{
+	if (!shell)
+		return ;
+	shell->saved_stdin = saved_stdin;
+	shell->saved_stdout = saved_stdout;
+	shell->redirs_saved = 1;
+}
+
+void	cleanup_redirections(t_shell *shell)
+{
+	if (!shell || !shell->redirs_saved)
+		return ;
+	restore_redirections(shell->saved_stdin, shell->saved_stdout);
+	shell->saved_stdin = -1;
+	shell->saved_stdout = -1;
+	shell->redirs_saved = 0;
+}

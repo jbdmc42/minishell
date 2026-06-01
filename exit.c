@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 09:15:11 by joaobarb          #+#    #+#             */
-/*   Updated: 2026/05/30 18:54:48 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/01 12:09:42 by jpaulo-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,15 @@ void	ft_exit(t_token *tokens, t_shell *shell)
 			printf("bash: line 1: exit: %s: numeric argument required\n",
 				tokens->next->value);
 			shell->exit_status = 2;
-			exit(shell->exit_status);
+			free_tokens(tokens);
+			cleanup_redirections(shell);//
+			free_shell_env(shell);
+			clean_exit(shell);
 		}
 		shell->exit_status = ft_atoi(tokens->next->value);
 	}
-	exit(shell->exit_status);
+	free_tokens(tokens);
+	cleanup_redirections(shell);//
+	free_shell_env(shell);
+	clean_exit(shell);
 }
