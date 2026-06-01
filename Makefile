@@ -4,8 +4,8 @@
 
 NAME		= minishell
 
-CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror -g
+CC			= cc
+CFLAGS		= -Wall -Wextra -Werror
 #CFLAGS		+= -g3 -fsanitize=address -fno-omit-frame-pointer
 LDFLAGS		= -lreadline -lncurses
 
