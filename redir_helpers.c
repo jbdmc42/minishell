@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 18:40:00 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/06/01 15:24:28 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/01 16:44:54 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,28 @@ int	heredoc_loop(int write_fd, char *delimiter);
 int	create_heredoc_fd(char *delimiter)
 {
 	int	fd[2];
+	pid_t	pid;
+	int	status;
 
 	if (pipe(fd) == -1)
 		return (-1);
-	heredoc_loop(fd[1], delimiter);
+	pid = fork();
+	if (pid == -1)
+	{
+		close(fd[0]);
+		close(fd[1]);
+		return (-1);
+	}
+	if (pid == 0)
+	{
+		close(fd[0]);
+		heredoc_loop(fd[1], delimiter);
+		close(fd[1]);
+		exit(0);
+	}
 	close(fd[1]);
+	waitpid(pid, &status, 0);
+	(void)status;
 	return (fd[0]);
 }
 

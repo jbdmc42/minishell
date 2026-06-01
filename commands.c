@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 14:18:09 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/06/01 15:21:29 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/01 17:13:41 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	handle_external_command(t_token *tokens, t_shell *shell)
 {
 	char	**argv;
 	char	**envp;
-
+	
 	argv = build_argv(tokens);
 	if (!argv)
 		return ;
@@ -28,7 +28,7 @@ static void	handle_external_command(t_token *tokens, t_shell *shell)
 	}
 	if (search_and_execute(tokens->value, argv, envp, shell) == -1)
 	{
-		printf("%s: command not found\n", tokens->value);
+		printf("bash: line 1: %s: command not found\n", tokens->value);
 		shell->exit_status = 127;
 	}
 	free(argv);
@@ -52,7 +52,6 @@ static int	check_and_execute_pipes(t_token *tokens, t_shell *shell)
 	return (0);
 }
 
-/* Centralize cleanup after command processing to avoid repetition */
 static void	finalize_processing(t_token *tokens, t_shell *shell,
 	int saved_stdin, int saved_stdout)
 {

@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 16:00:00 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/06/01 15:13:43 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/01 16:52:13 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,9 @@ void	free_inherited_resources(t_pipe_ctx *ctx)
 		free_tokens(ctx->tokens);
 		ctx->tokens = NULL;
 	}
-	if (ctx->shell && ctx->shell->env)
-	{
-		free_shell_env(ctx->shell);
-		ctx->shell->env = NULL;
-	}
+	/* Do not free ctx->shell->env here — child processes need access to the
+	   environment to execute builtins like `env`. The shell's env is shared and
+	   should be cleaned up by the parent process when appropriate. */
 }
 
 void	child_dup_fds(t_pipe_ctx *ctx)

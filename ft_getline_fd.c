@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 16:07:30 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/06/01 16:11:11 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/01 17:06:02 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,24 +45,16 @@ static int	ensure_capacity(char **lineptr, size_t *n, ssize_t total,
 	return (0);
 }
 
-static ssize_t	read_into_buffer(int fd, char *buf, size_t bufsize)
-{
-	ssize_t	r;
-
-	r = read(fd, buf, bufsize);
-	return (r);
-}
-
 static ssize_t	process_read_loop(int fd, char **lineptr, size_t *n)
 {
 	ssize_t	total;
 	ssize_t	r;
-	char	buf[128];
+	char	buf[1];
 
 	total = 0;
 	while (1)
 	{
-		r = read_into_buffer(fd, buf, sizeof(buf));
+		r = read(fd, buf, 1);
 		if (r <= 0)
 			break ;
 		if (ensure_capacity(lineptr, n, total, r) == -1)
