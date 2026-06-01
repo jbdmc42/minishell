@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 19:00:00 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/06/01 16:57:38 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/01 17:21:50 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static char	*read_line_from_fd(void)
 {
 	char	buf[1];
 	char	*line;
+	char	*new;
 	size_t	len;
 	ssize_t	r;
 
@@ -28,13 +29,9 @@ static char	*read_line_from_fd(void)
 		r = read(STDIN_FILENO, buf, 1);
 		if (r <= 0)
 			break ;
-		/* allocate new buffer of len+2 (char + null) */
-		char *new = malloc(len + 2);
+		new = malloc(len + 2);
 		if (!new)
-		{
-			free(line);
-			return (NULL);
-		}
+			return (free(line), NULL);
 		if (line)
 		{
 			ft_memcpy(new, line, len);

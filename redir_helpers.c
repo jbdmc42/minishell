@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 18:40:00 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/06/01 16:44:54 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/01 17:20:40 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	heredoc_loop(int write_fd, char *delimiter);
 
 int	create_heredoc_fd(char *delimiter)
 {
-	int	fd[2];
+	int		fd[2];
 	pid_t	pid;
-	int	status;
+	int		status;
 
 	if (pipe(fd) == -1)
 		return (-1);

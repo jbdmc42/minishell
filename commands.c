@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 14:18:09 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/06/01 17:13:41 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/01 17:19:50 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	handle_external_command(t_token *tokens, t_shell *shell)
 {
 	char	**argv;
 	char	**envp;
-	
+
 	argv = build_argv(tokens);
 	if (!argv)
 		return ;

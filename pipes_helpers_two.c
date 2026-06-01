@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 17:49:50 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/06/01 16:47:02 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/01 17:19:32 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,11 @@ int	handle_pipe_fork_error(t_pipe_ctx *ctx)
 
 int	wait_pipe_children(t_pipe_ctx *ctx)
 {
+	int	last_status;
+
+	last_status = 0;
 	ctx->child_count = ctx->num_cmds;
 	ctx->shell->exit_status = 0;
-	int	last_status = 0;
 	while (ctx->child_count > 0)
 	{
 		ctx->pid = waitpid(-1, &ctx->status, 0);
