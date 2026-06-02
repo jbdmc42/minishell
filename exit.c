@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 09:15:11 by joaobarb          #+#    #+#             */
-/*   Updated: 2026/06/01 14:46:05 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/02 10:46:21 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	ft_exit(t_token *tokens, t_shell *shell)
 	token_count = count_tokens(tokens);
 	if (token_count > 2)
 	{
-		printf("bash: line 1: exit: too many arguments\n");
+		printf("%s: exit: too many arguments\n", NAME);
 		shell->exit_status = 1;
 		return ;
 	}
@@ -70,8 +70,8 @@ void	ft_exit(t_token *tokens, t_shell *shell)
 	{
 		if (!is_numeric(tokens->next->value))
 		{
-			printf("bash: line 1: exit: %s: numeric argument required\n",
-				tokens->next->value);
+			printf("%s: exit: %s: numeric argument required\n",
+				NAME, tokens->next->value);
 			shell->exit_status = 2;
 			cleanup(tokens, shell);
 			return ;

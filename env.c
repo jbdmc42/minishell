@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 16:40:54 by joaobarb          #+#    #+#             */
-/*   Updated: 2026/06/01 16:39:52 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/02 10:49:48 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static int	env_has_arguments(t_token *tokens, t_shell *shell)
 		return (0);
 	if (tokens->next->type != WORD)
 		return (0);
-	printf("minishell: env: syntax error near unexpected token `%s'\n",
-		tokens->next->value);
+	printf("%s: env: syntax error near unexpected token `%s'\n",
+		NAME, tokens->next->value);
 	shell->exit_status = 1;
 	return (1);
 }

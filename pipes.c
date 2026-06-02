@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 12:00:00 by copilot           #+#    #+#             */
-/*   Updated: 2026/06/01 15:10:42 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/02 12:36:15 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@ static t_token	*dup_token_node(t_token *src)
 	node->value = ft_strdup(src->value);
 	node->type = src->type;
 	node->next = NULL;
+	if (src->heredoc_fd >= 0)
+		node->heredoc_fd = dup(src->heredoc_fd);
+	else
+		node->heredoc_fd = -1;
+	if (src->heredoc_fd >= 0 && node->heredoc_fd < 0)
+		return (free(node->value), free(node), NULL);
 	return (node);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 19:00:00 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/06/01 17:21:50 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/02 10:53:45 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <errno.h>
 #include <unistd.h>
 
-static char	*read_line_from_fd(void)
+static char	*read_line_from_fd(int fd)
 {
 	char	buf[1];
 	char	*line;
@@ -26,7 +26,7 @@ static char	*read_line_from_fd(void)
 	len = 0;
 	while (1)
 	{
-		r = read(STDIN_FILENO, buf, 1);
+		r = read(fd, buf, 1);
 		if (r <= 0)
 			break ;
 		new = malloc(len + 2);
@@ -54,34 +54,61 @@ static char	*read_line_from_fd(void)
 static char	*get_heredoc_input(void)
 {
 	char	*line;
+	int		tty_fd;
 
 	line = NULL;
 	if (isatty(STDIN_FILENO))
 		line = readline("> ");
 	else
 	{
-		line = read_line_from_fd();
+		tty_fd = open("/dev/tty", O_RDONLY);
+		if (tty_fd >= 0)
+		{
+			line = read_line_from_fd(tty_fd);
+			close(tty_fd);
+		}
+		else
+			line = read_line_from_fd(STDIN_FILENO);
 		if (!line)
 			return (NULL);
 	}
 	return (line);
 }
 
-int	heredoc_loop(int write_fd, char *delimiter)
+int	heredoc_loop(int write_fd, char *delimiter, int should_expand, t_shell *shell)
 {
 	char	*line;
+	int		line_count;
+	char	*expanded;
 
+	line_count = 0;
 	while (1)
 	{
 		line = get_heredoc_input();
 		if (!line)
+		{
+			if (line_count == 0)
+				line_count = 1;
+			printf("%s: warning: here-document at line %d delimited by end-of-file (wanted `%s')\n",
+				NAME, line_count, delimiter);
 			break ;
+		}
+		line_count++;
 		if (ft_strcmp(line, delimiter) == 0)
 		{
 			free(line);
 			break ;
 		}
-		write(write_fd, line, ft_strlen(line));
+		if (should_expand)
+		{
+			expanded = expand_variable_in_part(line, shell);
+			write(write_fd, expanded, ft_strlen(expanded));
+			free(expanded);
+		}
+		else
+		{
+			write(write_fd, line, ft_strlen(line));
+		}
 		write(write_fd, "\n", 1);
 		free(line);
 	}

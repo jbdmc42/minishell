@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 17:49:50 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/06/01 17:19:32 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/02 13:14:08 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	wait_pipe_children(t_pipe_ctx *ctx)
 			else
 				ctx->shell->exit_status = 1;
 		}
+		if (WIFSIGNALED(ctx->status) && WTERMSIG(ctx->status) == SIGINT)
+			write(STDOUT_FILENO, "\n", 1);
 		if (WIFEXITED(ctx->status))
 			last_status = WEXITSTATUS(ctx->status);
 		else if (WIFSIGNALED(ctx->status))

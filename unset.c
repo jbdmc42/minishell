@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 16:50:42 by joaobarb          #+#    #+#             */
-/*   Updated: 2026/05/30 17:49:03 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/02 10:54:15 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ int	ft_unset(t_token *tokens, t_shell *shell)
 	{
 		if (!is_valid_var_name(cur->value))
 		{
-			printf("minishell: unset: `%s': not a valid identifier\n",
-				cur->value);
+			printf("%s: unset: `%s': not a valid identifier\n",
+				NAME, cur->value);
 			exit_status = 1;
 		}
 		else

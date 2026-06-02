@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 14:55:00 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/06/01 15:10:48 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/02 11:36:33 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	execute_builtin(t_token *tokens, t_shell *shell)
 	else if (!ft_strcmp(tokens->value, "env"))
 		ft_env(tokens, shell);
 	else if (!ft_strcmp(tokens->value, "pwd"))
-		ft_pwd();
+		ft_pwd(shell);
 	else if (!ft_strcmp(tokens->value, "cd"))
 		ft_cd(tokens, shell);
 	else if (!ft_strcmp(tokens->value, "unset"))

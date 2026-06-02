@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 14:18:09 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/06/01 17:19:50 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/02 12:40:17 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,28 +28,11 @@ static void	handle_external_command(t_token *tokens, t_shell *shell)
 	}
 	if (search_and_execute(tokens->value, argv, envp, shell) == -1)
 	{
-		printf("bash: line 1: %s: command not found\n", tokens->value);
+		printf("%s: command not found\n", tokens->value);
 		shell->exit_status = 127;
 	}
 	free(argv);
 	free_envp_array(envp);
-}
-
-static int	check_and_execute_pipes(t_token *tokens, t_shell *shell)
-{
-	t_token	*current;
-
-	current = tokens;
-	while (current)
-	{
-		if (current->type == PIPE)
-		{
-			execute_pipe_chain(tokens, shell);
-			return (1);
-		}
-		current = current->next;
-	}
-	return (0);
 }
 
 static void	finalize_processing(t_token *tokens, t_shell *shell,
@@ -87,15 +70,22 @@ void	get_commands(t_token *tokens, t_shell *shell)
 {
 	int	saved_stdin;
 	int	saved_stdout;
+	t_token	*current;
 
+	current = tokens;
+	while (current)
+	{
+		if (current->type == PIPE)
+		{
+			execute_pipe_chain(tokens, shell);
+			free_tokens(tokens);
+			return ;
+		}
+		current = current->next;
+	}
 	if (setup_and_store(&tokens, shell, &saved_stdin, &saved_stdout) == -1)
 		return ;
 	if (!tokens || !tokens->value)
-	{
-		finalize_processing(tokens, shell, saved_stdin, saved_stdout);
-		return ;
-	}
-	if (check_and_execute_pipes(tokens, shell))
 	{
 		finalize_processing(tokens, shell, saved_stdin, saved_stdout);
 		return ;

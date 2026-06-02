@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:24 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/06/01 14:37:49 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/02 11:36:33 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ int	main(int argc, char **argv, char **envp)
 	shell.saved_stdout = -1;
 	shell.redirs_saved = 0;
 	init_env(&shell, envp);
-	setup_signal_handlers();
 	interactive = isatty(STDIN_FILENO);
+	setup_signal_handlers(interactive);
 	main_loop(&shell, interactive);
 	free_shell_env(&shell);
 	return (shell.exit_status);

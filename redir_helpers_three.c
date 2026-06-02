@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 19:05:00 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/06/01 16:26:44 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/02 10:53:30 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	check_target_valid(t_token *target, t_shell *shell)
 			error_msg = target->value;
 		else
 			error_msg = "newline";
-		printf("minishell: syntax error near unexpected token `%s'\n",
-			error_msg);
+		printf("%s: syntax error near unexpected token `%s'\n",
+			NAME, error_msg);
 		shell->exit_status = 2;
 		return (-1);
 	}
@@ -51,14 +51,14 @@ int	apply_redirection_stdin(t_token **tokens, t_token *redir,
 
 	if (!target || !target->value)
 	{
-		printf("minishell: syntax error near unexpected token `newline'\n");
+		printf("%s: syntax error near unexpected token `newline'\n", NAME);
 		shell->exit_status = 2;
 		return (-1);
 	}
 	fd = open(target->value, O_RDONLY);
 	if (fd < 0)
 	{
-		printf("minishell: %s: %s\n", target->value, strerror(errno));
+		printf("%s: %s: %s\n", NAME, target->value, strerror(errno));
 		shell->exit_status = 1;
 		return (-1);
 	}
@@ -89,14 +89,14 @@ int	apply_redirection_stdout(t_token **tokens, t_token *redir,
 
 	if (!target || !target->value)
 	{
-		printf("minishell: syntax error near unexpected token `newline'\n");
+		printf("%s: syntax error near unexpected token `newline'\n", NAME);
 		shell->exit_status = 2;
 		return (-1);
 	}
 	fd = open_output_file(target->value, redir);
 	if (fd < 0)
 	{
-		printf("minishell: %s: %s\n", target->value, strerror(errno));
+		printf("%s: %s: %s\n", NAME, target->value, strerror(errno));
 		shell->exit_status = 1;
 		return (-1);
 	}

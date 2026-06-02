@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 11:00:00 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/30 18:10:30 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/02 10:52:28 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ static void	print_unclosed_quote_error(char *line, char quote)
 
 	command = get_error_command(line);
 	if (command && command[0])
-		printf("minishell: %s: syntax error near unexpected token `%c'\n",
-			command, quote);
+		printf("%s: %s: syntax error near unexpected token `%c'\n",
+			NAME, command, quote);
 	else
-		printf("minishell: syntax error near unexpected token `%c'\n", quote);
+		printf("%s: syntax error near unexpected token `%c'\n", NAME, quote);
 	free(command);
 }
 

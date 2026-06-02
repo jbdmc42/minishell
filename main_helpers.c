@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 18:10:00 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/06/01 15:51:38 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/02 10:46:02 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,16 @@ int	process_input_line(char **line, t_shell *shell)
 	if (!*line)
 	{
 		if (g_signal_received)
+		{
+			g_signal_received = 0;
 			return (shell->exit_status = 130, 0);
+		}
 		clean_exit(shell);
 	}
 	if (g_signal_received)
 	{
 		shell->exit_status = 130;
+		g_signal_received = 0;
 		free(*line);
 		*line = NULL;
 		return (0);

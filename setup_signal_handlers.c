@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup_signal_handlers.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 13:27:38 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/02/16 11:43:01 by joaobarb         ###   ########.fr       */
+/*   Updated: 2026/06/02 13:14:08 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,28 @@
 void	sigint_handler(int sig)
 {
 	(void)sig;
-	g_signal_received = 1;
 	write(STDOUT_FILENO, "\n", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
 }
 
-void	setup_signal_handlers(void)
+void	setup_signal_handlers(int interactive)
 {
 	struct sigaction	sa;
 
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = 0;
-	sa.sa_handler = sigint_handler;
-	sigaction(SIGINT, &sa, NULL);
-	signal(SIGQUIT, SIG_IGN);
+	if (interactive)
+	{
+		sa.sa_handler = sigint_handler;
+		sigaction(SIGINT, &sa, NULL);
+		signal(SIGQUIT, SIG_IGN);
+	}
+	else
+	{
+		sa.sa_handler = SIG_DFL;
+		sigaction(SIGINT, &sa, NULL);
+		signal(SIGQUIT, SIG_IGN);
+	}
 }

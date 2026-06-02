@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 16:00:00 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/06/01 17:20:15 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/02 12:52:43 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	child_dup_fds(t_pipe_ctx *ctx)
 void	child_finish(t_pipe_ctx *ctx)
 {
 	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
+	signal(SIGQUIT, SIG_IGN);
 	free_inherited_resources(ctx);
 	get_commands(ctx->cmd, ctx->shell);
 	exit(ctx->shell->exit_status);

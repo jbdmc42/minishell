@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 18:55:49 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/06/01 13:36:41 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/02 12:09:36 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	add_token(char *value, t_tokentype type, t_token **tokens)
 	}
 	new_token->type = type;
 	new_token->next = NULL;
+	new_token->heredoc_fd = -1;
 	if (*tokens == NULL)
 	{
 		*tokens = new_token;
@@ -55,6 +56,8 @@ void	free_tokens(t_token *tokens)
 	while (tokens)
 	{
 		tmp = tokens->next;
+		if (tokens->heredoc_fd >= 0)
+			close(tokens->heredoc_fd);
 		free(tokens->value);
 		free(tokens);
 		tokens = tmp;

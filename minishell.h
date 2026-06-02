@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:34 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/06/01 16:12:11 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/02 12:09:36 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 
 // Macros
 
-# define PROMPT "minishell$ "
+# define NAME "minishell"
+# define PROMPT NAME "$ "
 # define EXIT "exit\n"
 
 // Libraries
@@ -49,13 +50,14 @@ extern volatile sig_atomic_t	g_signal_received;
 ** Environment Variables Structure that holds the content of
 ** all the environment variables on our program
 */
+
 typedef struct s_env
 {
-	char			*name;
-	char			*val;
-	struct s_env	*prev;
-	struct s_env	*next;
-}	t_env;
+    char            *name;
+    char            *val;
+    struct s_env    *prev;
+    struct s_env    *next;
+}   t_env;
 
 /*
 ** Shell state structure that holds the shell's context
@@ -100,10 +102,11 @@ typedef enum e_tokentype
 */
 typedef struct s_token
 {
-	char			*value;		
-	t_tokentype		type;
-	struct s_token	*next;
-}	t_token;
+	char            *value;
+	t_tokentype     type;
+	struct s_token  *next;
+	int             heredoc_fd;
+}   t_token;
 
 typedef struct s_pipe_ctx
 {
@@ -148,7 +151,7 @@ void	clean_exit(t_shell *shell);
 void	ft_echo(t_token *tokens, t_shell *shell);
 void	ft_exit(t_token *tokens, t_shell *shell);
 int		ft_cd(t_token *tokens, t_shell *shell);
-void	ft_pwd(void);
+void	ft_pwd(t_shell *shell);
 void	ft_export(t_token *tokens, t_shell *shell);
 int		ft_unset(t_token *tokens, t_shell *shell);
 void	get_commands(t_token *tokens, t_shell *shell);
@@ -200,14 +203,14 @@ void	ft_exit(t_token *tokens, t_shell *shell);
 
 // export_helpers.c:
 int		fill_node(t_env *var, char *name, char *val, t_env *cur);
-void	redefine_value(t_shell *shell, char **nameval);
+void	redefine_value(t_shell *shell, char **nameval, int is_append);
 void	define_value(t_shell *shell, char *name, char *val);
-char	**split_export_arg(char *arg);
+char	**split_export_arg(char *arg, int *is_append);
 
 // export.c:
 char	**alpha_sort(t_shell *shell);
 void	ft_export(t_token *tokens, t_shell *shell);
-void	process_export_var(char **nameval, t_shell *shell);
+void	process_export_var(char **nameval, t_shell *shell, int is_append);
 
 // env.c:
 void	ft_env(t_token *tokens, t_shell *shell);
@@ -241,7 +244,7 @@ char	*extract_word_part(char *line, size_t *i, t_shell *shell);
 int		append_word_part(char **token, char *part);
 
 // redir helpers
-int		create_heredoc_fd(char *delimiter);
+int		create_heredoc_fd(char *delimiter, int should_expand, t_shell *shell);
 int		perform_dup2_and_close(int fd, int target_fd, t_shell *shell);
 int		apply_redir_by_type(t_token **tokens, t_token *redir,
 			t_token *target, t_shell *shell);
@@ -249,7 +252,7 @@ int		handle_one_redirection(t_token **tokens, t_token *redir,
 			t_shell *shell);
 int		process_token_redirections(t_token **tokens, t_shell *shell,
 			int saved_stdin, int saved_stdout);
-int		heredoc_loop(int write_fd, char *delimiter);
+int		heredoc_loop(int write_fd, char *delimiter, int should_expand, t_shell *shell);
 int		check_target_valid(t_token *target, t_shell *shell);
 int		apply_redirection_stdin(t_token **tokens, t_token *redir,
 			t_token *target, t_shell *shell);
@@ -274,7 +277,7 @@ char	*env_get_value(t_env *env, const char *name);
 
 // setup_signal_handlers.c:
 void	sigint_handler(int sig);
-void	setup_signal_handlers(void);
+void	setup_signal_handlers(int interactive);
 
 // tokenization.c:
 void	add_token(char *value, t_tokentype type, t_token **tokens);

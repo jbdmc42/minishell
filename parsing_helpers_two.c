@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 15:10:00 by joaobarb          #+#    #+#             */
-/*   Updated: 2026/05/30 18:21:15 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/02 10:00:07 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,12 @@ void	parse_word(char *line, size_t *i, t_token **tokens,
 {
 	char	*token;
 	char	*part;
+	int		started_with_quote;
 
 	token = ft_strdup("");
 	if (!token)
 		return ;
+	started_with_quote = (line[*i] == '\'' || line[*i] == '"');
 	while (line[*i] && line[*i] != ' ' && line[*i] != '\t'
 		&& !is_operator_char(line[*i]))
 	{
@@ -68,9 +70,22 @@ void	parse_word(char *line, size_t *i, t_token **tokens,
 		if (!append_word_part(&token, part))
 		{
 			free(part);
+			free(token);
 			return ;
 		}
 		free(part);
+	}
+	if (started_with_quote && token)
+	{
+		char	*marked;
+		marked = malloc(ft_strlen(token) + 2);
+		if (marked)
+		{
+			marked[0] = 0x01;
+			ft_strlcpy(marked + 1, token, ft_strlen(token) + 1);
+			free(token);
+			token = marked;
+		}
 	}
 	add_token(token, WORD, tokens);
 	free(token);

@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 17:49:50 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/06/01 15:14:06 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/02 13:14:08 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,52 @@ void	init_pipe_ctx(t_pipe_ctx *ctx, t_token *tokens, t_shell *shell)
 	ctx->child_count = 0;
 	ctx->pid = -1;
 	ctx->last_pid = -1;
+}
+
+static int	pre_create_heredocs(t_pipe_ctx *ctx)
+{
+	t_token *cur;
+	t_token *target;
+	int     should_expand;
+	int     fd;
+
+	cur = ctx->tokens;
+	while (cur)
+	{
+		if (cur->type == DLESS)
+		{
+			target = cur->next;
+			if (!target)
+				return (0);
+			if (target->heredoc_fd >= 0)
+			{
+				cur = cur->next;
+				continue ;
+			}
+			should_expand = 1;
+			if (target->value && target->value[0] == '\x01')
+				should_expand = 0;
+			fd = create_heredoc_fd(target->value, should_expand, ctx->shell);
+			if (fd < 0)
+			{
+				/* cleanup any previously created fds */
+				cur = ctx->tokens;
+				while (cur)
+				{
+					if (cur->heredoc_fd >= 0)
+					{
+						close(cur->heredoc_fd);
+						cur->heredoc_fd = -1;
+					}
+					cur = cur->next;
+				}
+				return (1);
+			}
+			target->heredoc_fd = fd;
+		}
+		cur = cur->next;
+	}
+	return (0);
 }
 
 void	setup_pipe_child(t_pipe_ctx *ctx)
@@ -72,8 +118,25 @@ int	run_pipe_stage(t_pipe_ctx *ctx)
 int	execute_pipe_chain(t_token *tokens, t_shell *shell)
 {
 	t_pipe_ctx	ctx;
+	int	status;
+	struct sigaction old_int;
+	struct sigaction ignore;
 
 	init_pipe_ctx(&ctx, tokens, shell);
+	ctx.tokens = tokens;
+	/* Parent should ignore SIGINT while creating/forking pipeline children
+	   so Ctrl+C only affects the child processes. */
+	sigemptyset(&ignore.sa_mask);
+	ignore.sa_flags = 0;
+	ignore.sa_handler = SIG_IGN;
+	sigaction(SIGINT, &ignore, &old_int);
+
+	/* Pre-create all heredoc fds for the whole pipeline to avoid deadlock */
+	if (pre_create_heredocs(&ctx) == 1)
+	{
+		sigaction(SIGINT, &old_int, NULL);
+		return (1);
+	}
 	while (ctx.i < ctx.num_cmds)
 	{
 		if (run_pipe_stage(&ctx) == 1)
@@ -81,5 +144,21 @@ int	execute_pipe_chain(t_token *tokens, t_shell *shell)
 		ctx.tokens = ctx.next_token;
 		ctx.i++;
 	}
-	return (wait_pipe_children(&ctx));
+
+	/* Close parent's copies of precreated heredoc fds; children inherited theirs */
+	{
+		t_token *cur = tokens;
+		while (cur)
+		{
+			if (cur->heredoc_fd >= 0)
+			{
+				close(cur->heredoc_fd);
+				cur->heredoc_fd = -1;
+			}
+			cur = cur->next;
+		}
+	}
+	status = wait_pipe_children(&ctx);
+	sigaction(SIGINT, &old_int, NULL);
+	return (status);
 }

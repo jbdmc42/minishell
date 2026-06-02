@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 17:40:26 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/30 18:15:00 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/02 10:51:28 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	parse_single_quotes(char *line, size_t *i, t_token **tokens)
 		(*i)++;
 	if (line[*i] == '\0')
 	{
-		printf("minishell: unexpected EOF while looking for matching `'\n");
+		printf("%s: unexpected EOF while looking for matching `'\n", NAME);
 		return (-1);
 	}
 	token = ft_substr(line, start, *i - start);
@@ -104,7 +104,7 @@ int	parse_double_quotes(char *line, size_t *i, t_token **tokens)
 		(*i)++;
 	if (line[*i] == '\0')
 	{
-		printf("minishell: unexpected EOF while looking for matching `\"\n");
+		printf("%s: unexpected EOF while looking for matching `\"\n", NAME);
 		return (-1);
 	}
 	token = ft_substr(line, start, *i - start);
