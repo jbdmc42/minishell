@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 15:10:00 by joaobarb          #+#    #+#             */
-/*   Updated: 2026/06/02 10:00:07 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/02 13:28:50 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,21 @@ int	append_word_part(char **token, char *part)
 	return (1);
 }
 
+static char	*mark_quoted_token(char *token, int started_with_quote)
+{
+	char	*marked;
+
+	if (!started_with_quote || !token)
+		return (token);
+	marked = malloc(ft_strlen(token) + 2);
+	if (!marked)
+		return (token);
+	marked[0] = 0x01;
+	ft_strlcpy(marked + 1, token, ft_strlen(token) + 1);
+	free(token);
+	return (marked);
+}
+
 void	parse_word(char *line, size_t *i, t_token **tokens,
 	t_shell *shell)
 {
@@ -75,18 +90,7 @@ void	parse_word(char *line, size_t *i, t_token **tokens,
 		}
 		free(part);
 	}
-	if (started_with_quote && token)
-	{
-		char	*marked;
-		marked = malloc(ft_strlen(token) + 2);
-		if (marked)
-		{
-			marked[0] = 0x01;
-			ft_strlcpy(marked + 1, token, ft_strlen(token) + 1);
-			free(token);
-			token = marked;
-		}
-	}
+	token = mark_quoted_token(token, started_with_quote);
 	add_token(token, WORD, tokens);
 	free(token);
 }

@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:34 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/06/02 12:09:36 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/02 13:30:57 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 // Macros
 
 # define NAME "minishell"
-# define PROMPT NAME "$ "
+# define PROMPT "minishell$ "
 # define EXIT "exit\n"
 
 // Libraries
@@ -53,11 +53,11 @@ extern volatile sig_atomic_t	g_signal_received;
 
 typedef struct s_env
 {
-    char            *name;
-    char            *val;
-    struct s_env    *prev;
-    struct s_env    *next;
-}   t_env;
+	char				*name;
+	char				*val;
+	struct s_env		*prev;
+	struct s_env		*next;
+}	t_env;
 
 /*
 ** Shell state structure that holds the shell's context
@@ -102,11 +102,11 @@ typedef enum e_tokentype
 */
 typedef struct s_token
 {
-	char            *value;
-	t_tokentype     type;
-	struct s_token  *next;
-	int             heredoc_fd;
-}   t_token;
+	char			*value;
+	t_tokentype		type;
+	struct s_token	*next;
+	int				heredoc_fd;
+}	t_token;
 
 typedef struct s_pipe_ctx
 {
@@ -236,6 +236,7 @@ int		parse_less(char *line, size_t *i, t_token **tokens, t_shell *shell);
 int		parse_great(char *line, size_t *i, t_token **tokens, t_shell *shell);
 int		parse_single_quotes(char *line, size_t *i, t_token **tokens);
 int		parse_double_quotes(char *line, size_t *i, t_token **tokens);
+
 // parsing_helpers_two/three.c:
 char	*ft_strjoin_free(char *a, char *b);
 int		is_operator_char(char c);
@@ -252,7 +253,8 @@ int		handle_one_redirection(t_token **tokens, t_token *redir,
 			t_shell *shell);
 int		process_token_redirections(t_token **tokens, t_shell *shell,
 			int saved_stdin, int saved_stdout);
-int		heredoc_loop(int write_fd, char *delimiter, int should_expand, t_shell *shell);
+int		heredoc_loop(int write_fd, char *delimiter, int should_expand,
+			t_shell *shell);
 int		check_target_valid(t_token *target, t_shell *shell);
 int		apply_redirection_stdin(t_token **tokens, t_token *redir,
 			t_token *target, t_shell *shell);
