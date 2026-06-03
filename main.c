@@ -6,11 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:24 by jbdmc             #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2026/05/30 16:52:04 by jbdmc            ###   ########.fr       */
-=======
-/*   Updated: 2026/05/30 16:40:13 by jbdmc            ###   ########.fr       */
->>>>>>> 65d1981 (Tiny changes to main)
+/*   Updated: 2026/06/01 14:37:49 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,115 +14,43 @@
 
 volatile sig_atomic_t	g_signal_received = 0;
 
-/*
-**  Helper function that checks for an empty input line.
-*/
-static size_t	treat_empty_input(char *line, size_t i)
+size_t	skip_blank_prefix(char *line)
 {
+	size_t	i;
+
+	i = 0;
 	while (line[i] && (line[i] == ' ' || line[i] == '\t'))
 		i++;
 	return (i);
 }
 
-/*
-**  Handle readline input and check for interrupts or empty lines.
-**  Returns 1 if processing should continue, 0 if should skip to next iteration.
-*/
-static int	process_input_line(char **line, t_shell *shell)
+void	main_loop(t_shell *shell, int interactive)
 {
-	if (!*line)
-		clean_exit(shell);
-	if (g_signal_received)
-	{
-		shell->exit_status = 130;
-		return (0);
-	}
-	if ((*line)[treat_empty_input(*line, 0)] == '\0')
-	{
-		free(*line);
-		*line = NULL;  /* Mark as freed */
-		return (0);
-	}
-	return (1);
-}
-
-/*
-**  Process and execute the validated input line.
-*/
-static void	execute_line(char *line, t_shell *shell, int interactive)
-{
-	t_token	*tokens;
-	char	*validated_line;
-
-	validated_line = read_input_with_continuation(line, shell);
-	if (!validated_line)
-	{
-		return ;
-	}
-	if (interactive)
-		add_history(line);
-	tokens = NULL;
-	parse_input(validated_line, 0, &tokens, shell);
-	free(validated_line);
-	free_tokens(tokens);
-}
-
-/*
-**  Main loop: reads and processes user input continuously.
-*/
-static void	main_loop(t_shell *shell, int interactive)
-{
-	char	*line;
-
 	while (1)
 	{
 		g_signal_received = 0;
 		if (interactive)
-		{
-			line = readline(PROMPT);
-			if (!process_input_line(&line, shell))
-				continue ;
-			execute_line(line, shell, 1);
-		}
+			run_interactive_cycle(shell);
 		else
-		{
-			ssize_t nread;
-			size_t len = 0;
-			char *buf = NULL;
-
-			nread = getline(&buf, &len, stdin);
-			if (nread == -1)
-			{
-				free(buf);
-				clean_exit(shell);
-			}
-			if (nread > 0 && buf[nread - 1] == '\n')
-				buf[nread - 1] = '\0';
-			line = buf;
-			if (!process_input_line(&line, shell))
-				continue ;
-			execute_line(line, shell, 0);
-			buf = NULL;
-			len = 0;
-		}
+			run_noninteractive_cycle(shell);
 	}
 }
 
-/*
-**  main program function: starts the user input request loop and prepares the
-** signal handlers for CTRL-D, CTRL-C and CTRL-\.
-*/
 int	main(int argc, char **argv, char **envp)
 {
+	t_shell	shell;
+	int		interactive;
+
 	(void)argc;
 	(void)argv;
-	t_shell	shell; 													// Shell state structure
-	int		interactive;	// Flag indicating if the shell is running in interactive mode
-
-	shell.exit_status = 0; 									// Initialize exit status to 0
-	init_env(&shell, envp); 								// Initialize environment variables from envp
-	setup_signal_handlers(); 							// Setup signal handlers for SIGINT and SIGQUIT
-	interactive = isatty(STDIN_FILENO);				// Check if input is from a terminal
-	main_loop(&shell, interactive); 						// Start the main shell loop
-	return (shell.exit_status); 						// Return exit status (never reached)
+	shell.exit_status = 0;
+	shell.saved_stdin = -1;
+	shell.saved_stdout = -1;
+	shell.redirs_saved = 0;
+	init_env(&shell, envp);
+	setup_signal_handlers();
+	interactive = isatty(STDIN_FILENO);
+	main_loop(&shell, interactive);
+	free_shell_env(&shell);
+	return (shell.exit_status);
 }

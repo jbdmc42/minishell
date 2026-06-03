@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   exec_error.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/30 16:53:14 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/30 17:48:31 by jbdmc            ###   ########.fr       */
+/*   Created: 2026/06/01 17:40:00 by jbdmc             #+#    #+#             */
+/*   Updated: 2026/06/01 16:05:16 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <errno.h>
 
-void	ft_pwd(void)
+void	print_exec_error(char *command)
 {
-	char	cwd[PATH_MAX];
+	char	*msg;
 
-	printf("%s\n", getcwd(cwd, PATH_MAX));
+	msg = strerror(errno);
+	write(STDERR_FILENO, command, ft_strlen(command));
+	write(STDERR_FILENO, ": ", 2);
+	write(STDERR_FILENO, msg, ft_strlen(msg));
+	write(STDERR_FILENO, "\n", 1);
 }

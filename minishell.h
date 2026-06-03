@@ -6,11 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:34 by jbdmc             #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2026/05/28 09:38:12 by jpaulo-b         ###   ########.fr       */
-=======
-/*   Updated: 2026/05/30 16:06:17 by jbdmc            ###   ########.fr       */
->>>>>>> d0c3708 (Fixed double free on prompt line.)
+/*   Updated: 2026/06/01 16:12:11 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +41,6 @@
 # include <limits.h>
 
 // Globals
-
-/* 
-**  Global variable used ONLY for signal handling (Ctrl + C interruption) with
-** 0 = default state, 1 = interrupted by signal.
-**  "extern" expands the variable to all files that include this header by declaring and assigning it the 
-** initial value to the global variable directly in the header file, forcing any other C file to use that
-** declaration instead of redeclaring the variable.
-**  "volatile" means that the variable value can be read or modified asynchronously by something other than the
-** current thread of execution (can capture and interpret changes on signals).
-**  "sig_atomic_t" or "signal atomic type" is an integer type that can be accessed as an atomic entity even in the
-** presence of asynchronous interrupts made by signals. This type prevents race conditions between threads and
-** data corruptions by accessing the atomic value of the variable whenever a signal changes it. It basically
-** automatically handles access to the variable by using thread locks per signal without the need of us to program it.
-*/
 extern volatile sig_atomic_t	g_signal_received;
 
 // Structs
@@ -83,6 +65,9 @@ typedef struct s_shell
 {
 	int		exit_status;
 	t_env	*env;	
+	int		saved_stdin;
+	int		saved_stdout;
+	int		redirs_saved;
 }	t_shell;
 
 // More Structs
@@ -120,10 +105,43 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
+typedef struct s_pipe_ctx
+{
+	t_token	*tokens;
+	t_token	*cmd;
+	t_token	*next_token;
+	t_shell	*shell;
+	int		num_cmds;
+	int		i;
+	int		pipe_fd[2];
+	int		prev_read_fd;
+	int		status;
+	int		child_count;
+	pid_t	pid;
+	pid_t	last_pid;
+}	t_pipe_ctx;
+
+typedef struct s_exec_ctx
+{
+	char	**argv;
+	char	**envp;
+	t_shell	*shell;
+}	t_exec_ctx;
+
 // Function Declaration
 
+// main_helpers.c:
+int		process_input_line(char **line, t_shell *shell);
+void	execute_line(char *line, t_shell *shell, int interactive);
+int		run_interactive_cycle(t_shell *shell);
+int		run_noninteractive_cycle(t_shell *shell);
+void	main_loop(t_shell *shell, int interactive);
+
+// main.c:
+size_t	skip_blank_prefix(char *line);
+void	execute_line(char *line, t_shell *shell, int interactive);
+
 // cleaning.c:
-void	free_all(void);
 void	clean_exit(t_shell *shell);
 
 // commands.c:
@@ -135,19 +153,44 @@ void	ft_export(t_token *tokens, t_shell *shell);
 int		ft_unset(t_token *tokens, t_shell *shell);
 void	get_commands(t_token *tokens, t_shell *shell);
 char	**build_argv(t_token *tokens);
+int		count_tokens_for_argv(t_token *tokens);
 char	**build_envp(t_shell *shell);
 void	free_envp_array(char **envp);
-int		setup_redirections(t_token **tokens, int *saved_stdin, \
- 				int *saved_stdout, t_shell *shell);
+void	cleanup_redirections(t_shell *shell);
+void	store_saved_redirections(t_shell *shell, int saved_stdin,
+			int saved_stdout);
+int		setup_redirections(t_token **tokens, int *saved_stdin,
+			int *saved_stdout, t_shell *shell);
 void	restore_redirections(int saved_stdin, int saved_stdout);
-int		search_and_execute(char *command, char **argv, char **envp, t_shell *shell);
+int		search_and_execute(char *command, char **argv,
+			char **envp, t_shell *shell);
+
+// helpers moved from commands.c
+int		is_builtin_command(char *cmd);
+void	execute_builtin(t_token *tokens, t_shell *shell);
+
+// pipes_helpers.c:
+int		execute_pipe_chain(t_token *tokens, t_shell *shell);
+
+// pipes_helpers_two.c:
+void	init_pipe_ctx(t_pipe_ctx *ctx, t_token *tokens, t_shell *shell);
+void	setup_pipe_child(t_pipe_ctx *ctx);
+int		run_pipe_stage(t_pipe_ctx *ctx);
+int		handle_pipe_fork_error(t_pipe_ctx *ctx);
+int		wait_pipe_children(t_pipe_ctx *ctx);
+
+// pipes_helpers_three.c (moved helpers)
+void	free_inherited_resources(t_pipe_ctx *ctx);
+void	child_dup_fds(t_pipe_ctx *ctx);
+void	child_finish(t_pipe_ctx *ctx);
+int		create_pipe_if_needed(t_pipe_ctx *ctx);
+void	post_parent_housekeeping(t_pipe_ctx *ctx);
 
 // pipes.c:
 int		count_commands(t_token *tokens);
- t_token	*extract_command(t_token *tokens, t_token **next_token);
+t_token	*extract_command(t_token *tokens, t_token **next_token);
 int		create_pipe(int *pipe_fd);
 void	close_fd(int *fd);
-int		execute_pipe_chain(t_token *tokens, t_shell *shell);
 
 // echo.c:
 void	ft_echo(t_token *tokens, t_shell *shell);
@@ -169,6 +212,9 @@ void	process_export_var(char **nameval, t_shell *shell);
 // env.c:
 void	ft_env(t_token *tokens, t_shell *shell);
 
+// ft_getline.c:
+ssize_t	ft_getline_fd(char **lineptr, size_t *n, int fd);
+
 // ft_lsttochpp.c:
 char	**ft_lsttochpp(char **chpp, t_env *env);
 char	**ft_lsttochpp_no_quotes(char **chpp, t_env *env);
@@ -187,17 +233,44 @@ int		parse_less(char *line, size_t *i, t_token **tokens, t_shell *shell);
 int		parse_great(char *line, size_t *i, t_token **tokens, t_shell *shell);
 int		parse_single_quotes(char *line, size_t *i, t_token **tokens);
 int		parse_double_quotes(char *line, size_t *i, t_token **tokens);
+// parsing_helpers_two/three.c:
+char	*ft_strjoin_free(char *a, char *b);
+int		is_operator_char(char c);
+char	*expand_variable_in_part(char *part, t_shell *shell);
+char	*extract_word_part(char *line, size_t *i, t_shell *shell);
+int		append_word_part(char **token, char *part);
+
+// redir helpers
+int		create_heredoc_fd(char *delimiter);
+int		perform_dup2_and_close(int fd, int target_fd, t_shell *shell);
+int		apply_redir_by_type(t_token **tokens, t_token *redir,
+			t_token *target, t_shell *shell);
+int		handle_one_redirection(t_token **tokens, t_token *redir,
+			t_shell *shell);
+int		process_token_redirections(t_token **tokens, t_shell *shell,
+			int saved_stdin, int saved_stdout);
+int		heredoc_loop(int write_fd, char *delimiter);
+int		check_target_valid(t_token *target, t_shell *shell);
+int		apply_redirection_stdin(t_token **tokens, t_token *redir,
+			t_token *target, t_shell *shell);
+int		apply_redirection_stdout(t_token **tokens, t_token *redir,
+			t_token *target, t_shell *shell);
+void	unlink_token_node(t_token **tokens, t_token *node, t_token *next);
+
+// commands_extra helpers
+int		exec_found_command(char *full_path, char *command, t_exec_ctx *ctx);
+int		exec_direct_path(char *command, t_exec_ctx *ctx);
+int		try_exec_in_path(char *path_copy, char *command, t_exec_ctx *ctx);
+
+// exec_error.c
+void	print_exec_error(char *command);
 
 // parsing.c:
 void	parse_input(char *line, size_t i, t_token **tokens, t_shell *shell);
 int		syntaxe_error(char *line, size_t i);
 int		skip_spaces(char *line, size_t *i);
-<<<<<<< HEAD
 void	parse_word(char *line, size_t *i, t_token **tokens, t_shell *shell);
-=======
-void	parse_word(char *line, size_t *i, t_token **tokens, struct s_shell *shell);
 char	*env_get_value(t_env *env, const char *name);
->>>>>>> d0c3708 (Fixed double free on prompt line.)
 
 // setup_signal_handlers.c:
 void	sigint_handler(int sig);
@@ -208,6 +281,11 @@ void	add_token(char *value, t_tokentype type, t_token **tokens);
 void	print_tokens(t_token *tokens);
 void	free_tokens(t_token *tokens);
 
+// utilities_three.c:
+int		env_lstsize(t_env *env);
+t_env	*get_env_node(t_env *env_list, char *key);
+void	free_shell_env(t_shell *shell);
+
 // utilities_two.c:
 void	ft_swap(char **a, char **b);
 char	*remove_quotes(char *nameval);
@@ -216,7 +294,6 @@ int		is_valid_var_name(char *name);
 void	free_nameval(char **nameval);
 
 // utilities.c:
-int		env_lstsize(t_env *env);
 void	init_env(t_shell *shell, char **envp);
 
 #endif

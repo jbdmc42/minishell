@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 18:55:49 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/30 16:06:17 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/06/01 13:36:41 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,37 @@
 
 void	add_token(char *value, t_tokentype type, t_token **tokens)
 {
-	t_token	*new_token; // New token to be added
-	t_token	*tmp_token; // Temporary pointer to traverse list
+	t_token	*new_token;
+	t_token	*tmp_token;
 
-	new_token = malloc(sizeof(t_token)); // Allocate memory for new token
-	if (!new_token) // Check if malloc failed
+	new_token = malloc(sizeof(t_token));
+	if (!new_token)
 		return ;
-	new_token->value = ft_strdup(value); // Duplicate the token value
-	new_token->type = type; // Set token type
-	new_token->next = NULL; // Initialize next pointer to NULL
-	if (*tokens == NULL) // Check if list is empty
+	new_token->value = ft_strdup(value);
+	if (!new_token->value)
 	{
-		*tokens = new_token; // Make new token the first token
+		free(new_token);
 		return ;
 	}
-	tmp_token = *tokens; // Start at head of list
-	while (tmp_token->next) // Traverse to last token
+	new_token->type = type;
+	new_token->next = NULL;
+	if (*tokens == NULL)
+	{
+		*tokens = new_token;
+		return ;
+	}
+	tmp_token = *tokens;
+	while (tmp_token->next)
 		tmp_token = tmp_token->next;
-	tmp_token->next = new_token; // Add new token at end
+	tmp_token->next = new_token;
 }
 
 void	print_tokens(t_token *tokens)
 {
-	while (tokens) // Iterate through all tokens
+	while (tokens)
 	{
-		printf("TOKEN: %-12s | TYPE: %d\n", tokens->value, tokens->type); // Print token and type
-		tokens = tokens->next; // Move to next token
+		printf("TOKEN: %-12s | TYPE: %d\n", tokens->value, tokens->type);
+		tokens = tokens->next;
 	}
 }
 

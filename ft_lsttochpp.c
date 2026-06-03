@@ -17,7 +17,7 @@ char	**ft_lsttochpp(char **chpp, t_env *env)
 	char	*tmp_st;
 	char	*tmp_nd;
 	int		i;
-	
+
 	i = 0;
 	while (env)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 10:00:45 by joaobarb          #+#    #+#             */
-/*   Updated: 2026/05/12 11:26:18 by jpaulo-b         ###   ########.fr       */
+/*   Updated: 2026/05/30 17:42:53 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,40 +23,40 @@ static int	is_valid_n_flag(char *s)
 {
 	int	i;
 
-	if (!s || s[0] != '-') 	// Check if string is NULL or doesn't start with '-'
+	if (!s || s[0] != '-')
 		return (0);
 	i = 1;
-	if (s[i] == '\0') 		// Return 0 if string is just "-"
+	if (s[i] == '\0')
 		return (0);
-	while (s[i] == 'n') 	// Skip all 'n' characters
+	while (s[i] == 'n')
 		i++;
-	return (s[i] == '\0'); 	// Return 1 if string is "-n", "-nn", etc.
+	return (s[i] == '\0');
 }
 
 void	ft_echo(t_token *tokens, t_shell *shell)
 {
-	(void)shell; 			// Unused parameter for now
-	int		flag; 			// Flag for newline (1 = print newline, 0 = don't print)
-	int		first; 			// Flag to track first word (for spacing)
-	t_token	*cur; 			// Current token pointer
+	int		flag;
+	int		first;
+	t_token	*cur;
 
-	flag = 1; 				// Default: print newline at end
-	first = 1; 				// Start with first word
-	cur = tokens->next; 	// Skip the "echo" command token
-	while (cur && cur->type == WORD && is_valid_n_flag(cur->value)) 	// Process all -n flags
+	(void)shell;
+	flag = 1;
+	first = 1;
+	cur = tokens->next;
+	while (cur && cur->type == WORD && is_valid_n_flag(cur->value))
 	{
-		flag = 0; 			// Found -n flag, don't print newline
-		cur = cur->next; 	// Move to next token
+		flag = 0;
+		cur = cur->next;
 	}
-	while (cur) 			// Print all remaining tokens
+	while (cur)
 	{
-		if (!first) 		// Add space before words (except first)
+		if (!first)
 			write(1, " ", 1);
-		write(1, cur->value, ft_strlen(cur->value)); 					// Write token value
-		first = 0; 			// No longer first word
-		cur = cur->next; 	// Move to next token
+		write(1, cur->value, ft_strlen(cur->value));
+		first = 0;
+		cur = cur->next;
 	}
-	if (flag) 				// Print newline if flag is still 1
+	if (flag)
 		write(1, "\n", 1);
 	return ;
 }

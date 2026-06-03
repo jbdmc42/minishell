@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaobarb <joaobarb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 11:00:00 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/03/31 14:56:52 by joaobarb         ###   ########.fr       */
+/*   Updated: 2026/05/30 18:10:30 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ static void	print_unclosed_quote_error(char *line, char quote)
 
 	command = get_error_command(line);
 	if (command && command[0])
-		printf("minishell: %s: syntax error near unexpected token `%c'\n", command,
-			quote);
+		printf("minishell: %s: syntax error near unexpected token `%c'\n",
+			command, quote);
 	else
 		printf("minishell: syntax error near unexpected token `%c'\n", quote);
 	free(command);
@@ -70,7 +70,7 @@ int	is_quotes_balanced(char *str)
 **  Helper function that checks which quote was unclosed.
 ** 	Returns 0 for single and 1 for double.
 */
-static int decide_unclosed_quote(int s, int d, t_shell *shell, char *u)
+static int	decide_unclosed_quote(int s, int d, t_shell *shell, char *u)
 {
 	if (s || d)
 	{
@@ -93,7 +93,7 @@ char	*read_input_with_continuation(char *line, t_shell *shell)
 	int		i;
 	int		in_single;
 	int		in_double;
-	char	u;				// short for unclosed_quote
+	char	u;
 
 	i = 0;
 	in_single = 0;

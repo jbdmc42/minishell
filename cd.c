@@ -6,29 +6,13 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 16:58:26 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/27 14:08:51 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/05/30 18:11:31 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_env		*get_env_node(t_env *env_list, char *key)
-{
-	t_env	*current;
-
-	if (!env_list || !key)
-		return (NULL);
-	current = env_list;
-	while (current != NULL)
-	{
-		if (ft_strcmp(current->name, key) == 0)
-			return (current);
-		current = current->next;
-	}
-	return (NULL);
-}
-
-char		*get_env_value(t_env *env_list, char *key)
+char	*get_env_value(t_env *env_list, char *key)
 {
 	t_env	*node;
 
@@ -87,15 +71,15 @@ static int	go_to_special_dir(t_shell *data, char *key)
 	return (0);
 }
 
-int		ft_cd(t_token *tokens, t_shell *shell)
+int	ft_cd(t_token *tokens, t_shell *shell)
 {
 	char	old_path[PATH_MAX];
 
-	if (!tokens->next)		//  Se existe o nodo do sinal e mais nenhum argumento (cd ), faz o mesmo que ~ (HOME)
+	if (!tokens->next)
 		return (go_to_special_dir(shell, "HOME"));
-	if (tokens->next->next)		//  Se existe o nodo do sinal e mais argumentos
+	if (tokens->next->next)
 	{
-		ft_putendl_fd("minishell: cd: too many arguments", STDERR_FILENO);  //  msg erro e retorna 1
+		ft_putendl_fd("minishell: cd: too many arguments", STDERR_FILENO);
 		return (1);
 	}
 	if (ft_strcmp(tokens->next->value, "~") == 0)

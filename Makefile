@@ -4,8 +4,8 @@
 
 NAME		= minishell
 
-CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror -g
+CC			= cc
+CFLAGS		= -Wall -Wextra -Werror
 #CFLAGS		+= -g3 -fsanitize=address -fno-omit-frame-pointer
 LDFLAGS		= -lreadline -lncurses
 
@@ -17,25 +17,45 @@ INCLUDES	= -I. -I$(LIBFT_DIR)
 SRCS		= main.c \
 			cd.c \
 			cleaning.c \
-			commands.c \
+			commands_builtin.c \
+			commands_extra_two.c \
 			commands_extra.c \
+			commands_path_exec.c \
+			commands_exec_direct.c \
+			commands.c \
 			echo.c \
 			env.c \
+			env_helpers.c \
+			exec_error.c \
 			exit.c \
 			export_helpers.c \
 			export.c \
+			ft_getline_fd.c \
+			ft_getline.c \
 			ft_lsttochpp.c \
 			input_handling.c \
-			parsing_helpers.c \
+			main_helpers.c \
+			parsing_helpers_four.c \
+			parsing_helpers_three.c \
 			parsing_helpers_two.c \
+			parsing_helpers.c \
 			parsing.c \
+			pipes_helpers_three.c \
+			pipes_helpers_two.c \
+			pipes_helpers.c \
 			pipes.c \
 			pwd.c \
 			quote_handling.c \
+			redir_helpers_three.c \
+			redir_helpers_two.c \
+			redir_helpers.c \
+			redir_process.c \
+			redir_utils.c \
 			redir.c \
 			setup_signal_handlers.c \
 			tokenization.c \
 			unset.c \
+			utilities_three.c \
 			utilities_two.c \
 			utilities.c
 
@@ -59,6 +79,10 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 	@$(MAKE) -C $(LIBFT_DIR) fclean
+
+valgrind: 
+	@echo "{\n   leak readline\n   Memcheck:Leak\n...\n   fun:readline\n}\n{\n   leak add_history\n   Memcheck:Leak\n...\n   fun:add_history\n}" > readline.supp
+	@valgrind --suppressions=readline.supp --leak-check=full -s --show-leak-kinds=all --track-fds=yes ./$(NAME)
 
 re: fclean all
 

@@ -17,14 +17,14 @@
 */
 int	ft_strisspace(char *line)
 {
-	size_t	i; // Index for iterating through line
+	size_t	i;
 
-	i = 0; // Initialize index
-	if (!line) // Check if line is NULL
-		return (1); // Return 1 (true) for NULL line
-	while (line[i] == ' ' || line[i] == '\t') // Skip spaces and tabs
-		i++; // Move to next character
-	return (line[i] == '\0'); // Return 1 if only whitespace, 0 otherwise
+	i = 0;
+	if (!line)
+		return (1);
+	while (line[i] == ' ' || line[i] == '\t')
+		i++;
+	return (line[i] == '\0');
 }
 
 /*
@@ -34,16 +34,16 @@ int	ft_strisspace(char *line)
 */
 char	*read_input(void)
 {
-	size_t	i; 													// Index for skipping spaces
-	char	*line; 												// Input line from readline
+	size_t	i;
+	char	*line;
 
-	i = 0; 														// Initialize index
-	line = readline(PROMPT); 									// Read input from user
-	if (!line) 													// Check for EOF (Ctrl+D)
-		return (NULL); 											// Return NULL on EOF
-	while (line[i] && (line[i] == ' ' || line[i] == '\t')) 		// Skip leading whitespace
-		i++; 													// Move to next character
-	if (!ft_strisspace(line)) 									// Check if line is not only whitespace
-		add_history(line); 										// Add to readline history
-	return (line); 												// Return input line
+	i = 0;
+	line = readline(PROMPT);
+	if (!line)
+		return (NULL);
+	while (line[i] && (line[i] == ' ' || line[i] == '\t'))
+		i++;
+	if (!ft_strisspace(line))
+		add_history(line);
+	return (line);
 }

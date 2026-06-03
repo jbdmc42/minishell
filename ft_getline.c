@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_getline.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/30 16:53:14 by jbdmc             #+#    #+#             */
-/*   Updated: 2026/05/30 17:48:31 by jbdmc            ###   ########.fr       */
+/*   Created: 2026/06/01 16:50:00 by jbdmc             #+#    #+#             */
+/*   Updated: 2026/06/01 16:11:11 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <unistd.h>
 
-void	ft_pwd(void)
+ssize_t	ft_getline(char **lineptr, size_t *n, FILE *stream)
 {
-	char	cwd[PATH_MAX];
-
-	printf("%s\n", getcwd(cwd, PATH_MAX));
+	(void)stream;
+	return (ft_getline_fd(lineptr, n, STDIN_FILENO));
 }

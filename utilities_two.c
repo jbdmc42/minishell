@@ -31,7 +31,7 @@ void	free_nameval(char **nameval)
 void	ft_swap(char **a, char **b)
 {
 	char	*tmp;
-	
+
 	tmp = *a;
 	*a = *b;
 	*b = tmp;
@@ -52,20 +52,20 @@ char	*remove_quotes(char	*nameval)
 
 void	process_nameval_quotes(char **nameval)
 {
-    char	*temp;
+	char	*temp;
 
-    if (nameval[0])
-    {
-        temp = remove_quotes(nameval[0]);
-        free(nameval[0]);
-        nameval[0] = temp;
-    }
-    if (nameval[1])
-    {
-        temp = remove_quotes(nameval[1]);
-        free(nameval[1]);
-        nameval[1] = temp;
-    }
+	if (nameval[0])
+	{
+		temp = remove_quotes(nameval[0]);
+		free(nameval[0]);
+		nameval[0] = temp;
+	}
+	if (nameval[1])
+	{
+		temp = remove_quotes(nameval[1]);
+		free(nameval[1]);
+		nameval[1] = temp;
+	}
 }
 
 int	is_valid_var_name(char *name)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 16:49:55 by joaobarb          #+#    #+#             */
-/*   Updated: 2026/05/28 09:28:58 by jpaulo-b         ###   ########.fr       */
+/*   Updated: 2026/05/30 17:48:51 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	**alpha_sort(t_shell *shell)
 	char	**var;
 	int		i;
 	int		j;
-	
+
 	i = 0;
 	cur = shell->env;
 	var = malloc(sizeof(char *) * ((env_lstsize(shell->env)) + 1));
@@ -88,11 +88,11 @@ void	parse_argument(t_token *tokens, t_shell *shell)
 	arg = tokens->value;
 	nameval = split_export_arg(tokens->value);
 	if (!nameval)
-		return;
+		return ;
 	if (!nameval[0])
 	{
 		free(nameval);
-		return;
+		return ;
 	}
 	if (!is_valid_var_name(nameval[0]))
 	{
